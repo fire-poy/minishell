@@ -6,6 +6,14 @@ int	main(void)
 {
 	char *string;
 	
-	string = readline("hola guachin");
+	while (1)
+	{
+		string = readline("Minishell >");
+		if (!strcmp(string, "wc"))
+		{
+			foijtjefjooifasoij
+		}
+		if (cd -> )
+
 	return (0);
 }

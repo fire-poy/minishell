@@ -6,7 +6,7 @@
 #    By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/03/23 14:41:58 by mpons            ###   ########.fr        #
+#    Updated: 2022/03/23 14:58:52 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,9 @@ SRC 		= ./main.c\
 			  
 #INC			= -I./inc 
 HOME		= ..
-INC			= -I $(HOME)/.brew/Cellar/readline/8.1.2/include
+INC			= -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
 
-LIB			= -lreadline -L $(HOME)/.brew/Cellar/readline/8.1.2/lib
+LIB			= -lreadline -L $(HOME)/homebrew/Cellar/readline/8.1.2/lib
 #LIB			= ./libft/libft.a 
 
 all: $(NAME)
