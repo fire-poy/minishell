@@ -2,18 +2,26 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+int	ft_strlen(char *s)
+{
+	
+
 int	main(void)
 {
-	char *string;
+	char *in;
 	
 	while (1)
 	{
-		string = readline("Minishell >");
+		in = readline("Minishell >");
+		if (ft_strlen(in) > 0)
+			add_history(in);
+		/*
 		if (!strcmp(string, "wc"))
 		{
 			foijtjefjooifasoij
 		}
 		if (cd -> )
-
+*/
+	}
 	return (0);
 }
