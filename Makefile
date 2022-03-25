@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
+#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/03/25 14:07:21 by mpons            ###   ########.fr        #
+#    Updated: 2022/03/25 15:16:20 by jhermon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ LIBFT_DIR	= ./libft
 
 SRC 		= ./main.c\
 			  ./src/prompt.c\
+				./built_in/env.c\
+				./built_in/pwd.c\
 			  
 HOME		= ..
 INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include

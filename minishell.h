@@ -5,7 +5,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "./libft/libft.h"
+#include <stdlib.h>
 
-void    loop_prompt(int ac, char **av, char **envp);
+void	loop_prompt(int ac, char **av, char **envp);
+void	my_env(char **envp);
+void	current_dir(void);
 
 #endif
