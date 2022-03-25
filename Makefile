@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+         #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/03/23 14:58:52 by mpons            ###   ########.fr        #
+#    Updated: 2022/03/25 14:07:21 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,29 +19,29 @@ OBJS		= ${SRC:.c=.o}
 
 RM			= rm -f
 
-#LIBFT_DIR	= ./libft
+LIBFT_DIR	= ./libft
 
 SRC 		= ./main.c\
+			  ./src/prompt.c\
 			  
-#INC			= -I./inc 
 HOME		= ..
-INC			= -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
+INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
 
 LIB			= -lreadline -L $(HOME)/homebrew/Cellar/readline/8.1.2/lib
-#LIB			= ./libft/libft.a 
+LIBFT		= ./libft/libft.a 
 
 all: $(NAME)
 
 $(NAME):	$(OBJS)
-#			$(MAKE) -C $(LIBFT_DIR)
-			$(CC) $(CFLAGS) -o $(NAME) $(INC) $(SRC) $(LIB)
+			$(MAKE) -C $(LIBFT_DIR)
+			$(CC) $(CFLAGS) -o $(NAME) $(INC) $(SRC) $(LIB) $(LIBFT)
 
 clean:
-#			$(MAKE) -C $(LIBFT_DIR) clean
+			$(MAKE) -C $(LIBFT_DIR) clean
 		   	$(RM) $(OBJS)
 
 fclean: 
-#			$(MAKE) -C $(LIBFT_DIR) fclean
+			$(MAKE) -C $(LIBFT_DIR) fclean
 		   	$(RM) $(OBJS)
 	   		$(RM) $(NAME)
 
