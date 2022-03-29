@@ -1,14 +1,39 @@
 #include "../minishell.h"
+#include "../libft/libft.h"
 
 void	printlist(t_the_env *node)
 {
 	while (node != NULL)
 	{
+		printf("%s=", node->name);
 		printf("%s\n", node->content);
 		node = node->next;
 	}
 }
 
+char	*ft_get_line(char *line)
+{
+	int	i;
+	char	*res;
+
+	i = 0;
+	while(line[i] != '=')
+		i++;
+	res = ft_substr(line, i + 1, ft_strlen(line) - i);
+	return (res);
+}
+
+char	*ft_get_name(char *line)
+{
+	int	i;
+	char	*res;
+
+	i = 0;
+	while (line[i] != '=')
+		i++;
+	res = ft_substr(line, 0, i);
+	return (res);
+}
 
 void	create_node(t_the_env **head, char *data)
 {
@@ -18,20 +43,42 @@ void	create_node(t_the_env **head, char *data)
 	last = *head;
 	newNode = (t_the_env *)malloc(sizeof(t_the_env));
 	//newNode->content = NULL;
-	newNode->content = data;
+	newNode->name = ft_get_name(data);
+	newNode->content = ft_get_line(data);
+	newNode->next = NULL;
 	if (*head == NULL)
 	{
 		*head = newNode;
-			return ;
+		return ;
 	}
 	while (last->next != NULL)
 		last = last->next;
 	last->next = newNode;
+	//return ;
+}
+
+// supprimer 1er element liste
+
+t_the_env *delete_first(t_the_env **head)
+{
+	t_the_env	*tmp;
+	
+	tmp = *head;
+	if (*head != NULL)
+	{
+		if ((*head)->next)
+			tmp = (*head)->next;
+		free(*head);
+		return (tmp);
+	}
+	else
+		return (NULL) ;
 }
 
 void	create_env_list(t_the_env **head, char **envp)
 {
 	int				i;
+	t_the_env *tmp;
 
 	i = 2;
 	while (envp[i]!= NULL)
@@ -39,25 +86,16 @@ void	create_env_list(t_the_env **head, char **envp)
 		create_node(head, envp[i]);
 		i++;
 	}
-}
-
-// supprimer 1er element liste
-
-void	delete_first(t_the_env **head)
-{
-	t_the_env	*tmp;
-	t_the_env *ttmp;
-	
 	tmp = *head;
-	ttmp = *head;
-	if (tmp != NULL)
+	i = 0;
+	while (tmp->next != NULL)
 	{
-		ttmp = tmp->next;
-		free(tmp);
+		//printf("node Nr %d = %s\n", i++, tmp->content);
+		tmp = tmp->next;
 	}
-	else
-		return ;
+	*head = delete_first(head);
 }
+
 // supprimer element en fin de liste
 void	delete_last(t_the_env **head)
 {
@@ -102,32 +140,7 @@ int	main(int argc, char **envp)
 	t_the_env *ttmp;
 
 	head = (t_the_env *)malloc(sizeof(t_the_env));
-	printf("env test = %s\n", head->next->content);
 	create_env_list(&head, envp);
-	tmp = head;
-	printf("env 1 = %s\n", head->content);
-	printf("env 2 = %s\n", head->next->content);
-	printf("1 / first element list = %s\n", tmp->content);
-	printf("1 / first element list = %s\n", tmp->next->content);
-	delete_first(&head);
-	tmp = head;
-	printf("2 / first element list = %s\n", tmp->content);
-	// //printlist(tmp);
-	// tmp = find_last(&head);
-	// printf("1 / last element list = %s\n", tmp->content);
-	// delete_last(&head);
-	// tmp = find_last(&head);
-	// printf("2 / last element list = %s\n", tmp->content);
-	// delete_last(&head);
-	// tmp = find_last(&head);
-	// printf("3 / last element list = %s\n", tmp->content);
-	//delete_last(&tmp);
-	// ttmp = head;
-	// ttmp = find_last(&ttmp);
-	// printf("2 / last element list = %s\n", ttmp->content);
-	// delete_last(&head);
-	// head = find_last(&head);
-	// printf("3 / last element list = %s\n", head->content);
-	// //printlist(head);
+	printlist(head);
 	return (0);
 }
