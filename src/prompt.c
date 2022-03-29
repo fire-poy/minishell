@@ -1,18 +1,18 @@
 #include "../minishell.h"
 
-void    free_tab(char **tab)
+void	free_tab(char **tab)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (tab[i])
-    {
-        free (tab[i]);
-        tab[i] = NULL;
-        i++;
-    }
-    free (tab);
-    tab = NULL;
+	i = 0;
+	while (tab[i])
+	{
+		free (tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free (tab);
+	tab = NULL;
 }
 
 void	execution(char **path, char **cmd_tab, char **envp)
@@ -22,10 +22,10 @@ void	execution(char **path, char **cmd_tab, char **envp)
 	id = fork();
 	if (id == 0)
 		execve(*path, cmd_tab, envp);
-	else 
+	else
 		free (*path);
-		wait(&id);
-		return;
+	wait(&id);
+	return ;
 }
 
 int	find_path(char *cmd, char **envp)
@@ -46,7 +46,7 @@ int	find_path(char *cmd, char **envp)
 		paths[i] = ft_strjoin(paths[i], cmd_tab[0]);
 		if (access(paths[i], 0) == 0)
 		{
-			execution(&paths[i], cmd_tab,envp);
+			execution(&paths[i], cmd_tab, envp);
 			return (0);
 		}
 		free (paths[i]);
@@ -58,12 +58,12 @@ int	find_path(char *cmd, char **envp)
 	return (1);
 }
 
-void    loop_prompt(int ac, char **av, char **envp)
+void	loop_prompt(int ac, char **av, char **envp)
 {
-	char *input;
+	char	*input;
 
 	if (!ac || !av || !envp)
-			return ;    
+		return ;
 	while (1)
 	{
 		input = readline("Minishell >");

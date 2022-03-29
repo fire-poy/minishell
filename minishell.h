@@ -8,13 +8,26 @@
 #include "./libft/libft.h"
 #include <stdlib.h>
 
+
+typedef struct s_tokens t_tokens;
+
+struct s_tokens
+{
+	char	*token;
+	char	**tab_cmd;
+	char	*env;
+	int		token;
+}
+// 0 == cmd
+// 1 == env
+// 2 == 
+
 typedef struct s_the_env
 {
 	char	*name;
 	char	*content;
 	struct s_the_env	*next;
 }	t_the_env;
-
 
 void	loop_prompt(int ac, char **av, char **envp);
 void	my_env(char **envp);

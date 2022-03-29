@@ -6,7 +6,7 @@
 #    By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 14:25:48 by mpons             #+#    #+#              #
-#    Updated: 2021/12/27 18:55:56 by mpons            ###   ########.fr        #
+#    Updated: 2021/11/11 21:05:24 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRCS		= ft_isalpha.c\
 			  ft_memmove.c\
 			  ft_strlcpy.c\
 			  ft_strlcat.c\
-			  ft_strcat.c\
 			  ft_toupper.c\
 			  ft_tolower.c\
 			  ft_strchr.c\
@@ -46,9 +45,19 @@ SRCS		= ft_isalpha.c\
 			  ft_putendl_fd.c\
 			  ft_putnbr_fd.c\
 
-HEADERS		= libft.h
+BONUS		= ft_lstnew.c\
+			  ft_lstadd_front.c\
+			  ft_lstsize.c\
+			  ft_lstlast.c\
+			  ft_lstadd_back.c\
+			  ft_lstdelone.c\
+			  ft_lstclear.c\
+			  ft_lstiter.c\
+			  ft_lstmap.c\
 
 OBJS		= ${SRCS:.c=.o}
+
+B_OBJS		= ${BONUS:.c=.o}
 
 NAME 		= libft.a
 
@@ -71,12 +80,16 @@ ${NAME}: 	${OBJS}
 
 all:		${NAME}
 
+bonus:		${OBJS} ${B_OBJS}
+		 	${LIB} ${NAME} ${OBJS} ${B_OBJS}
+			${RAN} ${NAME}
+
 clean:
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${B_OBJS}
 
 fclean:		clean
 			${RM} ${NAME}
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus
