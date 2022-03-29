@@ -16,18 +16,20 @@ struct s_tokens
 	char	*token;
 	char	**tab_cmd;
 	char	*env;
-	int		token;
-}
+	//int		token;
+};
 // 0 == cmd
 // 1 == env
 // 2 == 
 
-typedef struct s_the_env
+typedef struct s_the_env t_the_env;
+
+struct s_the_env
 {
 	char	*name;
 	char	*content;
-	struct s_the_env	*next;
-}	t_the_env;
+	t_the_env	*next;
+}	;
 
 void	loop_prompt(int ac, char **av, char **envp);
 void	my_env(char **envp);
