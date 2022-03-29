@@ -42,7 +42,6 @@ void	create_node(t_the_env **head, char *data)
 
 	last = *head;
 	newNode = (t_the_env *)malloc(sizeof(t_the_env));
-	//newNode->content = NULL;
 	newNode->name = ft_get_name(data);
 	newNode->content = ft_get_line(data);
 	newNode->next = NULL;
@@ -54,7 +53,6 @@ void	create_node(t_the_env **head, char *data)
 	while (last->next != NULL)
 		last = last->next;
 	last->next = newNode;
-	//return ;
 }
 
 // supprimer 1er element liste
