@@ -3,14 +3,11 @@
 
 void	current_dir(void)
 {
-	char cwd[PATH_MAX];
+	char *cwd[PATH_MAX];
 
   if (getcwd(cwd, sizeof(cwd)) != NULL) 
-	{
-  	printf("Current working dir: %s\n", cwd);
-  } 
+  	printf("Current dir: %s\n", cwd);
 	else 
-	{
   	perror("getcwd() error");
-  }
+	free(cwd);
 }
