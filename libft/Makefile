@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+         #
+#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 14:25:48 by mpons             #+#    #+#              #
-#    Updated: 2021/11/11 21:05:24 by mpons            ###   ########.fr        #
+#    Updated: 2022/03/31 13:55:46 by jhermon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS		= ft_isalpha.c\
 			  ft_strchr.c\
 			  ft_strrchr.c\
 			  ft_strncmp.c\
+				ft_strcmp.c\
 			  ft_memchr.c\
 			  ft_memcmp.c\
 			  ft_strnstr.c\
