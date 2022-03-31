@@ -88,6 +88,7 @@ t_env	*ft_sort_list(t_env **head)
 	return (sort_list);
 }
 
+// this main will print a sorted list of the env if export is prompted
 int main(int argc, char **argv, char **envp)
 {
 	t_env *head;

@@ -33,15 +33,6 @@ struct s_env
 	t_env	*next;
 };
 
-// chained list to order export list
-
-typedef struct s_order
-{
-	t_env	*newNode;
-	t_env	*temp1;
-	t_env	*temp2;
-}	t_order;
-
 void	loop_prompt(int ac, char **av, char **envp);
 void	my_env(char **envp);
 void	current_dir(void);
