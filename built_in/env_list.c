@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void	printlist(t_the_env *node)
+void	printlist(t_env *node)
 {
 	while (node != NULL)
 	{
@@ -35,13 +35,15 @@ char	*ft_get_name(char *line)
 	return (res);
 }
 
-void	create_node(t_the_env **head, char *data)
+void	env_create_node(t_env **head, char *data)
 {
-	t_the_env	*newNode;
-	t_the_env	*last;
+	t_env	*newNode;
+	t_env	*last;
 
 	last = *head;
-	newNode = (t_the_env *)malloc(sizeof(t_the_env));
+	newNode = (t_env *)malloc(sizeof (t_env));
+	//printf("data = %s\n", data);
+	newNode->initial_env = ft_strdup(data);
 	newNode->name = ft_get_name(data);
 	newNode->content = ft_get_line(data);
 	newNode->next = NULL;
@@ -53,13 +55,14 @@ void	create_node(t_the_env **head, char *data)
 	while (last->next != NULL)
 		last = last->next;
 	last->next = newNode;
+	return ;
 }
 
 // supprimer 1er element liste
 
-t_the_env *delete_first(t_the_env **head)
+t_env *delete_first(t_env **head)
 {
-	t_the_env	*tmp;
+	t_env	*tmp;
 	
 	tmp = *head;
 	if (*head != NULL)
@@ -73,15 +76,16 @@ t_the_env *delete_first(t_the_env **head)
 		return (NULL) ;
 }
 
-void	create_env_list(t_the_env **head, char **envp)
+
+void	create_env_list(t_env **head, char **envp)
 {
 	int				i;
-	t_the_env *tmp;
+	t_env *tmp;
 
 	i = 2;
 	while (envp[i]!= NULL)
 	{
-		create_node(head, envp[i]);
+		env_create_node(head, envp[i]);
 		i++;
 	}
 	tmp = *head;
@@ -95,11 +99,11 @@ void	create_env_list(t_the_env **head, char **envp)
 }
 
 // supprimer element en fin de liste
-void	delete_last(t_the_env **head)
+void	delete_last(t_env **head)
 {
-	t_the_env	*liste;
-	t_the_env	*tmp;
-	t_the_env	*ptmp;
+	t_env	*liste;
+	t_env	*tmp;
+	t_env	*ptmp;
 
 	liste = *head;
 	tmp = *head;
@@ -121,9 +125,9 @@ void	delete_last(t_the_env **head)
 	//return (*liste);
 }
 
-t_the_env	*find_last(t_the_env **head)
+t_env	*find_last(t_env **head)
 {
-	t_the_env	*tmp;
+	t_env	*tmp;
 
 	tmp = *head;
 	while(tmp->next != NULL)
@@ -131,14 +135,12 @@ t_the_env	*find_last(t_the_env **head)
 	return (tmp);
 }
 
-int	main(int argc, char **envp)
-{
-	t_the_env *head;
-	t_the_env	*tmp;
-	t_the_env *ttmp;
+// int	main(int argc, char **envp)
+// {
+// 	t_env *head;
 
-	head = (t_the_env *)malloc(sizeof(t_the_env));
-	create_env_list(&head, envp);
-	printlist(head);
-	return (0);
-}
+// 	head = (t_env *)malloc(sizeof(t_env));
+// 	create_env_list(&head, envp);
+// 	printlist(head);
+// 	return (0);
+// }

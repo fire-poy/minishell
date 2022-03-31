@@ -6,7 +6,7 @@
 #    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/03/28 13:39:41 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/03/30 10:59:16 by jhermon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRC 		= ./main.c\
 				./built_in/env.c\
 				./built_in/pwd.c\
 				./built_in/echo.c\
+				./built_in/env_list.c\
+				./built_in/export.c\
 			  
 HOME		= ..
 INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
