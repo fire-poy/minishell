@@ -51,8 +51,10 @@ void	create_env_list(t_env **head, char **envp);
 t_env	*ft_search_in_list(t_env **head, char *name);
 t_env	*ft_create_node(char *name, char *value);
 void	ft_add_to_list(t_env **head, t_env *newnode);
-int	ft_delete_first_node(t_env **head, t_env *temp, char *name);
+int		ft_delete_first_node(t_env **head, t_env *temp, char *name);
 void	ft_delete_from_list(t_env **head, char *name);
-int	ft_count_list(t_env **head);
+int		ft_count_list(t_env **head);
+char	*ft_get_line(char *line);
+char	*ft_get_name(char *line);
 
 #endif
