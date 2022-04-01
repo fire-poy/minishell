@@ -1,76 +1,52 @@
 #include "../minishell.h"
-#include "../libft/libft.h"
 
-// char *trim(char *input)
-// {
-// 	char	trim[2];
+void	trimer (char *s, int *i)
+{
+	while (s[*i] == ' ' || s[*i] == '\t' || s[*i] == '\n'
+		|| s[*i] == '\v' || s[*i] == '\f' || s[*i] == '\r')
+		(*i)++;
+}
 
-// 	trim[0] = ' ';
-// 	trim[1] = '\t';
-// 	return (ft_strtrim(input, trim));
-// }
+char *chercher_env(t_env *liste, char *a_trouver)
+{
+	if (!liste)
+		return (NULL);
+	while (liste->next)
+	{
+		if (ft_strncmp(a_trouver, liste->name , ft_strlen(a_trouver)))//si sont different je continue a chercher
+			return (liste->content);
+	}
+	return (NULL);
+}
 
-int	search_quotes_closed(char *str)
+// lexer
+// 1 quitamos espacio vacio
+// 2 buscamos tokens -> < >> > ' " funciones
+	// despues de > file
+int	lexer(char *input, t_env *liste)
 {
 	int	i;
+	char *input2;
 
 	i = 0;
-	while (str[i])
-	{
-		while (str[i] != '\'' || str[i] != '\"' )	
-			i++;
-		if (str[i] == '\'') 
-		{
-			s_quote++;
-			while (str[i] != '\'')
-				i++;
-		}
-		if (str[i] == '\"') 
-		{
-			d_quote++;
-			while (str[i] != '\"')
-				i++;
-		}
-	}
+	trimer (input, &i);
+	input2 = ft_strdup(input + i);
+	input2 = search_and_replace_quotes(&input2, liste);
+	printf("input = %s \ninput 2 = %s", input, input2);
+	return (1);
+	// i = 0;
+	// while (input2[i])
+	// {
+	// 	search_and_create_token(input + i);
+	// }
 }
 
-int	search_quotes_closed(char *str)
-{
-	int	i;
-	int	s_quote;
-	int	d_quote;
+// void	search_type_token(char *input)
+// {
+// 	char *set;
 
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '\'' && str[i]) 
-		{
-			s_quote++;
-			i++;
-			while (str[i] != '\'' && str[i])
-				i++;
-		}
-		if (str[i] == '\"' && str[i]) 
-		{
-			d_quote++;
-			while (str[i] != '\"' && str[i])
-				i++;
-		}
-		if (s_quote % 2 == 1 || d_quote % 2 == 1)
-		{
-			exit_status == 3;
-			err_msg("quotes pas bien fermés")
-			break;
-		}
-	}
-}
-
-// if(str[i] == '$')
-
-int	lexer(char *input)
-{
-	// char *str_trim;
-	// char *z;
-	// str_trim = trim(input);
-	search_single_quotes(input)
-	
+// 	set = ft_strdup("<>|")
+// 	if (input[i] && ft_c_vs_charset(input[i], set))
+// 	{
+// 		if (input[i] == '<')
+// 			type = 0;

@@ -61,7 +61,8 @@ int	find_path(char *cmd, char **envp)
 void	loop_prompt(int ac, char **av, char **envp)
 {
 	char	*input;
-
+	t_env	*liste;
+	
 	if (!ac || !av || !envp)
 		return ;
 	while (1)
@@ -70,6 +71,8 @@ void	loop_prompt(int ac, char **av, char **envp)
 		if (ft_strlen(input) > 0)
 		{
 			add_history(input);
+			liste = get_env_chaine(envp);//fun teorique qui returne a partir de envp la liste chaine t_env
+			lexer(input, liste);
 			find_path(input, envp);
 		}
 	}
