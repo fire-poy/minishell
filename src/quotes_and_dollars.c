@@ -1,0 +1,140 @@
+#include "../minishell.h"
+
+//return char le quote simple ou double, selon trouvé
+//rendre à partir de info l'index ou il'y a le premier ' et le 2eme a partir du premier
+//check si sont le quotes fermes
+char	detect_quotes(char *s, t_str *info)
+{
+	char	c;
+	int		i;
+
+	i = ft_strchr_set(s, "'\"");
+	info->start = i;
+	c = s[i];
+	if (c) //si on a trouve on cherche 2eme
+	{
+		i++;
+		while (s[i] && s[i] != c)
+			i++;
+		info->len = i - info->start;
+		if (!s[i]) //on check que soit bien fermé
+			err_msg("quotes pas bien fermés", NULL, 3);
+		return (c);
+	}
+	else
+		return (c);
+}
+
+char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)//index dollar, combien a enlever , quoi ajouter
+{
+	char	*debut;
+	char	*fin;
+
+	debut =	ft_substr(*s, 0, *i - 1); //avant dollar
+	fin =	ft_substr(*s, 0, *i + enlever); //apres dollar
+	debut = ft_strjoin(debut, ajouter);//free debut
+	debut = ft_strjoin(debut, fin);
+	free (fin);
+	free (*s);
+	*s = NULL;
+	*i += ft_strlen(ajouter); //avance just after added string
+	return (debut);
+}
+
+char	*remplacer_dollar(char **s, int *index, t_env *liste) //return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
+{
+	int		len;
+	char	*env_var;
+	char	*remplacer;
+
+	len =	ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"");//busco siguiente espacio o fin dsp de dolar"
+	if (len == 0)
+		return (ajouter_au_string(s, index, 1, "'$'")); // remplazo, i avanza
+	else
+	{
+		env_var = ft_substr(*s, (unsigned int)*index, len); //$ ou apres $???
+		remplacer = chercher_env(liste, env_var);
+		if (remplacer == NULL)
+		{
+			*index += len + 1; //avanzo
+			return (*s);
+		}
+		else
+			return (ajouter_au_string(s, index, ft_strlen(env_var), remplacer)); //remplazo y avanzo
+		free (env_var);
+	}
+}
+
+char	*chercher_and_replace_dollar(char **s, t_str *info, t_env *liste)
+{
+	int		i;
+
+	i = info->start;
+	while (*s[i])
+	{
+		if(*s[i] == '$')//si hay dollar me fijo
+		{
+			*s = remplacer_dollar(s, &i, liste);
+		}
+	}
+	return (*s); 	
+}
+
+char	*search_and_replace_quotes(char **input, t_env *liste)
+{
+	t_str info;
+	char	c;
+	int		i;
+
+	i = -1;
+	while (*input[++i])
+	{
+		c = 0;
+		c = detect_quotes(*input + i, &info); //get_info_quotes
+		if (c == '\'') //si' -> i = 2eme' -> j'avance au 2eme ' 
+			i = info.start + info.len; 
+		if (c == '\"')
+			*input = chercher_and_replace_dollar(input, &info, liste);
+		if (c == 0)
+			return (*input);	
+	}
+	return (*input);
+}
+// void	search_next_quote(char *s, char c)
+// {
+// 	int	i = 0;
+
+// 	while (s[i])
+// 		if (s[i] == c)
+// 			i++;
+// }
+
+// void	chercher_dollar(char *s, t_str *info, t_env *liste)
+// {
+// 	int		i;
+// 	int		len;
+// 	char	*env_var;
+// 	char	*remplacer;
+
+// 	i = info->start;
+// 	while (s[i])
+// 	{
+// 		if(s[i] == '$')//si hay dollar me fijo
+// 		{
+// 			len =	ft_strchr_set(s + i + 1, " \t\n\v\f\r\"");//busco siguiente espacio o fin dsp de dolar"
+// 			if (len = 0)
+// 				s = ajouter_au_string(s, &i, 1, "'$'"); // remplazo, i avanza
+// 			else
+// 			{
+// 				env_var = ft_substr(s, &i, len); //$ ou apres $???
+// 				remplacer = chercher_env(liste, env_var);
+// 				if (remplacer == NULL)
+// 					i += len + 1; //avanzo
+// 				else
+// 					s = ajouter_au_string(s, &i, ft_strlen(env_var), remplacer); //remplazo y avanzo
+// 				free (env_var);
+// 			}
+// 		}
+// 	}
+// 	return (s); 	
+// }

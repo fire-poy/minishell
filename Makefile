@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/03/30 10:59:16 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/04/01 23:03:07 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,11 @@ LIBFT_DIR	= ./libft
 
 SRC 		= ./main.c\
 			  ./src/prompt.c\
+				./src/lexer.c\
+				./src/error.c\
+				./src/ft_strchr_set.c\
 				./built_in/env.c\
+				./src/quotes_and_dollars.c\
 				./built_in/pwd.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
