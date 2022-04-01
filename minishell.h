@@ -10,6 +10,11 @@
 
 // int	g_exit_status = 0;
 
+//Error
+void	err_msg(char *e, char *avant_e, int exit_status);
+
+//Token
+
 typedef struct s_token t_token;
 struct s_token
 {
@@ -31,6 +36,8 @@ struct s_token
 // 	int	index;
 	
 // }
+
+//struct pour garder des info pour remplacer le quotes
 typedef struct s_str t_str;
 
 struct s_str
@@ -38,6 +45,22 @@ struct s_str
 	int		start;
 	int		len;
 };
+
+// lexer
+int		ft_c_vs_charset(char c, const char *cs);
+int		ft_strchr_set(const char *s, char *set);
+
+void	loop_prompt(int ac, char **av, char **envp);
+int		lexer(char *input, t_env *liste);
+void	trimer (char *s, int *i);
+void	search_quotes_closed(char *str);
+char	detect_quotes(char *s, t_str *info);
+char	*chercher_env(t_env *liste, char *a_trouver);
+char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
+char	*remplacer_dollar(char **s, int *index, t_env *liste); 
+char	*chercher_and_replace_dollar(char **s, t_str *info, t_env *liste);
+char	*search_and_replace_quotes(char **input, t_env *liste);
+
 
 
 // chained list to extract env
@@ -60,20 +83,6 @@ typedef struct s_order
 	t_env	*temp2;
 }	t_order;
 
-// lexer
-int		ft_c_vs_charset(char c, const char *cs);
-int		ft_strchr_set(const char *s, char *set);
-void	loop_prompt(int ac, char **av, char **envp);
-int		lexer(char *input, t_env *liste);
-void	trimer (char *s, int *i);
-void	search_quotes_closed(char *str);
-char	detect_quotes(char *s, t_str *info);
-char	*chercher_env(t_env *liste, char *a_trouver);
-char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);//index dollar, combien a enlever , quoi ajouter
-char	*remplacer_dollar(char **s, int *index, t_env *liste); //return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
-char	*chercher_and_replace_dollar(char **s, t_str *info, t_env *liste);
-char	*search_and_replace_quotes(char **input, t_env *liste);
-
 //ENV
 void	my_env(char **envp);
 void	current_dir(void);
@@ -86,7 +95,8 @@ void	ft_add_to_list(t_env **head, t_env *newnode);
 int		ft_delete_first_node(t_env **head, t_env *temp, char *name);
 void	ft_delete_from_list(t_env **head, char *name);
 int		ft_count_list(t_env **head);
-void	err_msg(char *e, char *avant_e, int exit_status);
 
+char	*ft_get_line(char *line);
+char	*ft_get_name(char *line);
 
 #endif
