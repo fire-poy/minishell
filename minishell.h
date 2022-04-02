@@ -13,6 +13,26 @@
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
 
+// chained list to extract env
+typedef struct s_env t_env;
+
+struct s_env
+{
+	char	*initial_env;
+	char	*name;
+	char	*content;
+	t_env	*next;
+};
+
+// chained list to order export list
+
+typedef struct s_order
+{
+	t_env	*newNode;
+	t_env	*temp1;
+	t_env	*temp2;
+}	t_order;
+
 //Token
 
 typedef struct s_token t_token;
@@ -54,34 +74,14 @@ void	loop_prompt(int ac, char **av, char **envp);
 int		lexer(char *input, t_env *liste);
 void	trimer (char *s, int *i);
 void	search_quotes_closed(char *str);
-char	detect_quotes(char *s, t_str *info);
+char	detect_quotes(char *s, int *i);
 char	*chercher_env(t_env *liste, char *a_trouver);
 char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
 char	*remplacer_dollar(char **s, int *index, t_env *liste); 
-char	*chercher_and_replace_dollar(char **s, t_str *info, t_env *liste);
+char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste);
 char	*search_and_replace_quotes(char **input, t_env *liste);
 
 
-
-// chained list to extract env
-typedef struct s_env t_env;
-
-struct s_env
-{
-	char	*initial_env;
-	char	*name;
-	char	*content;
-	t_env	*next;
-};
-
-// chained list to order export list
-
-typedef struct s_order
-{
-	t_env	*newNode;
-	t_env	*temp1;
-	t_env	*temp2;
-}	t_order;
 
 //ENV
 void	my_env(char **envp);

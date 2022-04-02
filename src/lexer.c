@@ -32,7 +32,7 @@ int	lexer(char *input, t_env *liste)
 	trimer (input, &i);
 	input2 = ft_strdup(input + i);
 	input2 = search_and_replace_quotes(&input2, liste);
-	printf("input = %s \ninput 2 = %s", input, input2);
+	printf("input = %s \ninput 2 = %s\n", input, input2);
 	return (1);
 	// i = 0;
 	// while (input2[i])
