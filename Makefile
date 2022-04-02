@@ -6,7 +6,7 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/01 23:03:07 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/02 22:22:45 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRC 		= ./main.c\
 				./src/lexer.c\
 				./src/error.c\
 				./src/ft_strchr_set.c\
-				./built_in/env.c\
 				./src/quotes_and_dollars.c\
+				./built_in/env.c\
 				./built_in/pwd.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\

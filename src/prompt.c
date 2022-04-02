@@ -71,9 +71,10 @@ void	loop_prompt(int ac, char **av, char **envp)
 		if (ft_strlen(input) > 0)
 		{
 			add_history(input);
-			liste = get_env_chaine(envp);//fun teorique qui returne a partir de envp la liste chaine t_env
+			// liste = get_env_chaine(envp);//fun teorique qui returne a partir de envp la liste chaine t_env
+			liste = NULL;
 			lexer(input, liste);
-			find_path(input, envp);
+			// find_path(input, envp);
 		}
 	}
 }
