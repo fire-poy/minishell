@@ -14,7 +14,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	int	i;
@@ -40,3 +40,4 @@ int	main(int argc, char **argv)
 			printf("\n");
 	}
 }
+*/

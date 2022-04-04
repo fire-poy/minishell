@@ -6,7 +6,7 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/02 22:22:45 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/04 12:52:39 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,13 @@ SRC 		= ./main.c\
 				./src/error.c\
 				./src/ft_strchr_set.c\
 				./src/quotes_and_dollars.c\
+				./src/other_dollars.c\
 				./built_in/env.c\
-				./built_in/pwd.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
 				./built_in/export.c\
+				./built_in/linked_list.c\
+				# ./built_in/pwd.c\
 			  
 HOME		= ..
 INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include

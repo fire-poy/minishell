@@ -53,9 +53,7 @@ char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste)
 	while ((*s)[*i] && (*s)[*i] != '\"')
 	{
 		if((*s)[*i] == '$')//si hay dollar me fijo
-		{
 			*s = remplacer_dollar(s, i, liste);
-		}
 		else
 			(*i)++;
 	}
@@ -69,27 +67,16 @@ char	detect_quotes(char *s, int *idx)
 {
 	char	c;
 	int		i;
-	int		start;
 
+	*idx += ft_strchr_set(s + *idx, "'\"");
 	i = *idx;
-	i += ft_strchr_set(s + i, "'\"");
-	start = i;
 	c = s[i];
 	if (c) //si on a trouve on cherche 2eme
 	{
-		i++;
-		while (s[i] && s[i] != c)
-			i++;
-		if (!s[i]) //on check que soit bien fermé
+		if (search_next_c(&s, &i, c) == 0)
 			err_msg("quotes pas bien fermés", NULL, 3);
-		if (c == '\'')
-			*idx = i;
-		else 
-			*idx = start;
-		return (c);
 	}
-	else
-		return (c);
+	return (c);
 }
 
 char	*search_and_replace_quotes(char **input, t_env *liste)
@@ -102,8 +89,8 @@ char	*search_and_replace_quotes(char **input, t_env *liste)
 	{
 		c = 0;
 		c = detect_quotes(*input, &i); //get_info_quotes 
-		// if (c == '\'') //si' -> i = 2eme' -> j'avance au 2eme ' 
-			// i = info.start + info.len; 
+		if (c == '\'') //si' -> i = 2eme' -> j'avance au 2eme ' 
+			search_next_c(input, &i, c);
 		if (c == '\"')
 			*input = chercher_and_replace_dollar(input, &i, liste);
 		if (c == 0)
@@ -111,15 +98,6 @@ char	*search_and_replace_quotes(char **input, t_env *liste)
 	}
 	return (*input);
 }
-
-// void	search_next_quote(char *s, char c)
-// {
-// 	int	i = 0;
-
-// 	while (s[i])
-// 		if (s[i] == c)
-// 			i++;
-// }
 
 // void	chercher_dollar(char *s, t_str *info, t_env *liste)
 // {
@@ -149,4 +127,31 @@ char	*search_and_replace_quotes(char **input, t_env *liste)
 // 		}
 // 	}
 // 	return (s); 	
+// }
+
+// char	detect_quotes(char *s, int *idx)
+// {
+// 	char	c;
+// 	int		i;
+// 	int		start;
+
+// 	i = *idx;
+// 	i += ft_strchr_set(s + i, "'\"");
+// 	start = i;
+// 	c = s[i];
+// 	if (c) //si on a trouve on cherche 2eme
+// 	{
+// 		i++;
+// 		while (s[i] && s[i] != c)
+// 			i++;
+// 		if (!s[i]) //on check que soit bien fermé
+// 			err_msg("quotes pas bien fermés", NULL, 3);
+// 		if (c == '\'')
+// 			*idx = i;
+// 		else 
+// 			*idx = start;
+// 		return (c);
+// 	}
+// 	else
+// 		return (c);
 // }

@@ -69,9 +69,12 @@ struct s_str
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
 int		ft_strchr_set(const char *s, char *set);
+int		ft_strchr_char(const char *s, char c);
+int		search_next_c(char **s, int *debut, char c);
+
 
 void	loop_prompt(int ac, char **av, char **envp);
-int		lexer(char *input, t_env *liste);
+int		lexer(char *input, t_env *liste, t_token *tk);
 void	trimer (char *s, int *i);
 void	search_quotes_closed(char *str);
 char	detect_quotes(char *s, int *i);
@@ -80,7 +83,7 @@ char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
 char	*remplacer_dollar(char **s, int *index, t_env *liste); 
 char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste);
 char	*search_and_replace_quotes(char **input, t_env *liste);
-
+char	*remplacer_rest_of_dollar(char **s, t_env *liste);
 
 
 //ENV
