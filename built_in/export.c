@@ -34,7 +34,7 @@ t_env	*add_var_to_env(t_env **head, char *var)
 	return (temp);
 }
 
-
+/*
 
 // this main can add a new node with the var content and delete it
 
@@ -44,6 +44,8 @@ int main(int argc, char **argv, char **envp)
 	t_env	*newnode;
 	char	*var;
 
+	// (void)argv;
+	// (void)argc;
 	var = "var=42";
 	head = (t_env *)malloc(sizeof(t_env));
 	create_env_list(&head, envp);
@@ -63,5 +65,6 @@ int main(int argc, char **argv, char **envp)
 	printlist(head);
 	return 0;
 }
+*/
 
 

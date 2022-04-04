@@ -1,5 +1,19 @@
 #include "../minishell.h"
 
+int	ft_strchr_char(const char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 int	ft_c_vs_charset(char c, const char *cs)
 {
 	int	i;
@@ -23,3 +37,4 @@ int	ft_strchr_set(const char *s, char *set)
 		i++;
 	return (i);
 }
+
