@@ -68,9 +68,11 @@ void	loop_prompt(int ac, char **av, char **envp)
 	
 	if (!ac || !av || !envp)
 		return ;
-	// liste = (t_env *)malloc(sizeof(t_env));
- 	// create_env_list(&liste, envp);
- 	// printlist(liste);	
+	
+	liste = (t_env *)malloc(sizeof(t_env));
+ 	create_env_list(&liste, envp);
+ 	printlist(liste);	
+	
 	while (1)
 	{
 		write(1, GREEN, ft_strlen(GREEN));

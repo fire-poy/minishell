@@ -38,3 +38,17 @@ int	ft_strchr_set(const char *s, char *set)
 	return (i);
 }
 
+//search charset a partir du start, avance l'address si trouve le chset;
+int	ft_charset_found(const char *s, int* start, char *set)
+{
+	int	i;
+
+	i = *start;
+	while (s[i] && !ft_c_vs_charset(s[i], set))//while I dont find charset I advance
+		i++;
+	if (s[i] == 0)		
+		return (0);
+	else
+		*start = i;
+	return (1);
+}

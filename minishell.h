@@ -39,23 +39,27 @@ typedef struct s_token t_token;
 struct s_token
 {
 	char		*info;//cmd
-	char		**tab_cmd;
+	//char		**tab_cmd; on fait le tab dans le pipe?
 	int			type;
-	int			tk_index;
-	int			cmd_index;
+	int			tk_index;//ordre de token
+	int			cmd_index;//nro de commande
 	t_token	*next;
 };
-// 0 == stdrin
+
+#define IN_FILE 0
+#define OUT_FILE 1
+#define APPEND 2
+#define HEREDOC 3
+#define BUILT_IN 5
+#define CMD 5
+#define PIPE 5
+
 // 1 == cmd
 // 2 == stdrout
 // 3 == heredoc
 // 4 == a definir
 
-// token_index
-// {
-// 	int	index;
-	
-// }
+
 
 //struct pour garder des info pour remplacer le quotes
 typedef struct s_str t_str;
@@ -71,6 +75,7 @@ int		ft_c_vs_charset(char c, const char *cs);
 int		ft_strchr_set(const char *s, char *set);
 int		ft_strchr_char(const char *s, char c);
 int		search_next_c(char **s, int *debut, char c);
+int		ft_charset_found(const char *s, int* start, char *set);
 
 
 void	loop_prompt(int ac, char **av, char **envp);

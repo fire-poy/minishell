@@ -28,7 +28,8 @@ char	*remplacer_dollar(char **s, int *index, t_env *liste) //return string avec 
 	len =	ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"");//busco siguiente espacio o fin dsp de dolar"
 	if (len == 0)
 	{
-		return (ajouter_au_string(s, index, 1, "'$'")); // remplazo, i avanza
+		(*index)++;
+		return (*s);
 	}
 	else
 	{
