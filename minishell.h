@@ -103,7 +103,7 @@ void	ft_add_to_list(t_env **head, t_env *newnode);
 int		ft_delete_first_node(t_env **head, t_env *temp, char *name);
 void	ft_delete_from_list(t_env **head, char *name);
 int		ft_count_list(t_env **head);
-
+void    err_exit(char *e, char *avant_e, int exit_status);
 char	*ft_get_line(char *line);
 char	*ft_get_name(char *line);
 
