@@ -36,9 +36,10 @@ typedef struct s_order
 //Token
 
 typedef struct s_token t_token;
+
 struct s_token
 {
-	char		*info;//cmd
+	char		*content;//cmd
 	//char		**tab_cmd; on fait le tab dans le pipe?
 	int			type;
 	int			tk_index;//ordre de token
@@ -81,14 +82,23 @@ int		ft_charset_found(const char *s, int* start, char *set);
 void	loop_prompt(int ac, char **av, char **envp);
 int		lexer(char *input, t_env *liste, t_token *tk);
 void	trimer (char *s, int *i);
+
+// QUOTES
 void	search_quotes_closed(char *str);
-char	detect_quotes(char *s, int *i);
-char	*chercher_env(t_env *liste, char *a_trouver);
-char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
-char	*remplacer_dollar(char **s, int *index, t_env *liste); 
-char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste);
+char	detect_and_check_quotes(char *s, int *i);
 char	*search_and_replace_quotes(char **input, t_env *liste);
+char	*chercher_env(t_env *liste, char *a_trouver);
+char	*remplacer_dollar(char **s, int *index, t_env *liste); 
+char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
+char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste);
 char	*remplacer_rest_of_dollar(char **s, t_env *liste);
+
+//TOKENS
+void	explore_tokens_err(char **in);
+int		search_next_token(char *s, char *tk, int *type);
+t_token	*get_tokens(char *s, t_token *tk);
+void	printlist_tk(t_token *node);
+
 
 
 //ENV

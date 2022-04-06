@@ -68,11 +68,8 @@ void	loop_prompt(int ac, char **av, char **envp)
 	
 	if (!ac || !av || !envp)
 		return ;
-	
-	liste = (t_env *)malloc(sizeof(t_env));
+	liste = NULL;
  	create_env_list(&liste, envp);
- 	printlist(liste);	
-	
 	while (1)
 	{
 		write(1, GREEN, ft_strlen(GREEN));
@@ -81,8 +78,6 @@ void	loop_prompt(int ac, char **av, char **envp)
 		if (ft_strlen(input) > 0)
 		{
 			add_history(input);
-			// liste = get_env_chaine(envp);//fun teorique qui returne a partir de envp la liste chaine t_env
-			liste = NULL;
 			tk = NULL;
 			lexer(input, liste, tk);
 			// find_path(input, envp);
