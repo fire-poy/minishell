@@ -6,14 +6,14 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/05 15:32:59 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/06 16:32:55 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell 
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS		= -g -Wall -Wextra -Werror -fsanitize=address
 
 OBJS		= ${SRC:.c=.o}
 
@@ -28,6 +28,8 @@ SRC 		= ./main.c\
 				./src/ft_strchr_set.c\
 				./src/quotes_and_dollars.c\
 				./src/other_dollars.c\
+				./src/get_token.c\
+				./src/create_token.c\
 				./built_in/env.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
