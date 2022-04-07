@@ -135,12 +135,12 @@ t_env	*find_last(t_env **head)
 	return (tmp);
 }
 
-// int	main(int argc, char **envp)
-// {
-// 	t_env *head;
+/*int	main(int argc, char **envp)
+ {
+ 	t_env *head;
 
-// 	head = (t_env *)malloc(sizeof(t_env));
-// 	create_env_list(&head, envp);
-// 	printlist(head);
-// 	return (0);
-// }
+	head = (t_env *)malloc(sizeof(t_env));
+ 	create_env_list(&head, envp);
+  printlist(head);
+  return (0);
+}*/
