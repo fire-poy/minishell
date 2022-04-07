@@ -60,6 +60,8 @@ int	find_path(char *cmd, char **envp)
 	return (1);
 }
 
+// int	search_type_token(*tk);
+
 void	loop_prompt(int ac, char **av, char **envp)
 {
 	char		*input;
@@ -79,7 +81,9 @@ void	loop_prompt(int ac, char **av, char **envp)
 		{
 			add_history(input);
 			tk = NULL;
-			lexer(input, liste, tk);
+			lexer(input, liste, tk);// obtiene los token
+			// search_type_token(*tk);
+			// redirection
 			// find_path(input, envp);
 		}
 	}

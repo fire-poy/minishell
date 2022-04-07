@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:01:00 by mpons             #+#    #+#             */
-/*   Updated: 2021/11/05 15:26:13 by mpons            ###   ########.fr       */
+/*   Updated: 2022/04/07 15:25:17 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_c_vs_charset(char c, const char *cs)
+static int	ft_c_vs_charset(char c, const char *cs)
 {
 	int	i;
 

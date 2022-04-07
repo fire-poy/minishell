@@ -6,7 +6,7 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/06 16:32:55 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/07 14:58:44 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ SRC 		= ./main.c\
 				./src/ft_strchr_set.c\
 				./src/quotes_and_dollars.c\
 				./src/other_dollars.c\
-				./src/get_token.c\
-				./src/create_token.c\
+				./src/token_err_and_print.c\
+				./src/token_get.c\
 				./built_in/env.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
