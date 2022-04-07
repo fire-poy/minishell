@@ -35,32 +35,25 @@ typedef struct s_order
 
 //Token
 
+#define IN_FILE 0
+#define OUT_FILE 1
+#define APPEND 2
+#define HEREDOC 3
+#define BUILT_IN 4
+#define CMD 5
+#define PIPE 6
+
 typedef struct s_token t_token;
 
 struct s_token
 {
-	char		*content;//cmd
-	//char		**tab_cmd; on fait le tab dans le pipe?
+	char		*content;//cmd, infile, outfile, etc
+	char		**tab_cmd;//on fait le tab dans le pipe?
 	int			type;
 	int			tk_index;//ordre de token
 	int			cmd_index;//nro de commande
 	t_token	*next;
 };
-
-#define IN_FILE 0
-#define OUT_FILE 1
-#define APPEND 2
-#define HEREDOC 3
-#define BUILT_IN 5
-#define CMD 5
-#define PIPE 5
-
-// 1 == cmd
-// 2 == stdrout
-// 3 == heredoc
-// 4 == a definir
-
-
 
 //struct pour garder des info pour remplacer le quotes
 typedef struct s_str t_str;
@@ -95,10 +88,9 @@ char	*remplacer_rest_of_dollar(char **s, t_env *liste);
 
 //TOKENS
 void	explore_tokens_err(char **in);
-int		search_next_token(char *s, char *tk, int *type);
+void	search_next_token(char *s, int *start, int *tk_idx, int *type);
 t_token	*get_tokens(char *s, t_token *tk);
 void	printlist_tk(t_token *node);
-
 
 
 //ENV
