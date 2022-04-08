@@ -3,15 +3,20 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "./libft/libft.h"
 #include <stdlib.h>
+#include <fcntl.h>
+#include <limits.h>
 
 // int	g_exit_status = 0;
 
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
+void	xperror(char *str);
+void	print_join(char *s1, char *s2, int fd);
 
 // chained list to extract env
 typedef struct s_env t_env;
@@ -113,8 +118,9 @@ void	ft_add_to_list(t_env **head, t_env *newnode);
 int		ft_delete_first_node(t_env **head, t_env *temp, char *name);
 void	ft_delete_from_list(t_env **head, char *name);
 int		ft_count_list(t_env **head);
-void    err_exit(char *e, char *avant_e, int exit_status);
+void  err_exit(char *e, char *avant_e, int exit_status);
 char	*ft_get_line(char *line);
 char	*ft_get_name(char *line);
+void	ft_env_set_content(t_env *env, char *name, char *new_content);
 
 #endif

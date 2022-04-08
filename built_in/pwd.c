@@ -1,13 +1,12 @@
 #include "../minishell.h"
-#include <limits.h>
+
 
 void	current_dir(void)
 {
-	char *cwd[PATH_MAX];
+	char cwd[PATH_MAX];
 
-  if (getcwd(cwd, sizeof(cwd)) != NULL) 
-  	printf("Current dir: %s\n", cwd);
-	else 
-  	perror("getcwd() error");
-	free(cwd);
+  if (!getcwd(cwd, sizeof(cwd)))
+		xperror("pwd: ");
+	 	t_env *head;
+	ft_putendl_fd(cwd, 2);
 }
