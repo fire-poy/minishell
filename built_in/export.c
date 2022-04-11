@@ -34,10 +34,36 @@ t_env	*add_var_to_env(t_env **head, char *var)
 	return (temp);
 }
 
-/*
-
 // this main can add a new node with the var content and delete it
 
+int	ft_export(char **argv, t_env *liste)
+{
+	t_env *head;
+	//t_env	*newnode;
+	//char	*var;
+	int		i;
+
+	i = 0;
+	head = (t_env *)malloc(sizeof(t_env));
+	if (!argv[1])
+		printlist((ft_sort_list(liste)));
+	// while (head != NULL)
+	// {
+	// 	if (ft_strcmp(head->initial_env, var) == 0 )
+	// 	{
+	// 		ft_replace_var(&head, &var, var);
+	// 		return ;
+	// 	}
+	// }
+	// newnode = add_var_to_env(&head, var);
+	// ft_add_to_list(&head, newnode);
+	// printlist(head);
+	// printf("********************************* \n");
+	// ft_delete_from_list(&head, newnode->name);
+	// printlist(head);
+	return 0;
+}
+/*
 int main(int argc, char **argv, char **envp)
 {
 	t_env *head;

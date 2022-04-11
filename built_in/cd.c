@@ -78,7 +78,6 @@ void	ft_cd(char *args, t_env *env)
 	if (cd_check(args))
 		free_cd(dir, NULL, NULL, 1);*/
 	dir = getcwd(cwd, sizeof(cwd));
-	//dir = getcwd(dir, 0);
 	printf("dir = %s\n", dir);
 	pwd = get_env(env, "PWD");
 	printf("pwd = %s\n", pwd);
@@ -87,7 +86,7 @@ void	ft_cd(char *args, t_env *env)
 	//free_cd(dir, NULL, pwd, 0);
 }
 
-int	main(int argc, char **argv, char **envp)
+/*int	main(int argc, char **argv, char **envp)
 {   
 	t_env *head;
 
@@ -108,4 +107,4 @@ int	main(int argc, char **argv, char **envp)
 	//}
 	//printf("getpid = %d\n", getpid());
 	return (0); 
-}
+}*/

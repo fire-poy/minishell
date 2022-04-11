@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/11 12:27:47 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/04/06 16:32:55 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= jo-minishell 
+NAME		= minishell 
 
 CC			= gcc
 CFLAGS		= -g -Wall -Wextra -Werror -fsanitize=address
@@ -35,12 +35,7 @@ SRC 		= ./main.c\
 				./built_in/env_list.c\
 				./built_in/export.c\
 				./built_in/linked_list.c\
-				./built_in/linked_list_sort.c\
-				./built_in/pwd.c\
-				./built_in/cd.c\
-				./built_in/exit.c\
-				./built_in/builtin.c\
-				#./built_in/pwd.c\
+				# ./built_in/pwd.c\
 			  
 HOME		= ..
 INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include

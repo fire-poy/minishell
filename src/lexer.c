@@ -40,9 +40,9 @@ int	lexer(char *input, t_env *liste, t_token *tk)
 	// printf("input = %s \ninput 2 = %s\n", input, input2);
 	// (void)tk;
 	tk = get_tokens(input2, tk);
-	// printf("token->content = %s\n", tk->content);
-	printlist_tk(tk);
-
+	//printlist_tk(tk);
+	ft_builtin(tk, liste);
+	//printf("token->content = %s\n", tk->tab_cmd[1]);
 	return (1);
 }
 //ch_env debbug
