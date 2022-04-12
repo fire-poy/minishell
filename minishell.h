@@ -133,6 +133,9 @@ void	ft_cd(char *args, t_env *env);
 int		current_dir(void);
 int		my_env(t_env *envp);
 int		ft_echo(char **argv);
-int		ft_export(char **argv, t_env *liste, t_token *token);
+int		ft_equal(char *var);
+int		ft_check_export_var(char *var);
+t_env	*ft_export(char **argv, t_env *liste, t_token *token);
+void	ft_add_to_list2(t_env **head, t_env *newnode);
 
 #endif

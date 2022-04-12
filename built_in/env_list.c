@@ -5,8 +5,8 @@ void	printlist(t_env *node)
 {
 	while (node != NULL)
 	{
-		printf("%s=", node->name);
-		printf("%s\n", node->content);
+		printf("%s", node->name);
+		printf("=%s\n", node->content);
 		node = node->next;
 	}
 }
@@ -31,6 +31,7 @@ char	*ft_get_line(char *line)
 	if (equal == 0)
 		i = 0;
 	res = ft_substr(line, i + 1, ft_strlen(line) - i);
+	//printf("content = %s\n", res);
 	return (res);
 }
 
@@ -54,6 +55,7 @@ char	*ft_get_name(char *line)
 	if (equal == 0)
 		i = 0;
 	res = ft_substr(line, 0, i);
+	//printf("name = %s\n", res);
 	return (res);
 }
 

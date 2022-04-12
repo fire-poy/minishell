@@ -31,7 +31,7 @@ int	ft_echo(char **argv)
 		}
 		while (argv[i] != NULL)
 		{
-			return (write(2, "toi", 4));
+			//return (write(2, "toi\n", 4));
 			printf("%s", argv[i]);
 			if (argv[i + 1] && argv[i][0] != '\0')
 				printf(" ");

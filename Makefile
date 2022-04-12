@@ -6,14 +6,14 @@
 #    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/11 12:27:47 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/04/12 19:14:39 by jhermon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= jo-minishell 
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -g3 -Wall -Wextra -Werror -fsanitize=address
 
 OBJS		= ${SRC:.c=.o}
 
@@ -40,6 +40,7 @@ SRC 		= ./main.c\
 				./built_in/cd.c\
 				./built_in/exit.c\
 				./built_in/builtin.c\
+				./built_in/export_support.c\
 				#./built_in/pwd.c\
 			  
 HOME		= ..

@@ -2,9 +2,10 @@
 
 int	my_env(t_env	*envp)
 {
-  while (envp->next != NULL)
+  while (envp != NULL)
 	{
-		printf("%s\n", envp->initial_env);
+		printf("%s=", envp->name);
+		printf("%s\n", envp->content);
 		envp = envp->next;
 	}
 	return (0);

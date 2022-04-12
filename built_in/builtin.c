@@ -3,8 +3,10 @@
 int	ft_builtin(t_token *token, t_env *liste)
 {
 	t_token	*cmd;
+	t_env		*env;
 
 	cmd = token;
+	env = liste;
 	cmd->tab_cmd = ft_split(cmd->content, ' ');
 	if (!ft_strncmp(cmd->content, "exit", 5))
 	{
@@ -17,7 +19,7 @@ int	ft_builtin(t_token *token, t_env *liste)
 		exit(0);*/
 	if (!ft_strncmp(cmd->content, "echo", 4))
 	{
-		return(ft_echo(cmd->tab_cmd));
+		ft_echo(cmd->tab_cmd);
 	}
 	if (!ft_strncmp(cmd->content, "env", 4))
 		return(my_env(liste));
@@ -26,7 +28,7 @@ int	ft_builtin(t_token *token, t_env *liste)
 	if (!ft_strncmp(cmd->content, "export", 6))
 	{
 		printf("token = %s\n", token->content);
-		return(ft_export(cmd->tab_cmd, liste, token));
+		liste = ft_export(cmd->tab_cmd, env, token);
 	}
 	return (1);
 }
