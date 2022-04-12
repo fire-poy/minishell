@@ -15,7 +15,7 @@ int	ft_builtin(t_token *token, t_env *liste)
 		return(current_dir());
 	/*if (!ft_strncmp(cmd->content, "cd", 3))
 		exit(0);*/
-	if (!ft_strncmp(cmd->content, "echo", 5))
+	if (!ft_strncmp(cmd->content, "echo", 4))
 	{
 		return(ft_echo(cmd->tab_cmd));
 	}
@@ -23,7 +23,10 @@ int	ft_builtin(t_token *token, t_env *liste)
 		return(my_env(liste));
 	/*if (!ft_strncmp(cmd->content, "unset", 6))
 		exit(0);*/
-	if (!ft_strncmp(cmd->content, "export", 7))
-		return(ft_export(cmd->tab_cmd, liste));
+	if (!ft_strncmp(cmd->content, "export", 6))
+	{
+		printf("token = %s\n", token->content);
+		return(ft_export(cmd->tab_cmd, liste, token));
+	}
 	return (1);
 }

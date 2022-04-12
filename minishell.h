@@ -133,6 +133,6 @@ void	ft_cd(char *args, t_env *env);
 int		current_dir(void);
 int		my_env(t_env *envp);
 int		ft_echo(char **argv);
-int		ft_export(char **argv, t_env *liste);
+int		ft_export(char **argv, t_env *liste, t_token *token);
 
 #endif

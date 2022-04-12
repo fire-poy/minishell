@@ -14,11 +14,22 @@ void	printlist(t_env *node)
 char	*ft_get_line(char *line)
 {
 	int	i;
+	int	equal;
 	char	*res;
 
 	i = 0;
-	while(line[i] != '=')
+	equal = 0;
+	while (line[i])
+	{
+		if (line[i] == '=')
+		{
+			equal = 1;
+			break;
+		}
 		i++;
+	}
+	if (equal == 0)
+		i = 0;
 	res = ft_substr(line, i + 1, ft_strlen(line) - i);
 	return (res);
 }
@@ -26,11 +37,22 @@ char	*ft_get_line(char *line)
 char	*ft_get_name(char *line)
 {
 	int	i;
+	int	equal;
 	char	*res;
 
 	i = 0;
-	while (line[i] != '=')
+	equal = 0;
+	while (line[i])
+	{
+		if (line[i] == '=')
+		{
+			equal = 1;
+			break;
+		}
 		i++;
+	}
+	if (equal == 0)
+		i = 0;
 	res = ft_substr(line, 0, i);
 	return (res);
 }
