@@ -11,7 +11,7 @@ int	ft_builtin(t_token *token, t_env *liste)
 	if (!ft_strncmp(cmd->content, "exit", 5))
 	{
 		// I can't get error message to print in Minishell ????
-		return (ft_exit(cmd));
+		ft_exit(cmd);
 	}
 	if (!ft_strncmp(cmd->content, "pwd", 4))
 		return(current_dir());
@@ -27,7 +27,7 @@ int	ft_builtin(t_token *token, t_env *liste)
 		ft_unset(&liste, cmd->tab_cmd);
 	if (!ft_strncmp(cmd->content, "export", 6))
 	{
-		printf("token = %s\n", token->content);
+		//printf("token = %s\n", token->content);
 		liste = ft_export(cmd->tab_cmd, env, token);
 	}
 	return (1);
