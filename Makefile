@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/12 19:14:39 by jhermon-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME		= jo-minishell 
 
@@ -28,8 +17,8 @@ SRC 		= ./main.c\
 				./src/ft_strchr_set.c\
 				./src/quotes_and_dollars.c\
 				./src/other_dollars.c\
-				./src/get_token.c\
-				./src/create_token.c\
+				./src/token_err_and_print.c\
+				./src/token_get.c\
 				./built_in/env.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\

@@ -24,7 +24,7 @@ char	*remplacer_dollar(char **s, int *index, t_env *liste) //return string avec 
 	char	*env_var;
 	char	*remplacer;
 
-	len =	ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"");//busco siguiente espacio o fin dsp de dolar"
+	len =	ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");//busco siguiente espacio o fin dsp de dolar"
 	if (len == 0)
 	{
 		(*index)++;
