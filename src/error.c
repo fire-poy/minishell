@@ -15,6 +15,7 @@ void    err_exit(char *e, char *avant_e, int exit_status)
 	{
 		ft_putstr_fd(e, 2);
 		ft_putstr_fd(avant_e, 2);
+		ft_putstr_fd("\n", 2);
 	}
 	exit (exit_status);
 }

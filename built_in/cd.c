@@ -14,12 +14,12 @@ char	*get_env(t_env *env, char *name)
 	{
 		if (!ft_strcmp(env->name, name))
 		{
-			printf("test 6\n");
+			//printf("test 6\n");
 			return (env->content);
 		}
 		env = env->next;
 	}
-	return ("");
+	return (NULL);
 }
 
 int	free_cd(char *dir, char *arg, char *pwd, int ret)
@@ -50,33 +50,32 @@ int	cd_check(char *args)
 	return (0);
 }
 
-void	ft_cd(char *args, t_env *env)
+void	ft_cd(char **argv, t_env *env)
 {
-	char	*path;
 	char	*dir;
 	char  cwd[PATH_MAX];
 	char	*pwd;
 
-	path = NULL;
-	printf("test1\n");
-	if (!args)
+	dir = NULL;
+	//printf("test1\n");
+	if (!argv[1])
 	{
-		printf("test2\n");
-		path = get_env(env, "HOME");
-		printf("path = %s\n", path);
-		if (!path)
+		//printf("test2\n");
+		argv[1] = get_env(env, "HOME");
+		printf("path = %s\n", argv[1]);
+		if (!argv[1])
 		{
-			printf("test3\n");
-			printf("path = %s\n", path);
+			//printf("test3\n");
+			//printf("path = %s\n", path);
 			ft_putstr_fd("minishell: cd : HOME not set", 2);
 			return ;
 		}
 	}
-	printf("test4\n");
-/*	if (!ft_strcmp(args, "\"\"") || !ft_strcmp(args, "\'\'"))
-		free_cd(dir, args, NULL, 0);
-	if (cd_check(args))
-		free_cd(dir, NULL, NULL, 1);*/
+	//printf("test4\n");
+	if (!ft_strcmp(argv[1], "\"\"") || !ft_strcmp(argv[1], "\'\'"))
+		return ;
+	if (cd_check(argv[1]))
+		return ;
 	dir = getcwd(cwd, sizeof(cwd));
 	printf("dir = %s\n", dir);
 	pwd = get_env(env, "PWD");
