@@ -75,7 +75,7 @@ void	loop_prompt(int ac, char **av, char **envp)
 	while (1)
 	{
 		write(1, GREEN, ft_strlen(GREEN));
-		input = readline("Minishell >");
+		input = readline("Minishell > ");
 		write(1, DEFAULT, ft_strlen(DEFAULT));
 		if (ft_strlen(input) > 0)
 		{

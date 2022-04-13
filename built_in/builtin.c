@@ -8,7 +8,7 @@ int	ft_builtin(t_token *token, t_env *liste)
 	cmd = token;
 	env = liste;
 	cmd->tab_cmd = ft_split(cmd->content, ' ');
-	if (!ft_strncmp(cmd->content, "exit", 5))
+	if (!ft_strncmp(cmd->content, "exit", 4))
 	{
 		// I can't get error message to print in Minishell ????
 		ft_exit(cmd);
