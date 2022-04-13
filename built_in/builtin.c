@@ -23,8 +23,8 @@ int	ft_builtin(t_token *token, t_env *liste)
 	}
 	if (!ft_strncmp(cmd->content, "env", 4))
 		return(my_env(liste));
-	/*if (!ft_strncmp(cmd->content, "unset", 6))
-		exit(0);*/
+	if (!ft_strncmp(cmd->content, "unset", 5))
+		ft_unset(&liste, cmd->tab_cmd);
 	if (!ft_strncmp(cmd->content, "export", 6))
 	{
 		printf("token = %s\n", token->content);
