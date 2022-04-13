@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void	check_arg(char	*arg)
+int	check_arg(char	*arg)
 {
 	char	*message;
 	int		i;
@@ -13,16 +13,19 @@ void	check_arg(char	*arg)
 		{
 			message = ft_strjoin(arg, ": numeric argument required");
 			err_exit("minishell: exit: ", message, 255);
+			return (0);
 		}
 		i++;
 	}
+	return (1);
 }
 
 int	exit_arg(char *arg)
 {
 	int     estatus;
 
-	check_arg(arg);
+	if (check_arg(arg) == 0)
+		return (0);
 	estatus = ft_atoi(arg);
 	return (estatus);
 }
@@ -47,5 +50,4 @@ void	ft_exit(t_token *liste_args)
   i = exit_arg(args->tab_cmd[1]);
 	printf("exit\n");
   exit(i);
-	//return (0);
 }
