@@ -124,7 +124,7 @@ void	ft_env_set_content(t_env *env, char *name, char *new_content);
 
 int		ft_builtin(t_token *token, t_env *liste);
 void	ft_exit(t_token *liste_args);
-void	ft_cd(char *args, t_env *env);
+void	ft_cd(char **argv, t_env *env);
 int		current_dir(void);
 int		my_env(t_env *envp);
 int		ft_echo(char **argv);

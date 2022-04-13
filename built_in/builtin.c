@@ -8,27 +8,21 @@ int	ft_builtin(t_token *token, t_env *liste)
 	cmd = token;
 	env = liste;
 	cmd->tab_cmd = ft_split(cmd->content, ' ');
-	if (!ft_strncmp(cmd->content, "exit", 4))
-	{
-		// I can't get error message to print in Minishell ????
+	// printf("cmd->content = %s\n", cmd->content);
+	// printf("cmd->tab_cmd[0] = %s\n", cmd->tab_cmd[0]);
+	if (!ft_strcmp(cmd->tab_cmd[0], "exit"))
 		ft_exit(cmd);
-	}
-	if (!ft_strncmp(cmd->content, "pwd", 4))
+	if (!ft_strcmp(cmd->tab_cmd[0], "pwd"))
 		return(current_dir());
-	/*if (!ft_strncmp(cmd->content, "cd", 3))
-		exit(0);*/
-	if (!ft_strncmp(cmd->content, "echo", 4))
-	{
+	if (!ft_strcmp(cmd->tab_cmd[0], "cd"))
+		ft_cd(cmd->tab_cmd, env);
+	if (!ft_strcmp(cmd->tab_cmd[0], "echo"))
 		ft_echo(cmd->tab_cmd);
-	}
-	if (!ft_strncmp(cmd->content, "env", 4))
+	if (!ft_strcmp(cmd->tab_cmd[0], "env"))
 		return(my_env(liste));
-	if (!ft_strncmp(cmd->content, "unset", 5))
+	if (!ft_strcmp(cmd->tab_cmd[0], "unset"))
 		ft_unset(&liste, cmd->tab_cmd);
-	if (!ft_strncmp(cmd->content, "export", 6))
-	{
-		//printf("token = %s\n", token->content);
+	if (!ft_strcmp(cmd->tab_cmd[0], "export"))
 		liste = ft_export(cmd->tab_cmd, env, token);
-	}
 	return (1);
 }
