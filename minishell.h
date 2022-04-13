@@ -60,6 +60,8 @@ struct s_token
 	int			type;
 	int			tk_index;//ordre de token
 	int			cmd_index;//nro de commande
+	char		*export_name;// var name
+	char		*export_content; // var content
 	t_token	*next;
 };
 
@@ -120,7 +122,7 @@ void	ft_env_set_content(t_env *env, char *name, char *new_content);
 // BUILT_IN
 
 int		ft_builtin(t_token *token, t_env *liste);
-int 	ft_exit(t_token *liste_args);
+void	ft_exit(t_token *liste_args);
 void	ft_cd(char *args, t_env *env);
 int		current_dir(void);
 int		my_env(t_env *envp);
@@ -129,5 +131,6 @@ int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
 t_env	*ft_export(char **argv, t_env *liste, t_token *token);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
+void	ft_unset(t_env **env, char **argv);
 
 #endif

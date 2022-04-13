@@ -64,8 +64,8 @@ void	ft_delete_from_list(t_env **head, char *name)
 	else
 	{
 		prev->next = temp->next;
-		free(temp->name);
-		free(temp->content);
+		//free(temp->name);
+		//free(temp->content);
 		free(temp);
 	}
 }

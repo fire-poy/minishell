@@ -28,7 +28,7 @@ int	exit_arg(char *arg)
 }
 
 
-int ft_exit(t_token *liste_args)
+void	ft_exit(t_token *liste_args)
 {
   int     i;
   t_token	*args;
@@ -39,12 +39,13 @@ int ft_exit(t_token *liste_args)
     exit(0);
   if (args->tab_cmd[2] != NULL)
 	{
-		return (printf("minishell: exit :too many arguments\n"));
+		printf("minishell: exit :too many arguments\n");
+		return ;
 	}
   i = exit_arg(args->tab_cmd[1]);
 	//return (printf(" exit stat = %d\n", i));
   exit(i);
-	return (0);
+	//return (0);
 }
 
 // int main(int argc, char **argv)

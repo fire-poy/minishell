@@ -23,6 +23,7 @@ SRC 		= ./main.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
 				./built_in/export.c\
+				./built_in/unset.c\
 				./built_in/linked_list.c\
 				./built_in/linked_list_sort.c\
 				./built_in/pwd.c\
