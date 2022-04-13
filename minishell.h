@@ -3,15 +3,23 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "./libft/libft.h"
 #include <stdlib.h>
+#include <fcntl.h>
+#include <limits.h>
 
 // int	g_exit_status = 0;
 
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
+void	xperror(char *str);
+void	print_join(char *s1, char *s2, int fd);
+
+// chained list with minishell input
+
 
 // chained list to extract env
 typedef struct s_env t_env;
@@ -94,19 +102,32 @@ void	printlist_tk(t_token *node);
 
 
 //ENV
-void	my_env(char **envp);
-void	current_dir(void);
 void	create_node(t_env **head, char *data);
 void	printlist(t_env *node);
 void	create_env_list(t_env **head, char **envp);
+t_env	*ft_sort_list(t_env *head);
 t_env	*ft_search_in_list(t_env **head, char *name);
 t_env	*ft_create_node(char *name, char *value);
 void	ft_add_to_list(t_env **head, t_env *newnode);
 int		ft_delete_first_node(t_env **head, t_env *temp, char *name);
 void	ft_delete_from_list(t_env **head, char *name);
 int		ft_count_list(t_env **head);
-void    err_exit(char *e, char *avant_e, int exit_status);
+void  err_exit(char *e, char *avant_e, int exit_status);
 char	*ft_get_line(char *line);
 char	*ft_get_name(char *line);
+void	ft_env_set_content(t_env *env, char *name, char *new_content);
+
+// BUILT_IN
+
+int		ft_builtin(t_token *token, t_env *liste);
+int 	ft_exit(t_token *liste_args);
+void	ft_cd(char *args, t_env *env);
+int		current_dir(void);
+int		my_env(t_env *envp);
+int		ft_echo(char **argv);
+int		ft_equal(char *var);
+int		ft_check_export_var(char *var);
+t_env	*ft_export(char **argv, t_env *liste, t_token *token);
+void	ft_add_to_list2(t_env **head, t_env *newnode);
 
 #endif

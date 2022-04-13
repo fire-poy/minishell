@@ -25,15 +25,15 @@ void	ft_replaceit(t_env **head, char *name, char *value)
 	}
 }
 
-t_env	*ft_copy_list(t_env **head)
+t_env	*ft_copy_list(t_env *head)
 {
 	t_env	*temp;
 	t_env	*newnode;
 	t_env	*copy;
 
-	temp = *head;
+	temp = head;
 	copy = NULL;
-	if (*head == NULL)
+	if (head == NULL)
 		return (NULL);
 	while (temp != NULL)
 	{
@@ -66,7 +66,7 @@ void	ft_swap_nodes(t_env	*temp)
 	}
 }
 
-t_env	*ft_sort_list(t_env **head)
+t_env	*ft_sort_list(t_env *head)
 {
 	t_env	*temp;
 	t_env	*sort_list;
@@ -89,17 +89,17 @@ t_env	*ft_sort_list(t_env **head)
 }
 
 // this main will print a sorted list of the env if export is prompted
-int main(int argc, char **argv, char **envp)
-{
-	t_env *head;
+// int main(int argc, char **argv, char **envp)
+// {
+// 	t_env *head;
 
-	head = (t_env *)malloc(sizeof(t_env));
-	create_env_list(&head, envp);
-	printlist(head);
-	printf("//////////////////////////\n");
-	// printf("%s\n", argv[1]);
-	// printf("%d\n", ft_strcmp(argv[1], "export"));
-	if (argv[1] && ft_strcmp(argv[1], "export") == 0)
-		printlist(ft_sort_list(&head));
-	return 0;
-}
+// 	head = (t_env *)malloc(sizeof(t_env));
+// 	create_env_list(&head, envp);
+// 	printlist(head);
+// 	printf("//////////////////////////\n");
+// 	// printf("%s\n", argv[1]);
+// 	// printf("%d\n", ft_strcmp(argv[1], "export"));
+// 	if (argv[1] && ft_strcmp(argv[1], "export") == 0)
+// 		printlist(ft_sort_list(&head));
+// 	return 0;
+// }
