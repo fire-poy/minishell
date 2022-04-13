@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <limits.h>
+#include <signal.h>
 
 // int	g_exit_status = 0;
 
