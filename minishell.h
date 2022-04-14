@@ -43,7 +43,6 @@ typedef struct s_order
 }	t_order;
 
 //Token
-
 #define IN_FILE 0
 #define OUT_FILE 1
 #define APPEND 2
@@ -102,7 +101,10 @@ void	explore_tokens_err(char **in);
 void	search_next_token(char *s, int *start, int *tk_idx, int *type);
 t_token	*get_tokens(char *s, t_token *tk);
 void	printlist_tk(t_token *node);
-
+char	**ft_split_from_charset(char *s, char *set);
+void	tk_create_second(t_token **head, char **data, int type);
+void    tk_create_node(t_token **head, char **data, int type);
+int		set_type(char *s, int i, char c);
 
 //ENV
 void	create_node(t_env **head, char *data);

@@ -19,7 +19,7 @@ int	ft_c_vs_charset(char c, const char *cs)
 	int	i;
 
 	i = 0;
-	while (c != cs[i] && cs[i] && cs[i + 1] != '\0')
+	while (c != cs[i] && cs[i] && cs[i + 1] != '\0')// je pourrais enlever apres dernier &&
 		i++;
 	if (c == cs[i])
 		return (1);
@@ -28,6 +28,7 @@ int	ft_c_vs_charset(char c, const char *cs)
 }
 
 //return i in position of char from charset
+//return strlen if set not found
 int	ft_strchr_set(const char *s, char *set)
 {
 	int	i;

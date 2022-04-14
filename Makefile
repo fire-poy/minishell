@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
+#    Updated: 2022/04/13 14:15:19 by mpons            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME		= jo-minishell 
 
@@ -19,6 +30,7 @@ SRC 		= ./main.c\
 				./src/other_dollars.c\
 				./src/token_err_and_print.c\
 				./src/token_get.c\
+				./src/token_create.c\
 				./built_in/env.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\

@@ -1,12 +1,14 @@
 #include "../minishell.h"
 
+//avance  *i jusqu'il trouve quelque chose qui ne pas un espace
 void	trimer (char *s, int *i)
 {
 	while (s[*i] == ' ' || s[*i] == '\t' || s[*i] == '\n')
-		// || s[*i] == '\v' || s[*i] == '\f' || s[*i] == '\r')
 		(*i)++;
 }
+		// || s[*i] == '\v' || s[*i] == '\f' || s[*i] == '\r')
 
+//cherche string a_trouver dans la liste de ENV
 char *chercher_env(t_env *liste, char *a_trouver)
 {
 	while (liste)
@@ -18,7 +20,6 @@ char *chercher_env(t_env *liste, char *a_trouver)
 	}
 	return (NULL);
 }
-
 
 // lexer
 // 1 quitamos espacio vacio
@@ -40,6 +41,9 @@ int	lexer(char *input, t_env *liste, t_token *tk)
 	// printf("input = %s \ninput 2 = %s\n", input, input2);
 	// (void)tk;
 	tk = get_tokens(input2, tk);
+	// tk = swap_tokens(tk);si pipe vide avant alors prochaine CMD changer pour PIPE
+	// tk = split_token(tk);
+	// printf("token->content = %s\n", tk->content);
 	//printlist_tk(tk);
 	ft_builtin(tk, liste);
 	//printf("token->content = %s\n", tk->tab_cmd[1]);
