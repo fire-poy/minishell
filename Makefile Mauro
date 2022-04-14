@@ -6,14 +6,14 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/13 14:15:19 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/06 16:32:55 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= jo-minishell 
+NAME		= minishell 
 
 CC			= gcc
-CFLAGS		= -g3 -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -g -Wall -Wextra -Werror -fsanitize=address
 
 OBJS		= ${SRC:.c=.o}
 
@@ -28,22 +28,14 @@ SRC 		= ./main.c\
 				./src/ft_strchr_set.c\
 				./src/quotes_and_dollars.c\
 				./src/other_dollars.c\
-				./src/token_err_and_print.c\
-				./src/token_get.c\
-				./src/token_create.c\
+				./src/get_token.c\
+				./src/create_token.c\
 				./built_in/env.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
 				./built_in/export.c\
-				./built_in/unset.c\
 				./built_in/linked_list.c\
-				./built_in/linked_list_sort.c\
-				./built_in/pwd.c\
-				./built_in/cd.c\
-				./built_in/exit.c\
-				./built_in/builtin.c\
-				./built_in/export_support.c\
-				#./built_in/pwd.c\
+				# ./built_in/pwd.c\
 			  
 HOME		= ..
 INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include

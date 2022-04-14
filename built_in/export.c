@@ -7,64 +7,75 @@
 - export my var to the env if exported
 */
 
-void	ft_replace_var(t_env **head, char **var, char *str)
+void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 {
-	free((*head)->content);
-	(*head)->content = ft_get_line(str);
+	(*head)->content = NULL;
+	(*head)->content = content;
 	free((*head)->initial_env);
-	(*head)->initial_env = ft_strdup(str);
+	(*head)->initial_env = ft_strdup(var);
 	free((*head)->name);
-	(*head)->name = ft_get_name(str);
-	free (*var);
+	(*head)->name = name;
+	free (var);
 }
 
-t_env	*add_var_to_env(t_env **head, char *var)
+t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
 {
 	t_env	*temp;
-	char	*name;
-	char	*content;
 
 	temp = *head;
-	name = ft_get_name(var);
-	content = ft_get_line(var);
-	temp = ft_create_node(name, content);
+	if (!ft_equal(var))
+	{
+		while (temp->next != NULL && ft_strcmp(temp->name, token->export_name) != 0)
+			temp = temp->next;
+		if (ft_strcmp(temp->name, token->export_name) == 0)
+			return (0);
+	}
+	temp = ft_create_node(token->export_name, token->export_content);
 	temp->initial_env = ft_strdup(var);
-	printf("name = %s\n", temp->name);
-	printf("content = %s\n", temp->content);
 	return (temp);
 }
 
-/*
-
-// this main can add a new node with the var content and delete it
-
-int main(int argc, char **argv, char **envp)
+t_env	*ft_export(char **argv, t_env *liste, t_token *token)
 {
-	t_env *head;
+	t_token *vars;
+	t_env	*temp;
 	t_env	*newnode;
+	t_env	*sort;
 	char	*var;
 
-	// (void)argv;
-	// (void)argc;
-	var = "var=42";
-	head = (t_env *)malloc(sizeof(t_env));
-	create_env_list(&head, envp);
-	// while (head != NULL)
-	// {
-	// 	if (ft_strcmp(head->initial_env, var) == 0 )
-	// 	{
-	// 		ft_replace_var(&head, &var, var);
-	// 		return ;
-	// 	}
-	// }
-	newnode = add_var_to_env(&head, var);
-	ft_add_to_list(&head, newnode);
-	printlist(head);
-	printf("********************************* \n");
-	ft_delete_from_list(&head, newnode->name);
-	printlist(head);
-	return 0;
+	vars = token;
+	var = vars->tab_cmd[1];
+	vars->export_name = NULL;
+	sort = liste;
+	temp = liste;
+	//head = (t_env *)malloc(sizeof(t_env));
+	if (!argv[1])
+		printlist((ft_sort_list(sort)));
+	if (!ft_check_export_var(var))
+	{
+		if (var != NULL)
+		{
+			if (!ft_equal(var))
+			{
+				vars->export_name = ft_strjoin(vars->export_name, var);
+				vars->export_content = "' '";
+			}
+			else
+			{
+				vars->export_name = ft_get_name(var);
+				vars->export_content = ft_get_line(var);
+			}
+			while (temp->next != NULL && ft_strcmp(temp->name, vars->export_name) != 0)
+				temp = temp->next;
+			if (ft_strcmp(temp->name, vars->export_name) == 0)
+			{
+				ft_replace_var(&temp, vars->export_name, vars->export_content, var);
+				return (temp);
+			}
+			newnode = add_var_to_env(&temp, var, token);
+			ft_add_to_list(&temp, newnode);
+			return (temp);
+		}
+	}
+	return (temp);
 }
-*/
-
-

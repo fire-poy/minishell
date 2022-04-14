@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void	check_arg(char	*arg)
+int	check_arg(char	*arg)
 {
 	char	*message;
 	int		i;
@@ -12,55 +12,42 @@ void	check_arg(char	*arg)
 		if (!ft_isdigit(arg[i]))
 		{
 			message = ft_strjoin(arg, ": numeric argument required");
-			err_exit("exit: ", message, 255);
+			err_exit("minishell: exit: ", message, 255);
+			return (0);
 		}
 		i++;
 	}
+	return (1);
 }
 
 int	exit_arg(char *arg)
 {
-	char    *message;
 	int     estatus;
 
-	check_arg(arg);
+	if (check_arg(arg) == 0)
+		return (0);
 	estatus = ft_atoi(arg);
-	if (estatus < 0)
-	{
-		message = ft_strjoin(arg, ": numeric argument required");
-		err_exit("exit: ", message, 255);
-	}
 	return (estatus);
 }
 
 
-int ft_exit(char **liste_args)
+void	ft_exit(t_token *liste_args)
 {
-    int     i;
-    char    *arg;
+  int     i;
+  t_token	*args;
 
-    arg = malloc(sizeof(char) * ft_strlen(liste_args[0]));
-    arg = ft_strdup(liste_args[0]);
-    if (!arg)
-    {
-    // if I am in a forked shell i need to print èxit``
-    // how can I identify that?
-        exit(0);
-    }
-    if (liste_args[1] != NULL)
-        err_exit("exit", ":too many arguments", 1);
-    i = exit_arg(arg);
-    free (arg);
-    //free(liste_args);
-    exit(i);
-}
-
-int main(int argc, char **argv)
-{
-    if (argc > 1)
-    {
-        printf("%s\n", argv[1]);
-        ft_exit(&argv[1]);
-    }
-    return (0);
+  args = liste_args;
+  if (args->tab_cmd[1] == NULL)
+	{
+		printf("exit\n");
+    exit(0);
+	}
+  if (args->tab_cmd[2] != NULL)
+	{
+		printf("exit :too many arguments\n");
+		return ;
+	}
+  i = exit_arg(args->tab_cmd[1]);
+	printf("exit\n");
+  exit(i);
 }

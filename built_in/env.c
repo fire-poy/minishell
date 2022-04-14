@@ -1,9 +1,12 @@
 #include "../minishell.h"
 
-void	my_env(char **envp)
+int	my_env(t_env	*envp)
 {
-	int index = 0;
-
-  while (envp[index])
-    printf("%s\n", envp[index++]);
+  while (envp != NULL)
+	{
+		printf("%s=", envp->name);
+		printf("%s\n", envp->content);
+		envp = envp->next;
+	}
+	return (0);
 }

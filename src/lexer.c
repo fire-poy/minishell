@@ -44,8 +44,9 @@ int	lexer(char *input, t_env *liste, t_token *tk)
 	// tk = swap_tokens(tk);si pipe vide avant alors prochaine CMD changer pour PIPE
 	// tk = split_token(tk);
 	// printf("token->content = %s\n", tk->content);
-	printlist_tk(tk);
-
+	//printlist_tk(tk);
+	ft_builtin(tk, liste);
+	//printf("token->content = %s\n", tk->tab_cmd[1]);
 	return (1);
 }
 //ch_env debbug

@@ -64,8 +64,8 @@ void	ft_delete_from_list(t_env **head, char *name)
 	else
 	{
 		prev->next = temp->next;
-		free(temp->name);
-		free(temp->content);
+		//free(temp->name);
+		//free(temp->content);
 		free(temp);
 	}
 }
@@ -80,6 +80,25 @@ t_env	*ft_search_in_list(t_env **head, char *name)
 	while (temp != NULL && ft_strcmp(temp->name, name) != 0)
 		temp = temp->next;
 	return (temp);
+}
+
+void	ft_env_set_content(t_env *env, char *name, char *new_content)
+{
+	t_env	*head;
+
+	head = env;
+	while (head)
+	{
+		if (!ft_strcmp(head->name, name))
+		{
+			//free(head->content);
+			head->content = NULL;
+			if (new_content)
+				head->content = ft_strdup(new_content);
+			return ;
+		}
+		head = head->next;
+	}
 }
 
 int	ft_count_list(t_env **head)
