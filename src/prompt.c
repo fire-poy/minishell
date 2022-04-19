@@ -60,6 +60,8 @@ int	find_path(char *cmd, char **envp)
 	return (1);
 }
 
+
+
 // int	search_type_token(*tk);
 
 void	loop_prompt(int ac, char **av, char **envp)
@@ -67,13 +69,20 @@ void	loop_prompt(int ac, char **av, char **envp)
 	char		*input;
 	t_env		*liste;
 	t_token	*tk;
+	struct termios	save;
+	//struct termios	new;
 	
 	if (!ac || !av || !envp)
 		return ;
+	//ft_init_args(ac, av, envp);
 	liste = NULL;
  	create_env_list(&liste, envp);
+	tcgetattr(0, &save);
+	signal(SIGINT, signal_h);
+	signal(SIGQUIT, signal_h);
 	while (1)
 	{
+		//signal(SIGILL, ft_INThandler);
 		write(1, GREEN, ft_strlen(GREEN));
 		input = readline("Minishell > ");
 		write(1, DEFAULT, ft_strlen(DEFAULT));
@@ -87,4 +96,6 @@ void	loop_prompt(int ac, char **av, char **envp)
 			// find_path(input, envp);
 		}
 	}
+	free(input);
+	ft_listeclear(&liste, ft_free_env);
 }

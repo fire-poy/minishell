@@ -12,13 +12,13 @@ int	ft_builtin(t_token *token, t_env *liste)
 	// printf("cmd->tab_cmd[0] = %s\n", cmd->tab_cmd[0]);
 	if (!ft_strcmp(cmd->tab_cmd[0], "exit"))
 		ft_exit(cmd);
-	if (!ft_strcmp(cmd->tab_cmd[0], "pwd"))
+	if (!ft_strcmp(cmd->tab_cmd[0], "pwd") || !ft_strcmp(cmd->tab_cmd[0], "PWD"))
 		return(current_dir());
 	if (!ft_strcmp(cmd->tab_cmd[0], "cd"))
 		ft_cd(cmd->tab_cmd, env);
-	if (!ft_strcmp(cmd->tab_cmd[0], "echo"))
+	if (!ft_strcmp(cmd->tab_cmd[0], "echo") || !ft_strcmp(cmd->tab_cmd[0], "ECHO"))
 		ft_echo(cmd->tab_cmd);
-	if (!ft_strcmp(cmd->tab_cmd[0], "env"))
+	if (!ft_strcmp(cmd->tab_cmd[0], "env") || !ft_strcmp(cmd->tab_cmd[0], "ENV"))
 		return(my_env(liste));
 	if (!ft_strcmp(cmd->tab_cmd[0], "unset"))
 		ft_unset(&liste, cmd->tab_cmd);

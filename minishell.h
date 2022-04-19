@@ -11,8 +11,10 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <signal.h>
+#include <termios.h>
 
-// int	g_exit_status = 0;
+//int	g_exit_status = 1;
+//pid_t	g_pid[255];
 
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
@@ -75,6 +77,16 @@ struct s_str
 	int		len;
 };
 
+//struct pour garder original argc, argv
+typedef struct s_arg t_arg;
+
+struct s_arg
+{
+	int		argc;
+	char	**argv;
+	char	**env;
+};
+
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
 int		ft_strchr_set(const char *s, char *set);
@@ -133,5 +145,15 @@ int		ft_check_export_var(char *var);
 t_env	*ft_export(char **argv, t_env *liste, t_token *token);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
 void	ft_unset(t_env **env, char **argv);
+
+// SIGNAL
+
+void  ft_INThandler(int sig);
+void	signal_h(int signal);
+
+// clean
+
+void	ft_free_env(void *env);
+void	ft_listeclear(t_env **lst, void (*del)(void *));
 
 #endif
