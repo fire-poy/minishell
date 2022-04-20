@@ -12,15 +12,24 @@
 #include <limits.h>
 #include <signal.h>
 
+# define GREEN "\033[0;32m"
+# define DEFAULT "\033[0m"
+
+//Token
+#define IN_FILE 0
+#define OUT_FILE 1
+#define APPEND 2
+#define HEREDOC 3
+#define BUILT_IN 4
+#define CMD 5
+#define PIPE 6
+
 // int	g_exit_status = 0;
 
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
 void	xperror(char *str);
 void	print_join(char *s1, char *s2, int fd);
-
-// chained list with minishell input
-
 
 // chained list to extract env
 typedef struct s_env t_env;
@@ -34,7 +43,6 @@ struct s_env
 };
 
 // chained list to order export list
-
 typedef struct s_order
 {
 	t_env	*newNode;
@@ -42,37 +50,34 @@ typedef struct s_order
 	t_env	*temp2;
 }	t_order;
 
-//Token
-#define IN_FILE 0
-#define OUT_FILE 1
-#define APPEND 2
-#define HEREDOC 3
-#define BUILT_IN 4
-#define CMD 5
-#define PIPE 6
-
+// chained list with minishell input
 typedef struct s_token t_token;
 
 struct s_token
 {
 	char		*content;//cmd, infile, outfile, etc
-	char		**tab_cmd;//on fait le tab dans le pipe?
 	int			type;
-	int			tk_index;//ordre de token
 	int			cmd_index;//nro de commande
+	// char		**tab_cmd;//on fait le tab dans le pipe?
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
 };
 
-//struct pour garder des info pour remplacer le quotes
-typedef struct s_str t_str;
-
-struct s_str
+typedef struct s_info
 {
-	int		start;
-	int		len;
-};
+	t_token	*tk;
+	char	**full_cmd;
+	char	*redir_in; 
+	char	*redir_out;
+	int		q_in; //q == quantite 
+	int		q_out; 
+	int		cmd_i;//nro de commande
+	int		pipe_i;
+}	t_info;
+
+// parser
+void	parser(t_env *liste, t_token *tk, char **envp);
 
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
@@ -81,9 +86,8 @@ int		ft_strchr_char(const char *s, char c);
 int		search_next_c(char **s, int *debut, char c);
 int		ft_charset_found(const char *s, int* start, char *set);
 
-
 void	loop_prompt(int ac, char **av, char **envp);
-int		lexer(char *input, t_env *liste, t_token *tk);
+int		lexer(char *input, t_env *liste, t_token **tk);
 void	trimer (char *s, int *i);
 
 // QUOTES
@@ -105,6 +109,12 @@ char	**ft_split_from_charset(char *s, char *set);
 void	tk_create_second(t_token **head, char **data, int type);
 void    tk_create_node(t_token **head, char **data, int type);
 int		set_type(char *s, int i, char c);
+char	*erase_quotes(char *s);
+void	erase_quotes_tk(t_token *node);
+
+// EXEC
+int		find_path(char *cmd, char **envp, t_env *liste);
+
 
 //ENV
 void	create_node(t_env **head, char *data);

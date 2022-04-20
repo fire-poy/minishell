@@ -19,7 +19,7 @@ int	ft_c_vs_charset(char c, const char *cs)
 	int	i;
 
 	i = 0;
-	while (c != cs[i] && cs[i] && cs[i + 1] != '\0')// je pourrais enlever apres dernier &&
+	while (c != cs[i] && cs[i] && cs[i + 1] != '\0')
 		i++;
 	if (c == cs[i])
 		return (1);

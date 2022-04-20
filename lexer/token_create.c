@@ -1,12 +1,38 @@
 #include "../minishell.h"
 
+//search charset a partir du start, avance l'address si trouve le chset;
+//return 0 si ne trouve pas, 1 en succes
+int	ft_space_out_quotes_found(char *s, int* start, char *set)
+{
+	int	i;
+
+	i = *start;
+	while (s[i])
+	{
+		if (s[i] == '\"' || s[i] == '\'')
+			search_next_c(&s, &i, s[i]);
+		if (ft_c_vs_charset(s[i], set))
+		{
+			*start = i;
+			return (1);
+		}
+		i++;
+	}
+	if (s[i] == 0)		
+		return (0);
+	else
+		*start = i;
+	return (1);
+}
+
+//free s == content
 char	**ft_split_from_charset(char *s, char *set)
 {
 	int	i;
 	char **tab_ch;
 
 	i = 0;
-	if (ft_charset_found(s, &i, set))
+	if (ft_space_out_quotes_found(s, &i, set))
 	{
 		tab_ch = malloc(3 * sizeof(char *));
 		tab_ch[0] = ft_substr(s, 0, i);
@@ -55,7 +81,8 @@ void    tk_create_node(t_token **head, char **data, int type)//, char c)
 	int	i;
 
 	i = 0;
-	if ((type == 0 || type == 1 || type == 2) && ft_charset_found(*data, &i, " \t"))
+	if ((type == 0 || type == 1 || type == 2 || type == 3) 
+		&& ft_space_out_quotes_found(*data, &i, " \t"))
 	{
 		tk_create_second(head, data, type);
 		return ;
