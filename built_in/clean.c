@@ -1,21 +1,21 @@
 #include "../minishell.h"
 
-static inline char	**ft_malloc_error(char **tab, t_env *env_node)
-{
-	unsigned int	i;
+// static inline char	**ft_malloc_error(char **tab, t_env *env_node)
+// {
+// 	unsigned int	i;
 
-	(void)env_node;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-	tab = NULL;
-	return (NULL);
-}
+// 	(void)env_node;
+// 	i = 0;
+// 	while (tab[i])
+// 	{
+// 		free(tab[i]);
+// 		tab[i] = NULL;
+// 		i++;
+// 	}
+// 	free(tab);
+// 	tab = NULL;
+// 	return (NULL);
+// }
 
 void	ft_free_env(void *env)
 {
@@ -36,7 +36,7 @@ void	ft_free_env(void *env)
 	env = NULL;
 }
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_listedelone(t_env *lst, void (*del)(void*))
 {
 	if (!lst)
 		return ;
@@ -47,14 +47,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 
 void	ft_listeclear(t_env **lst, void (*del)(void *))
 {
-	t_list	*tmp;
+	t_env	*tmp;
 
 	if (lst)
 	{
 		while (*lst)
 		{
 			tmp = (*lst)->next;
-			ft_lstdelone(*lst, del);
+			ft_listedelone(*lst, del);
 			(*lst) = tmp;
 		}
 	}

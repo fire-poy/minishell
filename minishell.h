@@ -12,6 +12,9 @@
 #include <limits.h>
 #include <signal.h>
 #include <termios.h>
+#include <sys/types.h> 
+#include <sys/stat.h>
+#include <errno.h>
 
 //int	g_exit_status = 1;
 //pid_t	g_pid[255];
@@ -26,6 +29,7 @@ void	print_join(char *s1, char *s2, int fd);
 
 // chained list to extract env
 typedef struct s_env t_env;
+typedef struct s_arg t_arg;
 
 struct s_env
 {
@@ -33,6 +37,7 @@ struct s_env
 	char	*name;
 	char	*content;
 	t_env	*next;
+	t_arg	*args;
 };
 
 // chained list to order export list
@@ -78,7 +83,6 @@ struct s_str
 };
 
 //struct pour garder original argc, argv
-typedef struct s_arg t_arg;
 
 struct s_arg
 {
@@ -155,5 +159,10 @@ void	signal_h(int signal);
 
 void	ft_free_env(void *env);
 void	ft_listeclear(t_env **lst, void (*del)(void *));
+
+// path access
+
+void	ft_init_args(int argc, char **argv, char **envp);
+void	ft_check_path(char *cmd, char **env);
 
 #endif

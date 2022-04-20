@@ -74,7 +74,7 @@ void	loop_prompt(int ac, char **av, char **envp)
 	
 	if (!ac || !av || !envp)
 		return ;
-	//ft_init_args(ac, av, envp);
+	//
 	liste = NULL;
  	create_env_list(&liste, envp);
 	tcgetattr(0, &save);
@@ -90,6 +90,7 @@ void	loop_prompt(int ac, char **av, char **envp)
 		{
 			add_history(input);
 			tk = NULL;
+			//ft_init_args(ac, av, envp);
 			lexer(input, liste, tk);// obtiene los token
 			// search_type_token(*tk);
 			// redirection

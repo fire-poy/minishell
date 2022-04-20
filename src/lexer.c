@@ -29,8 +29,10 @@ int	lexer(char *input, t_env *liste, t_token *tk)
 {
 	int	i;
 	char *input2;
+	t_env	*l;
 
 	i = 0;
+	l = liste;
 	(void)tk;
 	trimer (input, &i);
 	input2 = ft_strdup(input + i);
@@ -41,8 +43,10 @@ int	lexer(char *input, t_env *liste, t_token *tk)
 	// (void)tk;
 	tk = get_tokens(input2, tk);
 	//printlist_tk(tk);
+	//printf("liste = %s\n", tk->content);
 	ft_builtin(tk, liste);
-	//printf("token->content = %s\n", tk->tab_cmd[1]);
+	//ft_check_path(tk->content, &liste->initial_env);
+	//printf("token->content = %c\n", tk->tab_cmd[0][0]);
 	return (1);
 }
 //ch_env debbug

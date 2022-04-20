@@ -32,6 +32,8 @@ SRC 		= ./main.c\
 				./built_in/builtin.c\
 				./built_in/export_support.c\
 				./built_in/ctrl.c\
+				./built_in/clean.c\
+				./built_in/run_path.c\
 				#./built_in/pwd.c\
 			  
 HOME		= ..
