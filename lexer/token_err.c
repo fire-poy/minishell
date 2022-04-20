@@ -83,15 +83,5 @@ void	explore_tokens_err(char **in)
 	}
 } 	
 
-void	printlist_tk(t_token *node)
-{
-	int	i;
 
-	i = 0;
-	while (node != NULL)
-	{
-		printf("%d %s = type %d\n", i, node->content, node->type);
-		node = node->next;
-		i++;
-	}
-}
+

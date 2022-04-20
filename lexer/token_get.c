@@ -32,35 +32,23 @@ void	search_next_token(char *s, int *start, int *tk_idx, int *type)
 	*tk_idx = i;
 }
 
-//erase quotes and envoie data to create node
+//trime spaces and send data to create node
 char	*get_content_tk(char *s, int start, int tk_i)
 {
 	char	dst[1000];
 	int		i;
 	int		j;
-	char	c;
 
 	i = start;
 	j = 0;
-	// if (tk_i == start)
-	// 	dst[j++] = s[i];
 	while (s[i] && i < tk_i)
-	{
-		if (s[i] != '\'' && s[i] != '\"')//si il n'ya pas de quotes je copie et avance;
-			dst[j++] = s[i++];
-		else
-		{
-			c = s[i];
-			i++;
-			while (s[i] && s[i] != c)
-				dst[j++] = s[i++];
-			i++;
-		}
-	}
+		dst[j++] = s[i++];
 	dst[j] = '\0';
 	return (ft_strtrim(dst, " \t"));
 	// return (ft_substr(dst, 0, ft_strlen(dst)));
 }
+
+
 
 char	*get_first(char *s, int *st, int *i, int *mem, int *type)
 {
@@ -80,6 +68,7 @@ char	*get_first(char *s, int *st, int *i, int *mem, int *type)
 // while (search_next_token(s, &st, &i, &type) != -1)//avance i jusqu'au token et st a la pos apres du token si != 0
 //fais un truc generic et apres un pour le premier
 // tk = NULL;
+//marche
 t_token	*get_tokens(char *s, t_token *tk)
 {
 	char	*content;
@@ -156,15 +145,6 @@ t_token	*get_tokens(char *s, t_token *tk)
 // 	return (NULL);
 // }
 
-
-	// type = set_type(s, i, s[i]);
-	// if (search_next_token(s, &i, &type) == -1)
-	// {
-	// 	i =	search_next_token(s, &c, &type);
-	// 	if (i == -1)
-	// 	i = ft_strlen(s);
-
-
 // name
 // A word consisting solely of letters, numbers, and underscores, 
 // beginning with a letter or underscore. 
@@ -180,11 +160,35 @@ t_token	*get_tokens(char *s, t_token *tk)
 // A metacharacter is a space, tab, newline, 
 // or one of the following characters: ‘|’, ‘&’, ‘(’, ‘)’, ‘<’, or ‘>’. ‘;’, 
 
+//erase quotes and envoie data to create node
+// char	*get_content_tk(char *s, int start, int tk_i)
+// {
+// 	char	dst[1000];
+// 	int		i;
+// 	int		j;
+// 	char	c;
 
-
-
-
-
+// 	i = start;
+// 	j = 0;
+// 	// if (tk_i == start)
+// 	// 	dst[j++] = s[i];
+// 	while (s[i] && i < tk_i)
+// 	{
+// 		if (s[i] != '\'' && s[i] != '\"')//si il n'ya pas de quotes je copie et avance;
+// 			dst[j++] = s[i++];
+// 		else
+// 		{
+// 			c = s[i];
+// 			i++;
+// 			while (s[i] && s[i] != c)
+// 				dst[j++] = s[i++];
+// 			i++;
+// 		}
+// 	}
+// 	dst[j] = '\0';
+// 	return (ft_strtrim(dst, " \t"));
+// 	// return (ft_substr(dst, 0, ft_strlen(dst)));
+// }
 
 
 
