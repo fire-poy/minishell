@@ -58,7 +58,7 @@ struct s_token
 	char		*content;//cmd, infile, outfile, etc
 	int			type;
 	int			cmd_index;//nro de commande
-	// char		**tab_cmd;//on fait le tab dans le pipe?
+	char		**tab_cmd;//on fait le tab dans le pipe?
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
