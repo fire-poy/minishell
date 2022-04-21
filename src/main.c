@@ -3,9 +3,10 @@
 // int	search_type_token(*tk);
 void	loop_prompt(int ac, char **av, char **envp)
 {
-	char		*input;
-	t_env		*liste;
-	t_token		*tk;
+	char	*input;
+	t_env	*liste;
+	t_token	*tk;
+	t_info	*info;
 	
 	if (!ac || !av || !envp)
 		return ;
@@ -21,7 +22,9 @@ void	loop_prompt(int ac, char **av, char **envp)
 			add_history(input);
 			tk = NULL;
 			lexer(input, liste, &tk);// obtiene los token
-			parser(liste, tk, envp);
+			info = parser(liste, tk, envp);// obtiene cmd et infos
+			execution_main(info);
+			free_all(&info);
 		}
 	}
 }
@@ -29,6 +32,5 @@ void	loop_prompt(int ac, char **av, char **envp)
 int	main(int ac, char **av, char **envp)
 {
 	loop_prompt(ac, av, envp);
-
 	return (0);
 }
