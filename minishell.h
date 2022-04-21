@@ -58,7 +58,6 @@ struct s_token
 	char		*content;//cmd, infile, outfile, etc
 	int			type;
 	int			cmd_index;//nro de commande
-	// char		**tab_cmd;//on fait le tab dans le pipe?
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
@@ -67,17 +66,34 @@ struct s_token
 typedef struct s_info
 {
 	t_token	*tk;
+	t_env	*liste;
+	char	**envp;
 	char	**full_cmd;
+	char	***split_cmd;
 	char	*redir_in; 
 	char	*redir_out;
 	int		q_in; //q == quantite 
 	int		q_out; 
 	int		cmd_i;//nro de commande
 	int		pipe_i;
+	int		exit_status;
 }	t_info;
 
+// EXEC
+char	*ft_strjoin_whit_space(char *s1, char const *s2);
+int		is_builtin(char *cmd);
+int		exec_builtin(char **tab_cmd, t_env *liste);
+int		find_path(char *cmd, char **envp, t_env *liste);
+void	execution_main(t_info *info);
+int		exec_single_cmd(t_info *info);
+
+// free
+void	free_tab(char **tab);
+void	free_tokens(t_token **tk);
+void	free_all(t_info **info);
+
 // parser
-void	parser(t_env *liste, t_token *tk, char **envp);
+t_info	*parser(t_env *liste, t_token *tk, char **envp);
 
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
@@ -111,10 +127,6 @@ void    tk_create_node(t_token **head, char **data, int type);
 int		set_type(char *s, int i, char c);
 char	*erase_quotes(char *s);
 void	erase_quotes_tk(t_token *node);
-
-// EXEC
-int		find_path(char *cmd, char **envp, t_env *liste);
-
 
 //ENV
 void	create_node(t_env **head, char *data);

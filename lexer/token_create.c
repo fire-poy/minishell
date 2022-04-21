@@ -61,6 +61,7 @@ void	tk_create_second(t_token **head, char **data, int type)
 	new_node_a->type = type;
 	new_node_a->next = new_node_b;
 	new_node_b->content = split_data[1];
+	free (split_data[2]);
 	new_node_b->type = CMD;
 	new_node_b->next = NULL;
 	if (*head == NULL)

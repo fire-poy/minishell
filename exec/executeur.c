@@ -1,34 +1,48 @@
 #include "../minishell.h"
 
+//compter   INPUT
+			// OUTPUT
+			// CMD
+			// PIPE
+// dernier input va etre celui de la redirection entrée
+// dernier output va etre celui de la redirection sortie avant un pipe
+// si il y a plusieurs inputs on ouvre en mode read et ferme jusq'au dernier
+// si il y a plusieurs inputs on ouvre en mode write et ferme
+
 // on met stdin au fichier d'entre si besoin
 // on fork 1 fois pour chaque commande a executter
 //pour exec la premier commande et change stdout si besoin
-void	free_tab(char **tab)
-{
-	int	i;
 
-	i = 0;
-	while (tab[i])
-	{
-		free (tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free (tab);
-	tab = NULL;
+	// pipe pipe_i fois
+	// compter BUILT_IN cmd from full_cmd
+	// fork cmd_i fois + 1  - B_in cmd
+	// faire redirection par raport au cmd_i
+	// executer cmd_i
+void	execution_main(t_info *info)
+{
+	if (info->cmd_i == 0)
+		exec_single_cmd(info);
+	else
+		return ;
 }
 
-void	execution(char **path, char **cmd_tab, char **envp)
+/*
+void	execution(char **path, char **cmd_tab, char **envp, t_env *liste)
 {
 	int	id;
 
+	// if (is_builtin(cmd_tab[0]))
+	// {
+	// 	exec_builtin(cmd_tab, *liste);
+	// 	free (*path);
+	// 	return ;
+	// }
 	id = fork();
 	if (id == 0)
 		execve(*path, cmd_tab, envp);
 	else
 		free (*path);
 	wait(&id);
-	return ;
 }
 
 // env = getenv("PATH");
@@ -64,48 +78,7 @@ int	find_path(char *cmd, char **envp, t_env *liste)
 	return (1);
 }
 
-/*
-static bool	is_built_in(char *cmd)
-{
-	const char	*built_in[] = {"pwd", "cd", NULL};
-
-	for (int i = 0; built_in[i]; i++) {
-		if (!strcmp(built_in[i], cmd))
-			return (true);
-	}
-	return (false);
-}
-
-static void	exec_built_in(char **built_in)
-{
-	if (!strcmp(built_in[0], "pwd"))
-		built_in_pwd();
-	else if (!strcmp(built_in[0], "cd"))
-		built_in_cd(built_in[1]);
-}
-
-int	is_builtin_command( t_cmd *cmd)
-{
-	if (str_compare(cmd->name, "cd") == 0)
-		return (1);
-	else if (str_compare(cmd->name, "echo") == 0)
-		return (1);
-	else if (str_compare(cmd->name, "env") == 0)
-		return (1);
-	else if (str_compare(cmd->name, "exit") == 0)
-		return (1);
-	else if (str_compare(cmd->name, "export") == 0)
-		return (1);
-	else if (str_compare(cmd->name, "pwd") == 0)
-		return (1);
-	else if (str_compare(cmd->name, "unset") == 0)
-		return (1);
-	else
-		return (0);
-}
-////////
-
-
+// 
 // @brief execute toutes les commandes se trouvant dans shell->cmds
 // @param shell 
 void	exec_commands(t_shell *shell)

@@ -1,5 +1,12 @@
 #include "../minishell.h"
 
+// redir_in = tk->content;
+// fd[redir_i] = open(tk->content, O_RDONLY )
+// if (fd = -1)
+// 	err_msg;
+//  fd[0][0] = open(av[1], O_RDONLY);cmd
+//     fd[0][1] = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+
 // void	handle_redirect_file(t_shell *shell, t_cmd *cmd)
 // {
 // 	if (cmd->redirect_id == id_in_std || cmd->redirect_id == id_in_file)
