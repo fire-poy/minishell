@@ -18,7 +18,7 @@ int	lexer(char *input, t_env *liste, t_token **tk)
 	char *input2;
 
 	i = 0;
-	(void)tk;
+	//(void)tk;
 	trimer (input, &i);
 	input2 = ft_strdup(input + i);
 	input2 = search_and_replace_quotes(&input2, liste);
@@ -26,7 +26,7 @@ int	lexer(char *input, t_env *liste, t_token **tk)
 	explore_tokens_err(&input2);
 	*tk = get_tokens(input2, *tk);
 	erase_quotes_tk(*tk);
-	// ft_builtin(tk, liste);
+	ft_builtin(*tk, liste);
 	// parser(input2, liste, tk);
 	//printf("token->content = %s\n", tk->tab_cmd[1]);
 	return (1);
