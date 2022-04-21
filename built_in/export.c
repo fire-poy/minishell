@@ -15,7 +15,7 @@ void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 	(*head)->initial_env = ft_strdup(var);
 	free((*head)->name);
 	(*head)->name = name;
-	free (var);
+	//free (var);
 }
 
 t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
@@ -44,7 +44,7 @@ t_env	*ft_export(char **argv, t_env *liste, t_token *token)
 	char	*var;
 
 	vars = token;
-	var = vars->tab_cmd[1];
+	var = vars->export_content;
 	vars->export_name = NULL;
 	sort = liste;
 	temp = liste;

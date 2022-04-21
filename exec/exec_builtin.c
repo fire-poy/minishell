@@ -19,22 +19,22 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	exec_builtin(char **tab_cmd, t_env *liste)
+int	exec_builtin(char **tab_cmd, t_info *liste)
 {
-	// if (!ft_strcmp(tab_cmd[0], "exit"))
-	// 	ft_exit(tab_cmd);
-	// if (!ft_strcmp(tab_cmd[0], "pwd"))
-	// 	return(current_dir());
-	// if (!ft_strcmp(tab_cmd[0], "cd"))
-	// 	ft_cd(tab_cmd, env);
-	// if (!ft_strcmp(tab_cmd[0], "echo"))
-	// 	ft_echo(tab_cmd);
-	// if (!ft_strcmp(tab_cmd[0], "env"))
-	// 	return(my_env(liste));
-	// if (!ft_strcmp(tab_cmd[0], "unset"))
-	// 	ft_unset(&liste, tab_cmd);
-	// if (!ft_strcmp(tab_cmd[0], "export"))
-	// 	liste = ft_export(tab_cmd, env, token);
+	if (!ft_strcmp(tab_cmd[0], "exit"))
+		ft_exit(tab_cmd);
+	else if (!ft_strcmp(tab_cmd[0], "pwd") || !ft_strcmp(tab_cmd[0], "PWD"))
+		current_dir();
+	else if (!ft_strcmp(tab_cmd[0], "cd"))
+		ft_cd(tab_cmd, liste->liste);
+	else if (!ft_strcmp(tab_cmd[0], "echo") || !ft_strcmp(tab_cmd[0], "ECHO"))
+		ft_echo(tab_cmd);
+	else if (!ft_strcmp(tab_cmd[0], "env") || !ft_strcmp(tab_cmd[0], "ENV"))
+		return(my_env(liste->liste));
+	else if (!ft_strcmp(tab_cmd[0], "unset"))
+		ft_unset(&liste->liste, liste->full_cmd);
+	else if(!ft_strcmp(tab_cmd[0], "export"))
+		ft_export(tab_cmd, liste->liste, liste->tk);
 	(void)tab_cmd;
 	(void)liste;
 	return (1);

@@ -83,7 +83,7 @@ typedef struct s_info
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
-int		exec_builtin(char **tab_cmd, t_env *liste);
+int		exec_builtin(char **tab_cmd, t_info *liste);
 int		find_path(char *cmd, char **envp, t_env *liste);
 void	execution_main(t_info *info);
 int		exec_single_cmd(t_info *info);
@@ -148,7 +148,7 @@ void	ft_env_set_content(t_env *env, char *name, char *new_content);
 // BUILT_IN
 
 int		ft_builtin(t_token *token, t_env *liste);
-void	ft_exit(t_token *liste_args);
+void	ft_exit(char **tab_cmd);
 void	ft_cd(char **argv, t_env *env);
 int		current_dir(void);
 int		my_env(t_env *envp);

@@ -89,7 +89,7 @@ int	exec_single_cmd(t_info *info)
 	id = 0;
 	path = NULL;
 	if (is_builtin(info->split_cmd[0][0]))
-		exec_builtin(info->split_cmd[0], info->liste);
+		exec_builtin(info->split_cmd[0], info);
 	else
 	{
 		if (access_ok(info->split_cmd[0][0], info, &path))
