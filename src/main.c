@@ -15,14 +15,14 @@ void	loop_prompt(int ac, char **av, char **envp)
 	while (1)
 	{
 		write(1, GREEN, ft_strlen(GREEN));
-		input = readline("Minishell > ");
+		input = readline("Minishell ~ ");
 		write(1, DEFAULT, ft_strlen(DEFAULT));
 		if (ft_strlen(input) > 0)
 		{
 			add_history(input);
 			tk = NULL;
-			lexer(input, liste, &tk);// obtiene los token
-			info = parser(liste, tk, envp);// obtiene cmd et infos
+			lexer(input, liste, &tk);// obtiens les token
+			info = parser(liste, tk, envp);// obtiens cmd et infos
 			execution_main(info);
 			free_all(&info);
 		}

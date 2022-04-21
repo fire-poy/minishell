@@ -38,6 +38,7 @@ void	free_all(t_info **info)
 	// free_tokens(f->tk);
 	free_tab((*info)->full_cmd);
 	free_tab(*(*info)->split_cmd);
+	//free pointeur des tableaux split_cmd
 	free_tokens(&(*info)->tk);
 	free (*info);
 	*info = NULL;

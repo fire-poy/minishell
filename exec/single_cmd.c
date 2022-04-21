@@ -1,5 +1,52 @@
 #include "../minishell.h"
 
+char	*ft_get_last_arg(char *src)
+{
+	int	i;
+	int j;
+	int	dst_len;
+	char *dst;
+
+	i = ft_strlen(src) - 1;
+	dst_len = 0;
+	// printf("get last src = %s\n", src);
+	// printf("i = %d\n", i);
+	while (src[i] != '/')
+	{
+		dst_len++;
+		i--;
+	}
+	// printf("dst_len = %d\n", dst_len);
+	j = 0;
+	//i = ft_strlen(src) - 1;
+	i++;
+	dst = malloc(sizeof(char) * ft_strlen(src) + 1);
+	while (src[i])
+	{
+		dst[j++] = src[i++];
+		//i--;
+	}
+	dst[j] = '\0';
+	// printf("dst = %s\n", dst);
+	return (dst);
+}
+
+
+int	slash_case(char *cmd, t_info *info)
+{
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, F_OK) == 0)
+		{
+			info->split_cmd[0][0] = ft_get_last_arg(cmd);
+			return (1);
+		}
+	}
+	return (0);
+}
+		 
+// int	get_path_de_jonas(char *cmd)
+
 // return 1 if access == ok
 // return the good path by **path
 int	access_ok(char *cmd, t_info *info, char **path)
@@ -8,14 +55,19 @@ int	access_ok(char *cmd, t_info *info, char **path)
 	char	*env;
 	int		i;
 
+	i = 0;
+	if (slash_case(cmd, info))
+	{
+		*path = cmd;
+		return (1);
+	}
 	env = chercher_env(info->liste, "PATH");
 	paths = ft_split(env, ':');
-	i = 0;
 	while (paths[i])
 	{
 		paths[i] = ft_strjoin(paths[i], "/");
 		paths[i] = ft_strjoin(paths[i], cmd);
-		if (access(paths[i], 0) == 0)
+		if (access(paths[i], F_OK) == 0)
 		{
 			*path = (paths[i]);
 			return (1);
@@ -23,7 +75,7 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		free (paths[i]);
 		i++;
 	}
-	ft_putstr_fd("zsh: command not found: ", 2);
+	ft_putstr_fd("Minishell: command not found: ", 2);
 	ft_putendl_fd(cmd, 2);
 	return (0);
 }

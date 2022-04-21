@@ -58,7 +58,7 @@ struct s_token
 	char		*content;//cmd, infile, outfile, etc
 	int			type;
 	int			cmd_index;//nro de commande
-// 	char		**tab_cmd;//on fait le tab dans le pipe?
+// 	char		**tab_cmd;// remplace par t_info->split_cmd
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
@@ -73,8 +73,8 @@ typedef struct s_info
 	char	***split_cmd;
 	char	*redir_in; 
 	char	*redir_out;
-	int		q_in; //q == quantite 
-	int		q_out; 
+	int		q_in; //q == quantite de redirection in
+	int		q_out; //q == quantite de redirection out
 	int		cmd_i;//nro de commande
 	int		pipe_i;
 	int		exit_status;
