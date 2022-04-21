@@ -7,22 +7,22 @@ int	ft_builtin(t_token *token, t_env *liste)
 
 	cmd = token;
 	env = liste;
-	cmd->tab_cmd = ft_split(cmd->content, ' ');
+	cmd->export_content = ft_split(cmd->content, ' ');
 	// printf("cmd->content = %s\n", cmd->content);
 	// printf("cmd->tab_cmd[0] = %s\n", cmd->tab_cmd[0]);
-	if (!ft_strcmp(cmd->tab_cmd[0], "exit"))
+	if (!ft_strcmp(cmd->content, "exit"))
 		ft_exit(cmd);
-	if (!ft_strcmp(cmd->tab_cmd[0], "pwd"))
+	if (!ft_strcmp(cmd->content, "pwd"))
 		return(current_dir());
-	if (!ft_strcmp(cmd->tab_cmd[0], "cd"))
-		ft_cd(cmd->tab_cmd, env);
-	if (!ft_strcmp(cmd->tab_cmd[0], "echo"))
-		ft_echo(cmd->tab_cmd);
-	if (!ft_strcmp(cmd->tab_cmd[0], "env"))
+	if (!ft_strcmp(cmd->content, "cd"))
+		ft_cd(cmd->content, env);
+	if (!ft_strcmp(cmd->content, "echo"))
+		ft_echo(cmd->content);
+	if (!ft_strcmp(cmd->content, "env"))
 		return(my_env(liste));
-	if (!ft_strcmp(cmd->tab_cmd[0], "unset"))
-		ft_unset(&liste, cmd->tab_cmd);
-	if (!ft_strcmp(cmd->tab_cmd[0], "export"))
-		liste = ft_export(cmd->tab_cmd, env, token);
+	if (!ft_strcmp(cmd->content, "unset"))
+		ft_unset(&liste, cmd->content);
+	if (!ft_strcmp(cmd->content, "export"))
+		liste = ft_export(cmd->content, env, token);
 	return (1);
 }
