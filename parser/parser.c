@@ -23,9 +23,15 @@ void	get_info_tk(t_token *tk, t_info *info)
 			tk->type = CMD;
 		}
 		if (tk->type == IN_FILE || tk->type == HEREDOC)
+		{
+			tk->in_index = info->q_in;
 			info->q_in++;
+		}
 		if (tk->type == OUT_FILE || tk->type == APPEND)
+		{
+			tk->out_index = info->q_out;
 			info->q_out++;
+		}
 		tk->cmd_index = info->cmd_i;
 		tk = tk->next;
 	}

@@ -7,10 +7,14 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "./libft/libft.h"
+#include "./gnl/get_next_line.h"
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <limits.h>
 #include <signal.h>
+
 
 # define GREEN "\033[0;32m"
 # define DEFAULT "\033[0m"
@@ -23,8 +27,6 @@
 #define BUILT_IN 4
 #define CMD 5
 #define PIPE 6
-
-// int	g_exit_status = 0;
 
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
@@ -58,10 +60,12 @@ struct s_token
 	char		*content;//cmd, infile, outfile, etc
 	int			type;
 	int			cmd_index;//nro de commande
-// 	char		**tab_cmd;// remplace par t_info->split_cmd
+	int			in_index;//nro de redir_in
+	int			out_index;//nro de redir_out
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
+// 	char		**tab_cmd;// remplace par t_info->split_cmd
 };
 
 typedef struct s_info
@@ -75,10 +79,16 @@ typedef struct s_info
 	char	*redir_out;
 	int		q_in; //q == quantite de redirection in
 	int		q_out; //q == quantite de redirection out
-	int		cmd_i;//nro de commande
+	int		cmd_i;	//nro de commande
 	int		pipe_i;
 	int		exit_status;
 }	t_info;
+
+// redirection
+void	redirect_in_out(t_info *info, int i);
+int		find_last_in(t_token *tk, int i);
+int		find_last_out(t_token *tk, int i);
+char	*get_heredoc(char *flag, int i);
 
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);

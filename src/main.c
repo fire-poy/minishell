@@ -24,6 +24,7 @@ void	loop_prompt(int ac, char **av, char **envp)
 			lexer(input, liste, &tk);// obtiens les token
 			info = parser(liste, tk, envp);// obtiens cmd et infos
 			execution_main(info);
+			// close_all_fd(info);
 			free_all(&info);
 		}
 	}

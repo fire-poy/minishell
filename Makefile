@@ -6,7 +6,7 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/21 14:31:50 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/22 17:29:00 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,9 @@ SRC 		=   ./src/main.c\
 				./exec/exec_builtin.c\
 				./exec/executeur.c\
 				./exec/single_cmd.c\
+				./exec/redirection_a.c\
+				./exec/redirection_b.c\
+				./gnl/get_next_line.c\
 				./built_in/env.c\
 				./built_in/echo.c\
 				./built_in/env_list.c\
@@ -51,7 +54,7 @@ SRC 		=   ./src/main.c\
 				#./built_in/exit.c\
 			  
 HOME		= ..
-INC			= -I./inc -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
+INC			= -I./gnl/get_next_line.h -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
 
 LIB			= -lreadline -L $(HOME)/homebrew/Cellar/readline/8.1.2/lib
 LIBFT		= ./libft/libft.a 

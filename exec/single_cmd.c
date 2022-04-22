@@ -1,36 +1,28 @@
 #include "../minishell.h"
 
-char	*ft_get_last_arg(char *src)
+// src = split_cmd[0]
+char	*ft_get_last_arg(char *src)//char **split_cmd)
 {
 	int	i;
 	int j;
 	int	dst_len;
 	char *dst;
-
+	
 	i = ft_strlen(src) - 1;
 	dst_len = 0;
-	// printf("get last src = %s\n", src);
-	// printf("i = %d\n", i);
 	while (src[i] != '/')
 	{
 		dst_len++;
 		i--;
 	}
-	// printf("dst_len = %d\n", dst_len);
 	j = 0;
-	//i = ft_strlen(src) - 1;
 	i++;
 	dst = malloc(sizeof(char) * ft_strlen(src) + 1);
 	while (src[i])
-	{
 		dst[j++] = src[i++];
-		//i--;
-	}
 	dst[j] = '\0';
-	// printf("dst = %s\n", dst);
 	return (dst);
 }
-
 
 int	slash_case(char *cmd, t_info *info)
 {
@@ -38,14 +30,14 @@ int	slash_case(char *cmd, t_info *info)
 	{
 		if (access(cmd, F_OK) == 0)
 		{
+			free (info->split_cmd[0][0]);
+			info->split_cmd[0][0] = NULL;
 			info->split_cmd[0][0] = ft_get_last_arg(cmd);
 			return (1);
 		}
 	}
 	return (0);
 }
-		 
-// int	get_path_de_jonas(char *cmd)
 
 // return 1 if access == ok
 // return the good path by **path
@@ -75,11 +67,13 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		free (paths[i]);
 		i++;
 	}
-	ft_putstr_fd("Minishell: command not found: ", 2);
-	ft_putendl_fd(cmd, 2);
+	perror ("minishell");
+	// ft_putstr_fd("Minishell: command not found: ", 2);
+	// ft_putendl_fd(cmd, 2);
 	return (0);
 }
 
+// wait(&id);
 int	exec_single_cmd(t_info *info)
 {
 	int		id;
@@ -96,12 +90,11 @@ int	exec_single_cmd(t_info *info)
 			id = fork();
 		if (id == 0)
 		{
-			// redirect_in_out(info);
+			redirect_in_out(info, 0);
 			execve(path, info->split_cmd[0], info->envp);
 		}
 		else
 		{
-			// wait(&id);
 			free (path);
 			waitpid(id, &status, 0);
 			if (WIFEXITED(status))

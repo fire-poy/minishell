@@ -15,6 +15,33 @@ void	free_tab(char **tab)
 	tab = NULL;
 }
 
+void	free_tab_tab(char ***tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+	{
+		while (tab[i][j])
+		{
+			free (tab[i][j]);
+			tab[i][j] = NULL;
+			j++;
+		}
+		free (tab[i][j]);
+		tab[i][j] = NULL;
+		free (tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free (tab[i]);
+	tab[i] = NULL;
+	free (tab);
+	tab = NULL;
+}
+
 void	free_tokens(t_token **tk)
 {
 	t_token *tmp;
