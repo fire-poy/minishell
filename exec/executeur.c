@@ -84,7 +84,7 @@ int	find_path(char *cmd, char **envp, t_env *liste)
 void	exec_commands(t_shell *shell)
 {
 	int		i;
-	t_cmd	*cmd;
+	t_cmd	*cmd;exo
 
 	i = -1;
 	prepare_here_doc_cmd(shell);

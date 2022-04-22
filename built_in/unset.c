@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	ft_unset(t_env **env, char **argv)
+void	ft_unset(t_env **env, char *argv)
 {
 	/*int	i;
 
@@ -9,9 +9,10 @@ void	ft_unset(t_env **env, char **argv)
 	{
 		printf("Unset = %s\n", argv[i++]);
 	}*/
-	if (argv[1])
+	//printf("argv[0] = %s\n", argv);
+	if (argv)
 	{
-		//printf("I am Unset\n");
-		ft_delete_from_list(env, argv[1]);
+		//printf("I am Unset %s\n", argv);
+		ft_delete_from_list(env, argv);
 	}
 }

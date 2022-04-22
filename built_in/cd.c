@@ -13,10 +13,7 @@ char	*get_env(t_env *env, char *name)
 	while (env)
 	{
 		if (!ft_strcmp(env->name, name))
-		{
-			//printf("test 6\n");
 			return (env->content);
-		}
 		env = env->next;
 	}
 	return (NULL);
@@ -60,7 +57,7 @@ void	ft_cd(char **argv, t_env *env)
 	if (!argv[1])
 	{
 		argv[1] = get_env(env, "HOME");
-		printf("path = %s\n", argv[1]);
+		//printf("path = %s\n", argv[1]);
 		if (!argv[1])
 		{
 			ft_putstr_fd("minishell: cd : HOME not set", 2);
@@ -72,9 +69,9 @@ void	ft_cd(char **argv, t_env *env)
 	if (cd_check(argv[1]))
 		return ;
 	dir = getcwd(cwd, sizeof(cwd));
-	printf("dir = %s\n", dir);
+	//printf("dir = %s\n", dir);
 	pwd = get_env(env, "PWD");
-	printf("pwd = %s\n", pwd);
+	//printf("pwd = %s\n", pwd);
 	ft_env_set_content(env, "OLDPWD", pwd);
 	ft_env_set_content(env, "PWD", dir);
 	//free_cd(dir, NULL, pwd, 0);

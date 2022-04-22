@@ -6,7 +6,7 @@
 #    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/21 16:50:00 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/04/22 17:55:25 by jhermon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC 		=   ./src/main.c\
 				./built_in/export_support.c\
 				./built_in/exit.c\
 				./built_in/export.c\
+				./built_in/ctrl.c\
 				# ./built_in/builtin.c\
 			  
 HOME		= ..

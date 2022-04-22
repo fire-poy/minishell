@@ -31,16 +31,10 @@ int	ft_check_export_var(char *var)
 	equal = ft_equal(var);
 	if (equal == 0)
 	{
-		printf("var = %s\n", var);
 		while (var[i])
 		{
-			printf("var[%d] = %c\n",i, var[i]);
 			if (!ft_isalpha(var[i]))
-			{
-				printf("var[%d] = %c\n", i, var[i]);
-				printf("export: not an identifier: %s\n", var);
 				return (1);
-			}
 			i++;
 		}
 		// how to collect a var even without export?

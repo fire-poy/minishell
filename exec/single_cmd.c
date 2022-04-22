@@ -9,25 +9,17 @@ char	*ft_get_last_arg(char *src)
 
 	i = ft_strlen(src) - 1;
 	dst_len = 0;
-	// printf("get last src = %s\n", src);
-	// printf("i = %d\n", i);
 	while (src[i] != '/')
 	{
 		dst_len++;
 		i--;
 	}
-	// printf("dst_len = %d\n", dst_len);
 	j = 0;
-	//i = ft_strlen(src) - 1;
 	i++;
 	dst = malloc(sizeof(char) * ft_strlen(src) + 1);
 	while (src[i])
-	{
 		dst[j++] = src[i++];
-		//i--;
-	}
 	dst[j] = '\0';
-	// printf("dst = %s\n", dst);
 	return (dst);
 }
 
@@ -45,8 +37,6 @@ int	slash_case(char *cmd, t_info *info)
 	return (0);
 }
 		 
-// int	get_path_de_jonas(char *cmd)
-
 // return 1 if access == ok
 // return the good path by **path
 int	access_ok(char *cmd, t_info *info, char **path)

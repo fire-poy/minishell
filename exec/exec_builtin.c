@@ -30,12 +30,10 @@ int	exec_builtin(char **tab_cmd, t_info *liste)
 	else if (!ft_strcmp(tab_cmd[0], "echo") || !ft_strcmp(tab_cmd[0], "ECHO"))
 		ft_echo(tab_cmd);
 	else if (!ft_strcmp(tab_cmd[0], "env") || !ft_strcmp(tab_cmd[0], "ENV"))
-		return(my_env(liste->liste));
+		my_env(liste->liste);
 	else if (!ft_strcmp(tab_cmd[0], "unset"))
-		ft_unset(&liste->liste, liste->full_cmd);
+		ft_unset(&liste->liste, tab_cmd[1]);
 	else if(!ft_strcmp(tab_cmd[0], "export"))
-		ft_export(tab_cmd, liste->liste, liste->tk);
-	(void)tab_cmd;
-	(void)liste;
+		ft_export(tab_cmd, liste->liste, liste);
 	return (1);
 }

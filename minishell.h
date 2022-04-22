@@ -11,6 +11,10 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <signal.h>
+#include <termios.h>
+#include <sys/types.h> 
+#include <sys/stat.h>
+#include <errno.h>
 
 # define GREEN "\033[0;32m"
 # define DEFAULT "\033[0m"
@@ -155,8 +159,12 @@ int		my_env(t_env *envp);
 int		ft_echo(char **argv);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
-t_env	*ft_export(char **argv, t_env *liste, t_token *token);
+t_env	*ft_export(char **argv, t_env *liste, t_info *info);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
-void	ft_unset(t_env **env, char **argv);
+void	ft_unset(t_env **env, char *argv);
+
+// SIGNALS
+
+void	signal_h(int signal);
 
 #endif

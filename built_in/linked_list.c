@@ -50,6 +50,7 @@ void	ft_delete_from_list(t_env **head, char *name)
 	t_env	*temp;
 
 	temp = *head;
+	//printf("delete name = %s\n", name);
 	if (*head == NULL)
 		return ;
 	if (ft_delete_first_node(head, temp, name))
