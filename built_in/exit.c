@@ -31,23 +31,21 @@ int	exit_arg(char *arg)
 }
 
 
-void	ft_exit(t_token *liste_args)
+void	ft_exit(char **tab_cmd)
 {
   int     i;
-  t_token	*args;
 
-  args = liste_args;
-  if (args->tab_cmd[1] == NULL)
+  if (tab_cmd[1] == NULL)
 	{
 		printf("exit\n");
     exit(0);
 	}
-  if (args->tab_cmd[2] != NULL)
+  if (tab_cmd[2] != NULL)
 	{
 		printf("exit :too many arguments\n");
 		return ;
 	}
-  i = exit_arg(args->tab_cmd[1]);
+  i = exit_arg(tab_cmd[1]);
 	printf("exit\n");
   exit(i);
 }
