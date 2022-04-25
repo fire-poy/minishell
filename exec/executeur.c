@@ -18,10 +18,34 @@
 	// fork cmd_i fois + 1  - B_in cmd
 	// faire redirection par raport au cmd_i
 	// executer cmd_i
+// void	restart_redirection();
+// {
+// 	if (dup2(fd[0][0], STDIN_FILENO) == -1)
+//         err_msg("dup child2 STDIN");
+//     if (dup2(fd[1][1], STDOUT_FILENO) == -1)
+//         err_msg("dup child2 STDIN");
+// }
+
 void	execution_main(t_info *info)
 {
+	int	id;
+
 	if (info->cmd_i == 0)
-		exec_single_cmd(info);
+	{
+		if (info->full_cmd[0][0] == '\0')
+		{
+			id = fork();
+			if (id == 0)
+			{	
+				redirect_in_out(info, 0);
+				exit(0);
+			}
+			else
+				wait(&id);
+		}
+		else
+			exec_single_cmd(info);
+	}
 	else
 		return ;
 }
