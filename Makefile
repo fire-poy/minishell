@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
+#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
 #    Updated: 2022/04/22 17:29:00 by mpons            ###   ########.fr        #
@@ -49,9 +49,10 @@ SRC 		=   ./src/main.c\
 				./built_in/linked_list.c\
 				./built_in/linked_list_sort.c\
 				./built_in/export_support.c\
-				# ./built_in/export.c\
+				./built_in/exit.c\
+				./built_in/export.c\
+				./built_in/ctrl.c\
 				# ./built_in/builtin.c\
-				#./built_in/exit.c\
 			  
 HOME		= ..
 INC			= -I./gnl/get_next_line.h -I $(HOME)/homebrew/Cellar/readline/8.1.2/include

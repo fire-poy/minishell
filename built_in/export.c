@@ -15,7 +15,7 @@ void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 	(*head)->initial_env = ft_strdup(var);
 	free((*head)->name);
 	(*head)->name = name;
-	free (var);
+	//free (var);
 }
 
 t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
@@ -30,49 +30,49 @@ t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
 		if (ft_strcmp(temp->name, token->export_name) == 0)
 			return (0);
 	}
-	temp = ft_create_node(token->export_name, token->export_content);
+	if (token->export_content)
+		temp = ft_create_node(token->export_name, token->export_content);
+	else
+		temp = ft_create_node(token->export_name, token->export_content);
 	temp->initial_env = ft_strdup(var);
 	return (temp);
 }
 
-t_env	*ft_export(char **argv, t_env *liste, t_token *token)
+t_env	*ft_export(char **argv, t_env *liste, t_info *info)
 {
-	t_token *vars;
 	t_env	*temp;
 	t_env	*newnode;
 	t_env	*sort;
 	char	*var;
 
-	vars = token;
-	var = vars->tab_cmd[1];
-	vars->export_name = NULL;
 	sort = liste;
 	temp = liste;
 	//head = (t_env *)malloc(sizeof(t_env));
 	if (!argv[1])
 		printlist((ft_sort_list(sort)));
+	var = argv[1];
 	if (!ft_check_export_var(var))
 	{
 		if (var != NULL)
 		{
 			if (!ft_equal(var))
 			{
-				vars->export_name = ft_strjoin(vars->export_name, var);
-				vars->export_content = "' '";
+				info->tk->export_name = var;
+				info->tk->export_content = "";
 			}
 			else
 			{
-				vars->export_name = ft_get_name(var);
-				vars->export_content = ft_get_line(var);
+				info->tk->export_name = ft_get_name(var);
+				info->tk->export_content = ft_get_line(var);
 			}
-			while (temp->next != NULL && ft_strcmp(temp->name, vars->export_name) != 0)
+			while (temp->next != NULL && ft_strcmp(temp->name, info->tk->export_name) != 0)
 				temp = temp->next;
-			if (ft_strcmp(temp->name, vars->export_name) == 0)
+			if (ft_strcmp(temp->name, info->tk->export_name) == 0)
 			{
-				ft_replace_var(&temp, vars->export_name, vars->export_content, var);
+				ft_replace_var(&temp, info->tk->export_name, info->tk->export_content, var);
 				return (temp);
 			}
-			newnode = add_var_to_env(&temp, var, token);
+			newnode = add_var_to_env(&temp, var, info->tk);
 			ft_add_to_list(&temp, newnode);
 			return (temp);
 		}

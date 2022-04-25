@@ -14,6 +14,10 @@
 #include <sys/wait.h>
 #include <limits.h>
 #include <signal.h>
+#include <termios.h>
+#include <sys/types.h> 
+#include <sys/stat.h>
+#include <errno.h>
 
 /* terminal colors */
 # define RED "\033[0;31m"
@@ -100,7 +104,7 @@ char	*ft_strjoin_whit_int(char *s1, int n);
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
-int		exec_builtin(char **tab_cmd, t_env *liste);
+int		exec_builtin(char **tab_cmd, t_info *liste);
 int		find_path(char *cmd, char **envp, t_env *liste);
 void	execution_main(t_info *info);
 int		exec_single_cmd(t_info *info);
@@ -165,15 +169,19 @@ void	ft_env_set_content(t_env *env, char *name, char *new_content);
 // BUILT_IN
 
 int		ft_builtin(t_token *token, t_env *liste);
-void	ft_exit(t_token *liste_args);
+void	ft_exit(char **tab_cmd);
 void	ft_cd(char **argv, t_env *env);
 int		current_dir(void);
 int		my_env(t_env *envp);
 int		ft_echo(char **argv);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
-t_env	*ft_export(char **argv, t_env *liste, t_token *token);
+t_env	*ft_export(char **argv, t_env *liste, t_info *info);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
-void	ft_unset(t_env **env, char **argv);
+void	ft_unset(t_env **env, char *argv);
+
+// SIGNALS
+
+void	signal_h(int signal);
 
 #endif
