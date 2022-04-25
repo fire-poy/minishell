@@ -28,9 +28,24 @@
 
 void	execution_main(t_info *info)
 {
+	int	id;
+
 	if (info->cmd_i == 0)
-		exec_single_cmd(info);
-		// restart_redirection();
+	{
+		if (info->full_cmd[0][0] == '\0')
+		{
+			id = fork();
+			if (id == 0)
+			{	
+				redirect_in_out(info, 0);
+				exit(0);
+			}
+			else
+				wait(&id);
+		}
+		else
+			exec_single_cmd(info);
+	}
 	else
 		return ;
 }

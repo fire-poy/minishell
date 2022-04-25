@@ -14,7 +14,7 @@ void	loop_prompt(int ac, char **av, char **envp)
  	create_env_list(&liste, envp);
 	while (1)
 	{
-		write(1, GREEN, ft_strlen(GREEN));
+		write(1, RED, ft_strlen(RED));
 		input = readline("Minishell ~ ");
 		write(1, DEFAULT, ft_strlen(DEFAULT));
 		if (ft_strlen(input) > 0)

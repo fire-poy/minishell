@@ -15,8 +15,13 @@
 #include <limits.h>
 #include <signal.h>
 
-
+/* terminal colors */
+# define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define CYAN "\033[0;36m"
 # define DEFAULT "\033[0m"
 
 //Token
@@ -89,6 +94,8 @@ void	redirect_in_out(t_info *info, int i);
 int		find_last_in(t_token *tk, int i);
 int		find_last_out(t_token *tk, int i);
 char	*get_heredoc(char *flag, int i);
+char	*ft_strjoin_whit_int(char *s1, int n);
+
 
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);

@@ -56,7 +56,7 @@ char	*get_first(char *s, int *st, int *i, int *mem, int *type)
 
 	if (*type == 0 || *type == 1)
 		add = 1;
-	if (*type == 2)
+	if (*type == 2 || *type == 3)
 		add = 2;
 	(*st)+= add;
 	*mem = *type;
