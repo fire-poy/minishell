@@ -18,6 +18,7 @@
 #include <sys/types.h> 
 #include <sys/stat.h>
 #include <errno.h>
+#include <dirent.h>
 
 /* terminal colors */
 # define RED "\033[0;31m"
@@ -27,6 +28,8 @@
 # define MAGENTA "\033[0;35m"
 # define CYAN "\033[0;36m"
 # define DEFAULT "\033[0m"
+
+//int exit_int = 0;
 
 //Token
 #define IN_FILE 0
@@ -74,7 +77,7 @@ struct s_token
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
-// 	char		**tab_cmd;// remplace par t_info->split_cmd
+	// char		**tab_cmd;// remplace par t_info->split_cmd
 };
 
 typedef struct s_info
@@ -182,6 +185,9 @@ void	ft_unset(t_env **env, char *argv);
 
 // SIGNALS
 
+#define _POSIX_SOURCE
+
 void	signal_h(int signal);
+void	ft_stop(char *input);
 
 #endif
