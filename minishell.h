@@ -1,23 +1,23 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "./libft/libft.h"
-#include "./gnl/get_next_line.h"
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <limits.h>
-#include <signal.h>
-#include <termios.h>
-#include <sys/types.h> 
-#include <sys/stat.h>
-#include <errno.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <string.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "./libft/libft.h"
+# include "./gnl/get_next_line.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <limits.h>
+# include <signal.h>
+# include <termios.h>
+# include <sys/types.h> 
+# include <sys/stat.h>
+# include <errno.h>
 
 /* terminal colors */
 # define RED "\033[0;31m"
@@ -29,13 +29,13 @@
 # define DEFAULT "\033[0m"
 
 //Token
-#define IN_FILE 0
-#define OUT_FILE 1
-#define APPEND 2
-#define HEREDOC 3
-#define BUILT_IN 4
-#define CMD 5
-#define PIPE 6
+# define IN_FILE 0
+# define OUT_FILE 1
+# define APPEND 2
+# define HEREDOC 3
+# define BUILT_IN 4
+# define CMD 5
+# define PIPE 6
 
 //Error
 void	err_msg(char *e, char *avant_e, int exit_status);
@@ -89,7 +89,10 @@ typedef struct s_info
 	int		q_in; //q == quantite de redirection in
 	int		q_out; //q == quantite de redirection out
 	int		cmd_i;	//nro de commande
+	int		q_cmd;
 	int		pipe_i;
+	int		**pipes;
+	int		*pids;
 	int		exit_status;
 }	t_info;
 
@@ -97,14 +100,29 @@ typedef struct s_info
 void	redirect_in_out(t_info *info, int i);
 int		find_last_in(t_token *tk, int i);
 int		find_last_out(t_token *tk, int i);
+int		get_q_in(t_token *tk, int i);
+int		get_q_out(t_token *tk, int i);
 char	*get_heredoc(char *flag, int i);
 char	*ft_strjoin_whit_int(char *s1, int n);
+void	restart_in_out(t_info *info);
 
+// pipe
+
+int		create_pipes(t_info *info);
+void	close_pipes(t_info *shell);
+void	free_pipes(int **pipes, int q);
+
+//pid
+void	create_pids(t_info *shell);
+void	wait_pids(t_info *shell);
 
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
 int		exec_builtin(char **tab_cmd, t_info *liste);
+char	*ft_get_last_arg(char *src);
+int		access_ok(char *cmd, t_info *info, char **path);
+int		slash_case(char *cmd, t_info *info);
 int		find_path(char *cmd, char **envp, t_env *liste);
 void	execution_main(t_info *info);
 int		exec_single_cmd(t_info *info);

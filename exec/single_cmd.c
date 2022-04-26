@@ -30,8 +30,8 @@ int	slash_case(char *cmd, t_info *info)
 	{
 		if (access(cmd, F_OK) == 0)
 		{
-			free (info->split_cmd[0][0]);
-			info->split_cmd[0][0] = NULL;
+			// free (info->split_cmd[0][0]);
+			// info->split_cmd[0][0] = NULL;
 			info->split_cmd[0][0] = ft_get_last_arg(cmd);
 			return (1);
 		}
@@ -83,7 +83,11 @@ int	exec_single_cmd(t_info *info)
 	id = 0;
 	path = NULL;
 	if (is_builtin(info->split_cmd[0][0]))
+	{
+		redirect_in_out(info, 0);
 		exec_builtin(info->split_cmd[0], info);
+		// restart_in_out(info);
+	}
 	else
 	{
 		if (access_ok(info->split_cmd[0][0], info, &path))

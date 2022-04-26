@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/22 17:29:00 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/26 16:02:21 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ SRC 		=   ./src/main.c\
 				./exec/single_cmd.c\
 				./exec/redirection_a.c\
 				./exec/redirection_b.c\
+				./exec/pipe.c\
+				./exec/pid.c\
 				./gnl/get_next_line.c\
 				./built_in/env.c\
 				./built_in/echo.c\
@@ -54,14 +56,19 @@ SRC 		=   ./src/main.c\
 				./built_in/ctrl.c\
 				# ./built_in/builtin.c\
 			  
-HOME		= ..
-INC			= -I./gnl/get_next_line.h -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
+#INC			= -I./gnl/get_next_line.h -I $(HOME)/homebrew/Cellar/readline/8.1.2/include
+#LIB			= -lreadline -L $(HOME)/homebrew/Cellar/readline/8.1.2/lib
+#LIBFT		= ./libft/libft.a 
 
-LIB			= -lreadline -L $(HOME)/homebrew/Cellar/readline/8.1.2/lib
+INC			= -I./gnl/get_next_line.h -I$(HOME)/.brew/opt/readline/include
+LIB			= -lreadline -L$(HOME)/.brew/opt/readline/lib
 LIBFT		= ./libft/libft.a 
 
 all: $(NAME)
 
+.c.o:
+			${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
+			
 $(NAME):	$(OBJS)
 			$(MAKE) -C $(LIBFT_DIR)
 			$(CC) $(CFLAGS) -o $(NAME) $(INC) $(SRC) $(LIB) $(LIBFT)

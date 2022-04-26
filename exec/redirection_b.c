@@ -28,6 +28,34 @@ int	find_last_out(t_token *tk, int i)
 	return (last_out);
 }
 
+int	get_q_in(t_token *tk, int i)
+{
+	int	q_in;
+
+	q_in = 0;
+	while (tk && tk->cmd_index == i)
+	{
+		if (tk->type == IN_FILE || tk->type == HEREDOC)
+			q_in++;
+		tk = tk->next;
+	}
+	return (q_in);
+}
+
+int	get_q_out(t_token *tk, int i)
+{
+	int	q_out;
+
+	q_out = 0;
+	while (tk && tk->cmd_index == i)
+	{
+		if (tk->type == OUT_FILE || tk->type == APPEND)
+			q_out++;
+		tk = tk->next;
+	}
+	return (q_out);
+}
+
 	// heredoc = ft_strjoin(heredoc, line);
 	// char	*heredoc;
 	// heredoc = NULL;
