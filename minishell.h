@@ -201,5 +201,6 @@ void	ft_unset(t_env **env, char *argv);
 // SIGNALS
 
 void	signal_h(int signal);
+void	ft_stop(char *input);
 
 #endif
