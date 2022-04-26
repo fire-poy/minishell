@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 14:25:48 by mpons             #+#    #+#              #
-#    Updated: 2022/03/31 13:55:46 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/04/26 16:37:02 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ B_OBJS		= ${BONUS:.c=.o}
 NAME 		= libft.a
 
 CC 			= gcc
-CFLAGS		= -Wall -Wextra -Werror 
+CFLAGS		= -g3 -Wall -Wextra -Werror 
 
 .c.o:
 			${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}

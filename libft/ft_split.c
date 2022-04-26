@@ -6,12 +6,12 @@
 /*   By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:53:35 by mpons             #+#    #+#             */
-/*   Updated: 2021/12/27 19:26:29 by mpons            ###   ########.fr       */
+/*   Updated: 2021/11/08 11:59:54 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_words(const char *s, char c)
+static int	ft_words(const char *s, char c)
 {	
 	int	i;
 	int	word;
@@ -33,7 +33,7 @@ int	ft_words(const char *s, char c)
 	return (word);
 }
 
-void	ft_w_copy(char **tab, const char *s, char c)
+static void	ft_w_copy(char **tab, const char *s, char c)
 {	
 	int	i;
 	int	j;

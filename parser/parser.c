@@ -35,6 +35,7 @@ void	get_info_tk(t_token *tk, t_info *info)
 		tk->cmd_index = info->cmd_i;
 		tk = tk->next;
 	}
+	info->q_cmd = info->pipe_i + 1;
 }
 
 char **get_tab_cmd(t_token *tk, int cmd_i)

@@ -37,3 +37,17 @@ int	exec_builtin(char **tab_cmd, t_info *liste)
 		ft_export(tab_cmd, liste->liste, liste);
 	return (1);
 }
+
+// void	restart_in_out(t_info *info)
+// {
+// 	if (info->q_in > 0)
+// 	{
+// 		dup2(STDIN_FILENO, fd_in);
+// 		// close (0);
+// 	}
+// 	if (info->q_out > 0 )
+// 	{
+// 		dup2(STDOUT_FILENO, fd_out);
+// 		// close (1);
+// 	}
+// }

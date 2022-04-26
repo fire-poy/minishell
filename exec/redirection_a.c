@@ -84,7 +84,6 @@ int	redirect_out(t_info *info, int i)
 
 	tk = info->tk;
 	last_out = find_last_out(tk, i);
-	// fd_out = malloc(info->q_out * sizeof(int *));
 	while (tk && tk->cmd_index == i)
 	{
 		if (tk->type == OUT_FILE)
@@ -108,111 +107,35 @@ int	redirect_out(t_info *info, int i)
 	}
 	return (fd_out);
 }
-//changer fd_in info?
+
+// changer fd_in info?
 void	redirect_in_out(t_info *info, int i)
 {
 	int fd_in;
 	int fd_out;
+	int last_cmd;
 
-	if (info->q_in > 0)
+	last_cmd = info->cmd_i;
+	if (get_q_in(info->tk, i) > 0)//si redir on le fait
 	{
 		fd_in =	redirect_in(info, i);
 		dup2(fd_in, STDIN_FILENO);
 		close (fd_in);
 	}
-	if (info->q_out > 0 )
+	else if (info->q_cmd > 1 && i != 0) //sinon si
+		dup2(info->pipes[i - 1][0], STDIN_FILENO);
+	if (get_q_out(info->tk, i) > 0)
 	{
 		fd_out = redirect_out(info, i);
 		dup2(fd_out, STDOUT_FILENO);
 		close (fd_out);
 	}
+	else if (info->q_cmd > 1 && i != last_cmd) //if not the last cmd => 
+		dup2(info->pipes[i][1], STDOUT_FILENO);
 }
 
-// void	close_all_fd(t_info *info);
-
-// redir_in = tk->content;
-// fd[redir_i] = open(tk->content, O_RDONLY )
-// if (fd = -1)
-// 	err_msg;
-//     fd[0][1] = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 
 /*
-void	handle_redirect_file(t_shell *shell, t_cmd *cmd)
-{
-	if (cmd->redirect_id == id_in_std || cmd->redirect_id == id_in_file)
-		redirect_input_file(shell, cmd);
-	if (cmd->redirect_id == id_out_write || cmd->redirect_id == id_out_append)
-		redirect_output_file(cmd);
-}
-
-void	redirect_input_file(t_shell *shell, t_cmd *cmd)
-{
-	int	fd;
-
-	(void)shell;
-	fd = -2;
-	if (cmd->redirect_id == id_in_file)
-		fd = open(cmd->redirect_path, O_RDONLY, 0644);
-	if (fd == -1)
-	{
-		perror("Error: open() failed");
-		exit(1);
-	}
-	else if (fd > 0)
-	{
-		dup2(fd, 0);
-		close(fd);
-	}
-}
-
-void	redirect_output_file(t_cmd *cmd)
-{
-	int	fd;
-
-	fd = -2;
-	if (cmd->redirect_id == id_out_write)
-		fd = open(cmd->redirect_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (cmd->redirect_id == id_out_append)
-		fd = open(cmd->redirect_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd == -1)
-	{
-		perror("Error: open() failed");
-		exit(1);
-	}
-	else if (fd > 0)
-	{
-		dup2(fd, 1);
-		close(fd);
-	}
-}
-
-void	redirect_input(t_shell *shell, t_cmd *cmd, int num)
-{
-	if (num > 0)
-	{
-		if (cmd->redirect_id == id_in_std || cmd->redirect_id == id_in_file)
-			redirect_input_file(shell, cmd);
-		else
-			dup2(shell->pipes[num - 1][0], 0);
-	}
-	else if (num == 0)
-		redirect_input_file(shell, cmd);
-}
-
-void	redirect_output(t_shell *shell, t_cmd *cmd, int num)
-{
-	if (num < shell->num_cmds - 1)
-	{
-		if (cmd->redirect_id == id_out_write
-			|| cmd->redirect_id == id_out_append)
-			redirect_output_file(cmd);
-		else
-			dup2(shell->pipes[num][1], 1);
-	}
-	else if (num == shell->num_cmds - 1)
-		redirect_output_file(cmd);
-}
-
 void	here_doc(char *argv, t_ppxb *pipex)
 {
 	int		file;
