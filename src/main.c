@@ -35,6 +35,15 @@ void	loop_prompt(int ac, char **av, char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
+	t_env *liste;
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		printf("%s\n", envp[i++]);
+	}
 	loop_prompt(ac, av, envp);
+	ft_free_list(&liste);
 	return (0);
 }

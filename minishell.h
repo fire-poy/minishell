@@ -183,6 +183,8 @@ void  err_exit(char *e, char *avant_e, int exit_status);
 char	*ft_get_line(char *line);
 char	*ft_get_name(char *line);
 void	ft_env_set_content(t_env *env, char *name, char *new_content);
+void	free_env(t_env **env);
+void	ft_free_list(t_env **head_a);
 
 // BUILT_IN
 

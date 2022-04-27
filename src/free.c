@@ -70,6 +70,3 @@ void	free_all(t_info **info)
 	free (*info);
 	*info = NULL;
 }
-
-
-
