@@ -39,10 +39,6 @@ int	main(int ac, char **av, char **envp)
 	int	i;
 
 	i = 0;
-	// while (envp[i])
-	// {
-	// 	printf("%s\n", envp[i++]);
-	// }
 	loop_prompt(ac, av, envp);
 	ft_free_list(&liste);
 	return (0);
