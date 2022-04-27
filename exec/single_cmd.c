@@ -54,6 +54,14 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		return (1);
 	}
 	env = chercher_env(info->liste, "PATH");
+	//printf("cherch_env = %s\n", env);
+	if (!env)
+	{
+		write(1, "Minishell : ", 12);
+		print_join("command not found : ", cmd, 1);
+		write(1, "\n", 1);
+		return (0);
+	}
 	paths = ft_split(env, ':');
 	while (paths[i])
 	{
