@@ -17,10 +17,10 @@ void	signal_h(int signal)
 	else if (signal == SIGQUIT)
 	{
 		rl_on_new_line();
-		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
+
 void	ft_stop(char *input)
 {
 		if (input == 0)
