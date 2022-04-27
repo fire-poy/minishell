@@ -21,9 +21,10 @@ int	ft_echo(char **argv)
 				printf(" ");
 			i++;
 		}
-		if (n_flag == 0)
-			printf("\n");
+		if (n_flag == 1)
+			return (0);
 	}
+	printf("\n");
 	return (0);
 }
 
