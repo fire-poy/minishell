@@ -55,31 +55,29 @@ int	access_ok(char *cmd, t_info *info, char **path)
 	}
 	env = chercher_env(info->liste, "PATH");
 	//printf("cherch_env = %s\n", env);
-	if (!env)
+	if (env != NULL)
 	{
-		write(1, "Minishell : ", 12);
-		print_join("command not found : ", cmd, 1);
-		write(1, "\n", 1);
-		return (0);
-	}
-	paths = ft_split(env, ':');
-	while (paths[i])
-	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		paths[i] = ft_strjoin(paths[i], cmd);
-		if (access(paths[i], F_OK) == 0)
+		paths = ft_split(env, ':');
+		while (paths[i])
 		{
-			*path = (paths[i]);
-			return (1);
+			paths[i] = ft_strjoin(paths[i], "/");
+			paths[i] = ft_strjoin(paths[i], cmd);
+			if (access(paths[i], F_OK) == 0)
+			{
+				*path = (paths[i]);
+				return (1);
+			}
+			free (paths[i]);
+			i++;
 		}
-		free (paths[i]);
-		i++;
 	}
-	perror ("minishell");
-	// ft_putstr_fd("Minishell: command not found: ", 2);
-	// ft_putendl_fd(cmd, 2);
+	write(1, "Minishell : ", 12);
+	print_join("command not found : ", cmd, 1);
+	write(1, "\n", 1);
 	return (0);
 }
+	// ft_putstr_fd("Minishell: command not found: ", 2);
+	// ft_putendl_fd(cmd, 2);
 
 // wait(&id);
 int	exec_single_cmd(t_info *info)
@@ -98,6 +96,7 @@ int	exec_single_cmd(t_info *info)
 	}
 	else
 	{
+		//if ((info->split_cmd[0][0] == expresiion )
 		if (access_ok(info->split_cmd[0][0], info, &path))
 			id = fork();
 		if (id == 0)

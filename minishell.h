@@ -71,6 +71,8 @@ struct s_token
 	int			cmd_index;//nro de commande
 	int			in_index;//nro de redir_in
 	int			out_index;//nro de redir_out
+	int			export_vars;
+	char		*export;
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
