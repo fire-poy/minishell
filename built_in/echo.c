@@ -28,6 +28,8 @@ int	ft_echo(char **argv)
 	return (0);
 }
 
+
+
 // compilation = gcc built_in/echo.c libft/ft_strncmp.c && ./a.out
 // int	main(int argc, char **argv)
 // {

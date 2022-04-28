@@ -54,7 +54,6 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		return (1);
 	}
 	env = chercher_env(info->liste, "PATH");
-	//printf("cherch_env = %s\n", env);
 	if (env != NULL)
 	{
 		paths = ft_split(env, ':');
@@ -112,6 +111,7 @@ int	exec_single_cmd(t_info *info)
 		{
 			free (path);
 			waitpid(id, &status, 0);
+			usleep(1000);
 			if (WIFEXITED(status))
 			info->exit_status = WEXITSTATUS(status);
 		}

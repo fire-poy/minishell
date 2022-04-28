@@ -28,8 +28,9 @@ void	loop_prompt(int ac, char **av, char **envp)
 			tk = NULL;
 			lexer(input, liste, &tk);// obtiens les token
 			info = parser(liste, tk, envp, info);// obtiens cmd et infos
+			create_heredocs(info->tk);
 			execution_main(info);
-			// close_all_fd(info);
+			destroy_heredocs(info->q_cmd);
 			free_all(&info);
 		}
 	}

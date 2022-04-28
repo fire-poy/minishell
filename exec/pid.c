@@ -17,3 +17,13 @@ void	wait_pids(t_info *info)
 	if (WIFEXITED(status))
 		info->exit_status = WEXITSTATUS(status);
 }
+
+void	wait_pids_heredoc(t_info *info, int i)
+{
+	int	j;
+	int	status;
+
+	j = -1;
+	while (++j < i)
+		waitpid(info->pids[j], &status, 0);
+}

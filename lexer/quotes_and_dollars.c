@@ -1,6 +1,7 @@
 #include "../minishell.h"
 
-char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)//index dollar, combien a enlever , quoi ajouter
+//index dollar, combien a enlever , quoi ajouter
+char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)
 {
 	char	*debut;
 	char	*fin;
@@ -18,13 +19,14 @@ char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)//index dol
 	return (debut);
 }
 
-char	*remplacer_dollar(char **s, int *index, t_env *liste) //return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
+//return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
+char	*remplacer_dollar(char **s, int *index, t_env *liste) 
 {
 	int		len;
 	char	*env_var;
 	char	*remplacer;
 
-	len =	ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");//busco siguiente espacio o fin dsp de dolar"
+	len = ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");//busco siguiente espacio o fin dsp de dolar"
 	if (len == 0)
 	{
 		(*index)++;
@@ -34,6 +36,8 @@ char	*remplacer_dollar(char **s, int *index, t_env *liste) //return string avec 
 	{
 		env_var = ft_substr(*s, (unsigned int)*index + 1, len); //$ ou apres $???
 		remplacer = chercher_env(liste, env_var);
+		// if (len == 1 && (*s)[(*index) + 1] == '?')
+		// 	remplacer = ft_itoa(info->exit_status);
 		if (remplacer == NULL)
 			return (ajouter_au_string(s, index, len + 1, "")); // remplazo, i avanza
 		else
