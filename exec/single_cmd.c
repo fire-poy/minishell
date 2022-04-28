@@ -96,9 +96,13 @@ int	exec_single_cmd(t_info *info)
 	}
 	else
 	{
-		//if ((info->split_cmd[0][0] == expresiion )
 		if (access_ok(info->split_cmd[0][0], info, &path))
+		{
 			id = fork();
+			ft_get_pid(id);
+			signal(SIGQUIT, signal_q);
+			signal(SIGINT, signal_q);
+		}
 		if (id == 0)
 		{
 			redirect_in_out(info, 0);

@@ -42,7 +42,7 @@ void	ft_exit(char **tab_cmd)
 	}
   if (tab_cmd[2] != NULL)
 	{
-		printf("exit :too many arguments\n");
+		printf("Minishell: exit :too many arguments\n");
 		return ;
 	}
   i = exit_arg(tab_cmd[1]);

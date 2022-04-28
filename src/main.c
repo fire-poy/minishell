@@ -8,24 +8,26 @@ void	loop_prompt(int ac, char **av, char **envp)
 	t_token	*tk;
 	t_info	*info;
 	
-	if (!ac || !av || !envp)
-		return ;
+	(void)ac;
+	(void)av;
 	liste = NULL;
+	info = NULL;
  	create_env_list(&liste, envp);
 	signal(SIGINT, signal_h);
-	signal(SIGQUIT, signal_h);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		write(1, RED, ft_strlen(RED));
 		input = readline("Minishell ~ ");
 		write(1, DEFAULT, ft_strlen(DEFAULT));
 		ft_stop(input);
+		info = init_info(info);
 		if (ft_strlen(input) > 0)
 		{
 			add_history(input);
 			tk = NULL;
 			lexer(input, liste, &tk);// obtiens les token
-			info = parser(liste, tk, envp);// obtiens cmd et infos
+			info = parser(liste, tk, envp, info);// obtiens cmd et infos
 			execution_main(info);
 			// close_all_fd(info);
 			free_all(&info);
