@@ -6,7 +6,7 @@
 /*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:25:18 by mpons             #+#    #+#             */
-/*   Updated: 2022/04/22 16:01:41 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:12:35 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ char	*ft_strjoin(char *s1, char const *s2)
 	while (s2[j])
 		dst[i++] = s2[j++];
 	dst[i] = '\0';
-	free (s1);
+	//free (s1);
 	return (dst);
 }

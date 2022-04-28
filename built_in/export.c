@@ -65,15 +65,15 @@ t_env	*ft_export(char **argv, t_env *liste, t_info *info)
 				info->tk->export_name = ft_get_name(var);
 				info->tk->export_content = ft_get_line(var);
 			}
-			while (temp->next != NULL && ft_strcmp(temp->name, info->tk->export_name) != 0)
-				temp = temp->next;
-			if (ft_strcmp(temp->name, info->tk->export_name) == 0)
+			while (liste->next != NULL && ft_strcmp(liste->name, info->tk->export_name) != 0)
+				liste = liste->next;
+			if (ft_strcmp(liste->name, info->tk->export_name) == 0)
 			{
-				ft_replace_var(&temp, info->tk->export_name, info->tk->export_content, var);
-				return (temp);
+				ft_replace_var(&liste, info->tk->export_name, info->tk->export_content, var);
+				return (liste);
 			}
-			newnode = add_var_to_env(&temp, var, info->tk);
-			ft_add_to_list(&temp, newnode);
+			newnode = add_var_to_env(&liste, var, info->tk);
+			ft_add_to_list(&liste, newnode);
 			return (temp);
 		}
 	}

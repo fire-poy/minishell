@@ -71,6 +71,8 @@ struct s_token
 	int			cmd_index;//nro de commande
 	int			in_index;//nro de redir_in
 	int			out_index;//nro de redir_out
+	int			export_vars;
+	char		*export;
 	char		*export_name;// var name
 	char		*export_content; // var content
 	t_token	*next;
@@ -81,6 +83,7 @@ typedef struct s_info
 {
 	t_token	*tk;
 	t_env	*liste;
+	char	*input;
 	char	**envp;
 	char	**full_cmd;
 	char	***split_cmd;
@@ -142,7 +145,8 @@ void	free_tokens(t_token **tk);
 void	free_all(t_info **info);
 
 // parser
-t_info	*parser(t_env *liste, t_token *tk, char **envp);
+t_info	*parser(t_env *liste, t_token *tk, char **envp, t_info *info);
+t_info	*init_info(t_info *info);
 
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
@@ -192,6 +196,8 @@ void  err_exit(char *e, char *avant_e, int exit_status);
 char	*ft_get_line(char *line);
 char	*ft_get_name(char *line);
 void	ft_env_set_content(t_env *env, char *name, char *new_content);
+void	free_env(t_env **env);
+void	ft_free_list(t_env **head_a);
 
 // BUILT_IN
 
@@ -211,5 +217,8 @@ void	ft_unset(t_env **env, char *argv);
 
 void	signal_h(int signal);
 void	ft_stop(char *input);
+void	ft_stop2(char *input);
+void	signal_q(int sig);
+void	ft_get_pid(int i);
 
 #endif

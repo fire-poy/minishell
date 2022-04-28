@@ -106,7 +106,7 @@ void	create_env_list(t_env **head, char **envp)
 	int				i;
 	t_env *tmp;
 
-	i = 2;
+	i = 0;
 	while (envp[i]!= NULL)
 	{
 		env_create_node(head, envp[i]);
@@ -116,10 +116,9 @@ void	create_env_list(t_env **head, char **envp)
 	i = 0;
 	while (tmp->next != NULL)
 	{
-		//printf("node Nr %d = %s\n", i++, tmp->content);
 		tmp = tmp->next;
 	}
-	*head = delete_first(head);
+	//*head = delete_first(head);
 }
 
 // supprimer element en fin de liste
@@ -159,12 +158,3 @@ t_env	*find_last(t_env **head)
 	return (tmp);
 }
 
-/*int	main(int argc, char **envp)
- {
- 	t_env *head;
-
-	head = (t_env *)malloc(sizeof(t_env));
- 	create_env_list(&head, envp);
-  printlist(head);
-  return (0);
-}*/

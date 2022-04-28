@@ -70,7 +70,9 @@ int	access_ok(char *cmd, t_info *info, char **path)
 			i++;
 		}
 	}
-	perror ("Minishell: command not found: ");
+	write(1, "Minishell : ", 12);
+	print_join("command not found : ", cmd, 1);
+	write(1, "\n", 1);
 	return (0);
 }
 	// ft_putstr_fd("Minishell: command not found: ", 2);
@@ -94,7 +96,12 @@ int	exec_single_cmd(t_info *info)
 	else
 	{
 		if (access_ok(info->split_cmd[0][0], info, &path))
+		{
 			id = fork();
+			ft_get_pid(id);
+			signal(SIGQUIT, signal_q);
+			signal(SIGINT, signal_q);
+		}
 		if (id == 0)
 		{
 			redirect_in_out(info, 0);
