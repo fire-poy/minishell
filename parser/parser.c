@@ -9,6 +9,7 @@ t_info	*init_info(t_info *info)
 	info->q_out = 0; 
 	info->cmd_i = 0;
 	info->pipe_i = 0;
+	info->input = malloc(sizeof(char));
 	return (info);
 }
 
@@ -80,13 +81,13 @@ char ***get_cmd_split(char **full_cmd, int cmd_i)
 	return (cmd_split);
 }
 
-t_info	*parser(t_env *liste, t_token *tk, char **envp)
+t_info	*parser(t_env *liste, t_token *tk, char **envp, t_info *info)
 {
-	t_info	*info;
+	//t_info	*info;
 	int 	i = 0;
 
-	info = NULL;
-	info = init_info(info);
+	//info = NULL;
+	//info = init_info(info);
 	get_info_tk(tk, info);	
 	info->full_cmd = get_tab_cmd(tk, info->cmd_i);
 	info->split_cmd = get_cmd_split(info->full_cmd, info->cmd_i);
