@@ -54,24 +54,27 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		return (1);
 	}
 	env = chercher_env(info->liste, "PATH");
-	paths = ft_split(env, ':');
-	while (paths[i])
+	if (env != NULL)
 	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		paths[i] = ft_strjoin(paths[i], cmd);
-		if (access(paths[i], F_OK) == 0)
+		paths = ft_split(env, ':');
+		while (paths[i])
 		{
-			*path = (paths[i]);
-			return (1);
+			paths[i] = ft_strjoin(paths[i], "/");
+			paths[i] = ft_strjoin(paths[i], cmd);
+			if (access(paths[i], F_OK) == 0)
+			{
+				*path = (paths[i]);
+				return (1);
+			}
+			free (paths[i]);
+			i++;
 		}
-		free (paths[i]);
-		i++;
 	}
-	perror ("minishell");
-	// ft_putstr_fd("Minishell: command not found: ", 2);
-	// ft_putendl_fd(cmd, 2);
+	perror ("Minishell: command not found: ");
 	return (0);
 }
+	// ft_putstr_fd("Minishell: command not found: ", 2);
+	// ft_putendl_fd(cmd, 2);
 
 // wait(&id);
 int	exec_single_cmd(t_info *info)
@@ -101,6 +104,7 @@ int	exec_single_cmd(t_info *info)
 		{
 			free (path);
 			waitpid(id, &status, 0);
+			usleep(1000);
 			if (WIFEXITED(status))
 			info->exit_status = WEXITSTATUS(status);
 		}

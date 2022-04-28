@@ -102,12 +102,19 @@ int		find_last_in(t_token *tk, int i);
 int		find_last_out(t_token *tk, int i);
 int		get_q_in(t_token *tk, int i);
 int		get_q_out(t_token *tk, int i);
-char	*get_heredoc(char *flag, int i);
+
+// heredoc
+int		create_heredocs(t_token *tk);
+void	get_heredoc(char *flag, int i);
+int		get_heredoc_fd(int cmd_index);
+int		destroy_heredocs(int q_cmd);
 char	*ft_strjoin_whit_int(char *s1, int n);
-void	restart_in_out(t_info *info);
+
+
+
+// void	restart_in_out(t_info *info);
 
 // pipe
-
 int		create_pipes(t_info *info);
 void	close_pipes(t_info *shell);
 void	free_pipes(int **pipes, int q);
@@ -115,6 +122,8 @@ void	free_pipes(int **pipes, int q);
 //pid
 void	create_pids(t_info *shell);
 void	wait_pids(t_info *shell);
+void	wait_pids_heredoc(t_info *info, int i);
+
 
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);

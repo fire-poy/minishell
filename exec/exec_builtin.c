@@ -2,6 +2,8 @@
 
 int	is_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (0);
 	if (!ft_strcmp(cmd, "exit"))
 		return (1);
 	if (!ft_strcmp(cmd, "pwd"))
