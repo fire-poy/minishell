@@ -18,7 +18,7 @@ void	exec_child_proc(t_info *info, int i)
 		close_pipes(info);
 		if (info->full_cmd[i][0] != '\0')
 		{
-			// printf("cmd ='%s'\n char ='%c'", info->full_cmd[i], (int)info->full_cmd[i][0]);
+			// 1f("cmd ='%s'\n char ='%c'", info->full_cmd[i], (int)info->full_cmd[i][0]);
 			if (is_builtin(info->split_cmd[i][0]))
 				exec_builtin(info->split_cmd[i], info);
 			else if (access_ok(info->split_cmd[i][0], info, &path))
@@ -49,6 +49,7 @@ void	exec_cmds(t_info *info)
 void	execution_main(t_info *info)
 {
 	int	id;
+	int	status;
 
 	if (info->q_cmd == 1)
 	{
@@ -61,7 +62,11 @@ void	execution_main(t_info *info)
 				exit(0);
 			}
 			else
-				wait(&id);
+			{
+				waitpid(id, &status, 0);
+				if (WIFEXITED(status))
+				info->exit_status = WEXITSTATUS(status);
+			}
 		}
 		else
 			exec_single_cmd(info);

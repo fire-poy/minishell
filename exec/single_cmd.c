@@ -48,6 +48,8 @@ int	access_ok(char *cmd, t_info *info, char **path)
 	int		i;
 
 	i = 0;
+	if (is_invalid_command(info, cmd))
+		return (0);
 	if (slash_case(cmd, info))
 	{
 		*path = cmd;
@@ -64,15 +66,17 @@ int	access_ok(char *cmd, t_info *info, char **path)
 			if (access(paths[i], F_OK) == 0)
 			{
 				*path = (paths[i]);
+				info->exit_status = 0;
 				return (1);
 			}
 			free (paths[i]);
 			i++;
 		}
 	}
-	write(1, "Minishell : ", 12);
-	print_join("command not found : ", cmd, 1);
-	write(1, "\n", 1);
+	write(2, "Minishell : ", 12);
+	print_join("command not found : ", cmd, 2);
+	write(2, "\n", 1);
+	info->exit_status = 127;
 	return (0);
 }
 	// ft_putstr_fd("Minishell: command not found: ", 2);
@@ -88,20 +92,13 @@ int	exec_single_cmd(t_info *info)
 	id = 0;
 	path = NULL;
 	if (is_builtin(info->split_cmd[0][0]))
+		info->exit_status = exec_builtin(info->split_cmd[0], info);
+	else if (access_ok(info->split_cmd[0][0], info, &path))
 	{
-		redirect_in_out(info, 0);
-		exec_builtin(info->split_cmd[0], info);
-		// restart_in_out(info);
-	}
-	else
-	{
-		if (access_ok(info->split_cmd[0][0], info, &path))
-		{
-			id = fork();
-			ft_get_pid(id);
-			signal(SIGQUIT, signal_q);
-			signal(SIGINT, signal_q);
-		}
+		id = fork();
+		ft_get_pid(id);
+		signal(SIGQUIT, signal_q);
+		signal(SIGINT, signal_q);
 		if (id == 0)
 		{
 			redirect_in_out(info, 0);
@@ -111,7 +108,6 @@ int	exec_single_cmd(t_info *info)
 		{
 			free (path);
 			waitpid(id, &status, 0);
-			usleep(1000);
 			if (WIFEXITED(status))
 			info->exit_status = WEXITSTATUS(status);
 		}

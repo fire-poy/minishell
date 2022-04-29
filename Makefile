@@ -6,14 +6,14 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/28 16:52:12 by mpons            ###   ########.fr        #
+#    Updated: 2022/04/29 12:30:09 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell 
 
 CC			= gcc
-CFLAGS		= -g3 -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -g3 -Wall -Wextra -Werror #-fsanitize=address
 
 OBJS		= ${SRC:.c=.o}
 
@@ -33,6 +33,7 @@ SRC 		=   ./src/main.c\
 				./lexer/token_get.c\
 				./lexer/token_create.c\
 				./parser/parser.c\
+				./exec/access.c\
 				./exec/exec_utils.c\
 				./exec/exec_builtin.c\
 				./exec/executeur.c\

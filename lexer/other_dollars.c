@@ -12,7 +12,7 @@ int	search_next_c(char **s, int *debut, char c)
 	return (1);
 }
 
-char *remplacer_rest_of_dollar(char **s, t_env *liste)
+char *remplacer_rest_of_dollar(char **s, t_env *liste, t_info *info)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ char *remplacer_rest_of_dollar(char **s, t_env *liste)
 		if((*s)[i] == '\"' || (*s)[i] == '\'')
 			search_next_c(s, &i, (*s)[i]);
 		if((*s)[i] == '$')//si hay dollar me fijo
-			*s = remplacer_dollar(s, &i, liste);
+			*s = remplacer_dollar(s, &i, liste, info);
 		else
 			i++;
 	}

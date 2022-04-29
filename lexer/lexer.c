@@ -12,7 +12,7 @@ void	trimer (char *s, int *i)
 // 2 buscamos " ' y remplazamos $dentro
 // 2 buscamos tokens -> < >> > ' " funciones
 // 	despues de > file
-int	lexer(char *input, t_env *liste, t_token **tk)
+int	lexer(char *input, t_env *liste, t_token **tk, t_info *info)
 {
 	int	i;
 	char *input2;
@@ -21,8 +21,8 @@ int	lexer(char *input, t_env *liste, t_token **tk)
 	//(void)tk;
 	trimer (input, &i);
 	input2 = ft_strdup(input + i);
-	input2 = search_and_replace_quotes(&input2, liste);
-	input2 = remplacer_rest_of_dollar(&input2, liste);
+	input2 = search_and_replace_quotes(&input2, liste, info);
+	input2 = remplacer_rest_of_dollar(&input2, liste, info);
 	explore_tokens_err(&input2);
 	*tk = get_tokens(input2, *tk);
 	erase_quotes_tk(*tk);

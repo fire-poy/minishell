@@ -37,7 +37,7 @@ int	exec_builtin(char **tab_cmd, t_info *liste)
 		ft_unset(&liste->liste, tab_cmd[1]);
 	else if(!ft_strcmp(tab_cmd[0], "export"))
 		ft_export(tab_cmd, liste->liste, liste);
-	return (1);
+	return (0);
 }
 
 // void	restart_in_out(t_info *info)
