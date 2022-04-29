@@ -20,6 +20,19 @@ void    err_exit(char *e, char *avant_e, int exit_status)
 	exit (exit_status);
 }
 
+int	show_command_error(t_info *info, char *cmd, char *msg, int exit_status)
+{
+	ft_putstr_fd("minishell: ", 2);
+	if (cmd)
+	{
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": ", 2);
+	}
+	ft_putendl_fd(msg, 2);
+	info->exit_status = exit_status;
+	return (exit_status);
+}
+
 void	print_join(char *s1, char *s2, int fd)
 {
 	char	*print;

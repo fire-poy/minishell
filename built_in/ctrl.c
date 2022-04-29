@@ -27,8 +27,19 @@ void	signal_q(int sig)
 		write(1, "^C\n", 3);
 }
 
-void
-	signal_h(int signal)
+void	signal_here(int signal)
+{
+	// struct termios	save;
+
+	// tcgetattr(0, &save);
+	// save.c_lflag &= ~ECHOCTL;
+	int a = -1;
+	if (signal == SIGINT)
+		write(0, &a, 1);
+		//ilfaut write meme signaux de ctrl+D
+}
+
+void	signal_h(int signal)
 {
 	struct termios	save;
 

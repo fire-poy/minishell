@@ -20,7 +20,7 @@ char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)
 }
 
 //return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
-char	*remplacer_dollar(char **s, int *index, t_env *liste) 
+char	*remplacer_dollar(char **s, int *index, t_env *liste, t_info *info) 
 {
 	int		len;
 	char	*env_var;
@@ -32,31 +32,62 @@ char	*remplacer_dollar(char **s, int *index, t_env *liste)
 		(*index)++;
 		return (*s);
 	}
+	else if (len == 1 && (*s)[(*index) + 1] == '?')
+	{
+		remplacer = ft_itoa(info->exit_status);
+		*s = (ajouter_au_string(s, index, len + 1, remplacer)); //remplazo y avanzo
+		free (remplacer);
+		return (*s);
+	}
+	env_var = ft_substr(*s, (unsigned int)*index + 1, len); //$ ou apres $???
+	remplacer = chercher_env(liste, env_var);
+	if (remplacer == NULL)
+		return (ajouter_au_string(s, index, len + 1, "")); // remplazo, i avanza
 	else
 	{
-		env_var = ft_substr(*s, (unsigned int)*index + 1, len); //$ ou apres $???
-		remplacer = chercher_env(liste, env_var);
-		// if (len == 1 && (*s)[(*index) + 1] == '?')
-		// 	remplacer = ft_itoa(info->exit_status);
-		if (remplacer == NULL)
-			return (ajouter_au_string(s, index, len + 1, "")); // remplazo, i avanza
-		else
-		{
-			*s = (ajouter_au_string(s, index, ft_strlen(env_var) + 1, remplacer)); //remplazo y avanzo
-			free (env_var);
-			return (*s);
-		}
+		*s = (ajouter_au_string(s, index, ft_strlen(env_var) + 1, remplacer)); //remplazo y avanzo
+		free (env_var);
+		return (*s);
 	}
 }
+//return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
+// char	*remplacer_dollar(char **s, int *index, t_env *liste) 
+// {
+// 	int		len;
+// 	char	*env_var;
+// 	char	*remplacer;
+
+// 	len = ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");//busco siguiente espacio o fin dsp de dolar"
+// 	if (len == 0)
+// 	{
+// 		(*index)++;
+// 		return (*s);
+// 	}
+// 	else
+// 	{
+// 		env_var = ft_substr(*s, (unsigned int)*index + 1, len); //$ ou apres $???
+// 		remplacer = chercher_env(liste, env_var);
+// 		// if (len == 1 && (*s)[(*index) + 1] == '?')
+// 		// 	remplacer = ft_itoa(info->exit_status);
+// 		if (remplacer == NULL)
+// 			return (ajouter_au_string(s, index, len + 1, "")); // remplazo, i avanza
+// 		else
+// 		{
+// 			*s = (ajouter_au_string(s, index, ft_strlen(env_var) + 1, remplacer)); //remplazo y avanzo
+// 			free (env_var);
+// 			return (*s);
+// 		}
+// 	}
+// }
 
 //on commence in the "
-char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste)
+char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste, t_info *info)
 {
 	(*i)++;
 	while ((*s)[*i] && (*s)[*i] != '\"')
 	{
 		if((*s)[*i] == '$')//si hay dollar me fijo
-			*s = remplacer_dollar(s, i, liste);
+			*s = remplacer_dollar(s, i, liste, info);
 		else
 			(*i)++;
 	}
@@ -82,7 +113,7 @@ char	detect_and_check_quotes(char *s, int *idx)
 	return (c);
 }
 
-char	*search_and_replace_quotes(char **input, t_env *liste)
+char	*search_and_replace_quotes(char **input, t_env *liste, t_info *info)
 {
 	char	c;
 	int		i;
@@ -95,7 +126,7 @@ char	*search_and_replace_quotes(char **input, t_env *liste)
 		if (c == '\'') //si' -> i = 2eme' -> j'avance au 2eme ' 
 			search_next_c(input, &i, c);
 		if (c == '\"')
-			*input = chercher_and_replace_dollar(input, &i, liste);
+			*input = chercher_and_replace_dollar(input, &i, liste, info);
 		if (c == 0)
 			return (*input);	
 	}
