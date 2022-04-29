@@ -49,6 +49,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	i = 0;
+	liste = NULL;
  	create_env_list(&liste, envp);
 	loop_prompt(liste, envp);
 	ft_free_list(&liste);

@@ -47,7 +47,6 @@ t_env	*ft_export(char **argv, t_env *liste, t_info *info)
 
 	sort = liste;
 	temp = liste;
-	//head = (t_env *)malloc(sizeof(t_env));
 	if (!argv[1])
 		printlist((ft_sort_list(sort)));
 	var = argv[1];
@@ -74,6 +73,7 @@ t_env	*ft_export(char **argv, t_env *liste, t_info *info)
 			}
 			newnode = add_var_to_env(&liste, var, info->tk);
 			ft_add_to_list(&liste, newnode);
+			free (var);
 			return (temp);
 		}
 	}

@@ -25,6 +25,7 @@ int	ft_echo(char **argv)
 			return (0);
 	}
 	printf("\n");
+	free_tab(argv);
 	return (0);
 }
 
