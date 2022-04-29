@@ -42,6 +42,7 @@
 # define CMD 5
 # define PIPE 6
 
+pid_t	g_pid[255];
 
 // chained list to extract env
 typedef struct s_env t_env;

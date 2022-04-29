@@ -18,9 +18,7 @@ void	get_heredoc(char *flag, int i)
 	char	*name;
 	int		len;
 	int		file;
-	int		ret;
 
-	ret = 0;
 	name = ft_strjoin_whit_int(".heredoc_tmp", i);
 	file = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (file < 0)
@@ -30,13 +28,20 @@ void	get_heredoc(char *flag, int i)
 	{
 		write (STDOUT_FILENO, ">", 1);
 		line = get_next_line(STDIN_FILENO);
-		// ft_stop2(line);
+		ft_stop2(line);
+		signal(SIGINT, signal_here);
+		signal(SIGQUIT, SIG_IGN);
 		if (line == 0)
 		{
 			line = flag;
 			return ;
 		}
-		// printf("line = %s\n",line);
+		if (g_pid[8] == 6) // to quit with ctrl+c
+		{
+			g_pid[8] = 0;
+			line = flag;
+			return ;
+		}
 		if (ft_strncmp(flag, line, len) == 0 && line != 0)
 		{
 			free (line);	
