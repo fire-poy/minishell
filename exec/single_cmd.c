@@ -96,9 +96,19 @@ int	exec_single_cmd(t_info *info)
 	else if (access_ok(info->split_cmd[0][0], info, &path))
 	{
 		id = fork();
-		ft_get_pid(id);
-		signal(SIGQUIT, signal_q);
-		signal(SIGINT, signal_q);
+		printf("split_cmd = %s\n", info->split_cmd[0][0]);
+		if ((!ft_strcmp(info->split_cmd[0][0], "cat") || !ft_strcmp(info->split_cmd[0][0], "grep")) && info->split_cmd[0][0] != NULL)
+		{
+			ft_get_pid(id);
+			signal(SIGINT, signal_q);
+			signal(SIGQUIT, signal_q);
+		}
+		else
+		{
+			ft_get_pid(id);
+			signal(SIGINT, signal_h);
+			signal(SIGQUIT, SIG_IGN);
+		}
 		if (id == 0)
 		{
 			redirect_in_out(info, 0);

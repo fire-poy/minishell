@@ -231,5 +231,6 @@ void	ft_stop2(char *input);
 void	signal_q(int sig);
 void	ft_get_pid(int i);
 void	signal_here(int signal);
+void	signal_2(int signal);
 
 #endif

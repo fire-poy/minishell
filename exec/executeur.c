@@ -9,9 +9,6 @@ void	exec_child_proc(t_info *info, int i)
 	// sleep(1);
 	if (info->pids[i] < 0)
 		perror("Error: fork() failed");
-	// ft_get_pid(info);
-	// signal(SIGQUIT, signal_q);
-	// signal(SIGINT, signal_q);
 	if (info->pids[i] == 0)
 	{
 		redirect_in_out(info, i);
