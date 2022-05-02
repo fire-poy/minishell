@@ -225,9 +225,10 @@ int		my_env(t_env *envp);
 int		ft_echo(char **argv);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
-t_env	*ft_export(char **argv, t_env *liste, t_info *info);
+void	ft_export(char **argv, t_env *liste, t_info *info);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
 void	ft_unset(t_env **env, char *argv);
+void	ft_replace_var(t_env **head, char *name, char *content, char *var);
 
 // SIGNALS
 

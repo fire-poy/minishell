@@ -1,11 +1,5 @@
 #include "../minishell.h"
 
-/*
-bash-3.2$ cd he
-bash: cd: he: No such file or directory
-bash-3.2$ cd ../help
-bash: cd: ../help: No such file or directory
-*/
 char	*get_env(t_env *env, char *name)
 {
 	if (!name)
@@ -76,26 +70,3 @@ void	ft_cd(char **argv, t_env *env)
 	ft_env_set_content(env, "PWD", dir);
 	//free_cd(dir, NULL, pwd, 0);
 }
-
-/*int	main(int argc, char **argv, char **envp)
-{   
-	t_env *head;
-
-	head = (t_env *)malloc(sizeof(t_env));
- 	create_env_list(&head, envp);
-	printlist(head);
-	// printing current working directory
-	ft_cd(argv[1], head);
-	//printlist(head);
-	//current_dir();
-	// the regular shell does show all available directory ???
-	//if (chdir(argv[1]) == -1)
-		//perror(argv[1]);
-	//printf("cd: no such file or directory: %s\n", argv[1]);
-	// printing current working directory
-	//current_dir();
-	// after chdir is executed
-	//}
-	//printf("getpid = %d\n", getpid());
-	return (0); 
-}*/
