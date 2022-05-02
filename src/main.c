@@ -36,7 +36,7 @@ void	loop_prompt(t_env *liste, char **envp)
 			execution_main(info);
 			destroy_heredocs(info->q_cmd);
 			last_exit = info->exit_status;
-			free_all(&info);
+			free_all(info);
 		}
 	}
 }

@@ -149,7 +149,8 @@ int		is_invalid_command(t_info *info, char *cmd);
 // free
 void	free_tab(char **tab);
 void	free_tokens(t_token **tk);
-void	free_all(t_info **info);
+void	free_all(t_info *info);
+char	*ft_strjoin_free(char *s1, char const *s2);
 
 // parser
 t_info	*parser(t_env *liste, t_token *tk, char **envp, t_info *info);
