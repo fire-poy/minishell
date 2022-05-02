@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:53:35 by mpons             #+#    #+#             */
-/*   Updated: 2021/11/08 11:59:54 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/02 18:25:40 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_words(const char *s, char c)
@@ -69,7 +70,7 @@ char	**ft_split(const char *s, char c)
 	if (!s)
 		return (NULL);
 	ac = ft_words(s, c);
-	tab = malloc((ac + 1) * sizeof(char *));
+	tab = malloc(sizeof(char *) * (ac + 1));
 	if (!tab)
 		return (NULL);
 	ft_w_copy(tab, s, c);

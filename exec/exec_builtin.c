@@ -28,7 +28,10 @@ int	exec_builtin(char **tab_cmd, t_info *liste)
 	else if (!ft_strcmp(tab_cmd[0], "pwd") || !ft_strcmp(tab_cmd[0], "PWD"))
 		current_dir();
 	else if (!ft_strcmp(tab_cmd[0], "cd"))
+	{
+		printf("tab_cmd[1] = %s\n", tab_cmd[1]);
 		ft_cd(tab_cmd, liste->liste);
+	}
 	else if (!ft_strcmp(tab_cmd[0], "echo") || !ft_strcmp(tab_cmd[0], "ECHO"))
 		ft_echo(tab_cmd);
 	else if (!ft_strcmp(tab_cmd[0], "env") || !ft_strcmp(tab_cmd[0], "ENV"))
