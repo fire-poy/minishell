@@ -8,10 +8,42 @@ void	ft_free_list(t_env **head_a)
 	{
 		tmp = (*head_a);
 		(*head_a) = (*head_a)->next;
-		free(tmp->initial_env);
+		// if (tmp->initial_env)
+		// 	free(tmp->initial_env);
+		if (tmp->content)
+			free(tmp->content);
+		if (tmp->name)
+			free(tmp->name);
 		free(tmp);
 	}
 }
+
+// void	ft_free_listtokens(t_env **env)
+// {
+// 	t_env *tmp;
+// 	t_env *a;
+	
+// 	a = *env;
+// 	while (a)
+// 	{
+// 		if (a->content)
+// 			free (a->content);
+// 		// if (a->export)
+// 		// {
+// 		// 	// free (a->export);
+// 		// 	// a->export = NULL;
+// 		// }
+// 		// if (a->export_name)
+// 		// 	free (a->export_name);
+// 		// if (a->export_content)
+// 		// 	free (a->export_content);
+// 		tmp = a->next;
+// 		free (a);
+// 		a = tmp;
+// 	}
+// 	*tk = NULL;
+// }
+
 
 void	ft_replaceit(t_env **head, char *name, char *value)
 {
@@ -47,21 +79,40 @@ t_env	*ft_copy_list(t_env *head)
 	return (copy);
 }
 
+// void	ft_swap_nodes(t_env	*temp)
+// {
+// 	char	*tmp;
+
+// 	if (ft_strcmp(temp->name, temp->next->name) > 0)
+// 	{
+// 		tmp = ft_strdup(temp->next->name);
+// 		free(temp->next->name);
+// 		temp->next->name = ft_strdup(temp->name);
+// 		free(temp->name);
+// 		temp->name = tmp;
+// 		tmp = ft_strdup(temp->next->content);
+// 		free(temp->next->content);
+// 		temp->next->content = ft_strdup(temp->content);
+// 		free(temp->content);
+// 		temp->content = tmp;
+// 	}
+// }
+
 void	ft_swap_nodes(t_env	*temp)
 {
 	char	*tmp;
 
 	if (ft_strcmp(temp->name, temp->next->name) > 0)
 	{
-		tmp = ft_strdup(temp->next->name);
-		free(temp->next->name);
-		temp->next->name = ft_strdup(temp->name);
-		free(temp->name);
+		tmp = temp->next->name;
+		// free(temp->next->name);
+		temp->next->name = temp->name;
+		// free(temp->name);
 		temp->name = tmp;
-		tmp = ft_strdup(temp->next->content);
-		free(temp->next->content);
-		temp->next->content = ft_strdup(temp->content);
-		free(temp->content);
+		tmp = temp->next->content;
+		// free(temp->next->content);
+		temp->next->content = temp->content;
+		// free(temp->content);
 		temp->content = tmp;
 	}
 }

@@ -82,8 +82,6 @@ t_token	*get_tokens(char *s, t_token *tk)
 	while ((unsigned long)i < ft_strlen(s))
 	{
 		search_next_token(s, &st, &i, &type); //avance i jusqu'au token et st a la pos apres du token si != 0. ou \0
-		// printf("apres search st %d \n", st);
-		// printf("apres search i %d \n", i);
 		if (i == 0)
 			content = get_first(s, &st, &i, &mem, &type);		
 		else

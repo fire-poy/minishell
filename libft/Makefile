@@ -6,7 +6,7 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 14:25:48 by mpons             #+#    #+#              #
-#    Updated: 2022/04/26 16:37:02 by mpons            ###   ########.fr        #
+#    Updated: 2022/05/02 13:50:31 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,12 +74,11 @@ LIB			= ar rc
 
 RAN			= ranlib
 
+all:		${NAME}
 
 ${NAME}: 	${OBJS}
 		 	${LIB} ${NAME} ${OBJS}
 			${RAN} ${NAME}
-
-all:		${NAME}
 
 bonus:		${OBJS} ${B_OBJS}
 		 	${LIB} ${NAME} ${OBJS} ${B_OBJS}

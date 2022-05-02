@@ -47,5 +47,7 @@ void	ft_exit(char **tab_cmd)
 	}
   i = exit_arg(tab_cmd[1]);
 	printf("exit\n");
+	// free_all(info);
+	// ft_free_list;
   exit(i);
 }

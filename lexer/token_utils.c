@@ -56,6 +56,7 @@ char	*erase_quotes(char *s)
 		}
 	}
 	dst[j] = '\0';
+	free (s);
 	return (ft_substr(dst, 0, ft_strlen(dst)));
 }
 
