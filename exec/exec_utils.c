@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+// ft_strjoin modifie qui ajoute un espace au millieu
 char	*ft_strjoin_whit_space(char *s1, char const *s2)
 {
 	char	*dst;
@@ -17,7 +18,7 @@ char	*ft_strjoin_whit_space(char *s1, char const *s2)
 		return (NULL);
 	while (s1[++i])
 		dst[i] = s1[i];
-	dst[i++] = ' ';//
+	dst[i++] = ' ';
 	while (s2[j])
 		dst[i++] = s2[j++];
 	dst[i] = '\0';

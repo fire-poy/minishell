@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/04/29 18:50:23 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/05/02 15:39:03 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell 
 
 CC			= gcc
-CFLAGS		= -g3 -Wall -Wextra -Werror #-fsanitize=address
+#  CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
 
 OBJS		= ${SRC:.c=.o}
 

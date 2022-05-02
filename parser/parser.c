@@ -10,7 +10,7 @@ t_info	*init_info(t_info *info, int last_exit)
 	info->cmd_i = 0;
 	info->pipe_i = 0;
 	info->exit_status = last_exit;
-	info->input = malloc(sizeof(char));
+	// info->input = malloc(sizeof(char));
 	return (info);
 }
 
@@ -40,16 +40,16 @@ void	get_info_tk(t_token *tk, t_info *info)
 	info->q_cmd = info->pipe_i + 1;
 }
 
-char **get_tab_cmd(t_token *tk, int cmd_i)
+char **get_tab_cmd(t_token *tk, int q_cmd)
 {
 	char	**full_cmd;
 	int		i;
 
-	full_cmd = malloc((cmd_i + 2) * sizeof(char *));
+	full_cmd = malloc((q_cmd + 1) * sizeof(char *));
 	if (!full_cmd)
 		return (NULL);
 	i = 0;
-	while (i < cmd_i + 2)
+	while (i < q_cmd)// i = 0 < q_qmd = 1
 	{
 		full_cmd[i] = malloc(sizeof(char));
 		full_cmd[i][0] = '\0';
@@ -61,7 +61,8 @@ char **get_tab_cmd(t_token *tk, int cmd_i)
 			full_cmd[tk->cmd_index] = ft_strjoin_whit_space(full_cmd[tk->cmd_index], tk->content);
 		tk = tk->next;
 	}
-	full_cmd[cmd_i + 1] = NULL;
+	// free (full_cmd[q_cmd]);
+	full_cmd[q_cmd] = NULL;
 	return (full_cmd);
 }
 
@@ -85,7 +86,7 @@ char ***get_cmd_split(char **full_cmd, int cmd_i)
 t_info	*parser(t_env *liste, t_token *tk, char **envp, t_info *info)
 {
 	get_info_tk(tk, info);	
-	info->full_cmd = get_tab_cmd(tk, info->cmd_i);
+	info->full_cmd = get_tab_cmd(tk, info->q_cmd);
 	info->split_cmd = get_cmd_split(info->full_cmd, info->cmd_i);
 	info->tk = tk;
 	info->liste = liste;

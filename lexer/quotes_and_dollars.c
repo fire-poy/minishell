@@ -10,8 +10,8 @@ char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)
 	e = *i;
 	debut =	ft_substr(*s, 0, e); //avant dollar
 	fin =	ft_substr(*s, *i + enlever, 1000); //apres dollar
-	debut = ft_strjoin(debut, ajouter);//free debut
-	debut = ft_strjoin(debut, fin);
+	debut = ft_strjoin_free(debut, ajouter);//free debut
+	debut = ft_strjoin_free(debut, fin);
 	free (fin);
 	free (*s);
 	*s = NULL;
@@ -108,7 +108,8 @@ char	detect_and_check_quotes(char *s, int *idx)
 	if (c) //si on a trouve on cherche 2eme
 	{
 		if (search_next_c(&s, &i, c) == 0)
-			err_msg("quotes pas bien fermés", NULL, 3);
+			c = 'e';
+			// err_msg("quotes pas bien fermés", NULL, 3);
 	}
 	return (c);
 }
@@ -129,6 +130,8 @@ char	*search_and_replace_quotes(char **input, t_env *liste, t_info *info)
 			*input = chercher_and_replace_dollar(input, &i, liste, info);
 		if (c == 0)
 			return (*input);	
+		if (c == 'e')
+			return (NULL);
 	}
 	return (*input);
 }

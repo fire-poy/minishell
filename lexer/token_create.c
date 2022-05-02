@@ -40,6 +40,7 @@ char	**ft_split_from_charset(char *s, char *set)
 			i++;
 		tab_ch[1] = ft_substr(s, i, (int)ft_strlen - i);
 		tab_ch[2] = NULL;
+		free (s);
 		return (tab_ch);
 	}
 	else
@@ -62,6 +63,7 @@ void	tk_create_second(t_token **head, char **data, int type)
 	new_node_a->next = new_node_b;
 	new_node_b->content = split_data[1];
 	free (split_data[2]);
+	free (split_data);
 	new_node_b->type = CMD;
 	new_node_b->next = NULL;
 	if (*head == NULL)

@@ -74,6 +74,7 @@ char	*erase_quotes(char *s)
 		}
 	}
 	dst[j] = '\0';
+	free (s);
 	return (ft_substr(dst, 0, ft_strlen(dst)));
 }
 
@@ -117,6 +118,7 @@ t_token	*get_tokens(char *s, t_token *tk)
 		st = i;
 		mem = type;
 	}
+	free (s);
 	return (tk);
 }
 

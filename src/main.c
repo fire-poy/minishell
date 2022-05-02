@@ -28,15 +28,24 @@ void	loop_prompt(t_env *liste, char **envp)
 		info = init_info(info, last_exit);
 		if (ft_strlen(input) > 0)
 		{
-			add_history(input);
 			tk = NULL;
-			lexer(input, liste, &tk, info);// obtiens les token
-			info = parser(liste, tk, envp, info);// obtiens cmd et infos
-			create_heredocs(info->tk);
-			execution_main(info);
-			destroy_heredocs(info->q_cmd);
-			last_exit = info->exit_status;
-			free_all(info);
+			if (lexer(input, liste, &tk, info) == 0)// obtiens les token
+			{
+				xperror("quotes pas bien fermés");				
+				free_info_simple(info);
+				free (input);
+			}
+			else 
+			{	
+				add_history(input);
+				info = parser(liste, tk, envp, info);// obtiens cmd et infos
+				create_heredocs(info->tk);
+				execution_main(info);
+				destroy_heredocs(info->q_cmd);
+				last_exit = info->exit_status;
+				free_all(info);
+				free (input);
+			}
 		}
 	}
 }

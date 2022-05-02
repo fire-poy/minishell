@@ -41,6 +41,44 @@ int	slash_case(char *cmd, t_info *info)
 
 // return 1 if access == ok
 // return the good path by **path
+// int	access_ok(char *cmd, t_info *info, char **path)
+// {
+// 	char	**paths;
+// 	char	*env;
+// 	int		i;
+
+// 	i = 0;
+// 	if (is_invalid_command(info, cmd))
+// 		return (0);
+// 	if (slash_case(cmd, info))
+// 	{
+// 		*path = cmd;
+// 		return (1);
+// 	}
+// 	env = chercher_env(info->liste, "PATH");
+// 	if (env != NULL)
+// 	{
+// 		paths = ft_split(env, ':');
+// 		while (paths[i])
+// 		{
+// 			paths[i] = ft_strjoin(paths[i], "/");
+// 			paths[i] = ft_strjoin(paths[i], cmd);
+// 			if (access(paths[i], F_OK) == 0)
+// 			{
+// 				*path = (paths[i]);
+// 				info->exit_status = 0;
+// 				return (1);
+// 			}
+// 			free (paths[i]);
+// 			i++;
+// 		}
+// 	}
+// 	info->exit_status = show_command_error(info, cmd, MSG_COMMAND_NOT_FOUND, 127);
+// 	return (0);
+// }
+
+// return 1 if access == ok
+// return the good path by **path
 int	access_ok(char *cmd, t_info *info, char **path)
 {
 	char	**paths;
@@ -61,22 +99,20 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		paths = ft_split(env, ':');
 		while (paths[i])
 		{
-			paths[i] = ft_strjoin(paths[i], "/");
-			paths[i] = ft_strjoin(paths[i], cmd);
-			if (access(paths[i], F_OK) == 0)
+			*path = ft_strjoin(paths[i], "/");
+			*path = ft_strjoin_free(*path, cmd);
+			if (access(*path, F_OK) == 0)
 			{
-				*path = (paths[i]);
+				free_tab(paths);
 				info->exit_status = 0;
 				return (1);
 			}
-			free (paths[i]);
+			free(*path);
 			i++;
 		}
+		free_tab(paths);
 	}
-	write(2, "Minishell : ", 12);
-	print_join("command not found : ", cmd, 2);
-	write(2, "\n", 1);
-	info->exit_status = 127;
+	info->exit_status = show_command_error(info, cmd, MSG_COMMAND_NOT_FOUND, 127);
 	return (0);
 }
 	// ft_putstr_fd("Minishell: command not found: ", 2);
