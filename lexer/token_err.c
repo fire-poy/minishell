@@ -13,7 +13,7 @@ void syntax_error(char **in, int *i)
 	err_msg(e, "syntax error near unexpected token `", 258);
 }
 // "syntax error near unexpected token `|'"
-void	get_token_err(char **in, int *i)
+void	get_token_err(char **in, int *i, t_info *info)
 {
 	int		origin;
 	char	*s;
@@ -30,12 +30,16 @@ void	get_token_err(char **in, int *i)
 		syntax_error(in, i);
 	}
 	if (s[*i] == '\0')
+	{
+		info->err = 1;
+		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
 		err_msg("syntax error near unexpected token `newline'", NULL, 258);
+	}
 	*i = origin;
 }
 
 // "syntax error near unexpected token `|'"
-void	get_pipe_err(char **in, int *i)
+void	get_pipe_err(char **in, int *i, t_info *info)
 {
 	int		origin;
 	char	*s;
@@ -50,11 +54,15 @@ void	get_pipe_err(char **in, int *i)
 	if (s[*i] == '|')	
 		syntax_error(in, i);
 	if (s[*i] == '\0')
+	{
+		info->err = 2;
+		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
 		err_msg("syntax error near unexpected token `newline'", NULL, 258);
+	}
 	*i = origin;
 }
 
-void	explore_tokens_err(char **in)
+void	explore_tokens_err(char **in, t_info *info)
 {
 	int		i;
 	char	*s;
@@ -69,16 +77,16 @@ void	explore_tokens_err(char **in)
 		{
 			if (s[i + 1] == '<')
 				i++;
-			get_token_err(in, &i);
+			get_token_err(in, &i, info);
 		}	
 		if (s[i] == '>')
 		{
 			if (s[i + 1] == '>')
 				i++;
-			get_token_err(in, &i);			
+			get_token_err(in, &i, info);			
 		}	
 		if (s[i] == '|')
-			get_pipe_err(in, &i);			
+			get_pipe_err(in, &i, info);			
 		i++;
 	}
 } 	

@@ -28,7 +28,10 @@ int	lexer(char *input, t_env *liste, t_token **tk, t_info *info)
 		return (0);
 	}
 	input2 = remplacer_rest_of_dollar(&input2, liste, info);
-	explore_tokens_err(&input2);
+	explore_tokens_err(&input2, info);
+	// if (info->err == 1)
+		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
+	// else if (info->err == 2)
 	*tk = get_tokens(input2, *tk);
 	erase_quotes_tk(*tk);
 	free (input2);

@@ -6,12 +6,13 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:25:34 by mpons             #+#    #+#             */
-/*   Updated: 2022/04/22 17:30:15 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/03 09:29:17 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "./get_next_line.h"
+#include "../minishell.h"
 
 char	*ft_read_save(int fd, char *str)
 {
@@ -34,7 +35,7 @@ char	*ft_read_save(int fd, char *str)
 		buf[char_lu] = '\0';
 		if (!str)
 			str = ft_strdup("");
-		str = ft_strjoin(str, buf);
+		str = ft_strjoin_free(str, buf);
 		if (char_lu == 0)
 			break ;
 	}
@@ -42,7 +43,7 @@ char	*ft_read_save(int fd, char *str)
 	return (str);
 }
 
-static char	*ft_get_line(char *s)
+char	*ft_get_line_gnl(char *s)
 {
 	char	*line;
 	int		i;
@@ -88,7 +89,7 @@ char	*get_next_line(int fd)
 	bkp = ft_read_save(fd, bkp);
 	if (!bkp)
 		return (NULL);
-	r_line = ft_get_line(bkp);
+	r_line = ft_get_line_gnl(bkp);
 	bkp = ft_reste(bkp);
 	return (r_line);
 }
