@@ -35,8 +35,6 @@ int	get_q_in(t_token *tk, int i)
 	q_in = 0;
 	while (tk)
 	{
-		// printf("tk_content = %s\n", tk->content);
-		// printf("cmd_index = %d\n", tk->cmd_index);
 		if (tk->cmd_index == i && (tk->type == IN_FILE || tk->type == HEREDOC))
 			q_in++;
 		tk = tk->next;
@@ -57,4 +55,3 @@ int	get_q_out(t_token *tk, int i)
 	}
 	return (q_out);
 }
-	

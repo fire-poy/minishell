@@ -8,25 +8,26 @@ char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter)
 	int		e;
 
 	e = *i;
-	debut =	ft_substr(*s, 0, e); //avant dollar
-	fin =	ft_substr(*s, *i + enlever, 1000); //apres dollar
-	debut = ft_strjoin_free(debut, ajouter);//free debut
+	debut = ft_substr(*s, 0, e);
+	fin = ft_substr(*s, *i + enlever, 1000);
+	debut = ft_strjoin_free(debut, ajouter);
 	debut = ft_strjoin_free(debut, fin);
 	free (fin);
 	free (*s);
 	*s = NULL;
-	*i += ft_strlen(ajouter); //avance just after added string
+	*i += ft_strlen(ajouter);
 	return (debut);
 }
 
-//return string avec le $ remplacé deja, et i et mis sur la position du 2eme " pour continuer
+// return string avec le $ remplacé deja, 
+// i et mis sur la position du 2eme " pour continuer
 char	*remplacer_dollar(char **s, int *index, t_env *liste, t_info *info) 
 {
 	int		len;
 	char	*env_var;
 	char	*remplacer;
 
-	len = ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");//busco siguiente espacio o fin dsp de dolar"
+	len = ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");
 	if (len == 0)
 	{
 		(*index)++;
@@ -57,7 +58,8 @@ char	*remplacer_dollar(char **s, int *index, t_env *liste, t_info *info)
 // 	char	*env_var;
 // 	char	*remplacer;
 
-// 	len = ft_strchr_set(*s + (unsigned int)*index + 1, " \t\n\v\f\r\"'");//busco siguiente espacio o fin dsp de dolar"
+// 	len = ft_strchr_set(*s + (unsigned int)*index + 1, 
+//	" \t\n\v\f\r\"'");
 // 	if (len == 0)
 // 	{
 // 		(*index)++;
@@ -105,11 +107,10 @@ char	detect_and_check_quotes(char *s, int *idx)
 	*idx += ft_strchr_set(s + *idx, "'\"");
 	i = *idx;
 	c = s[i];
-	if (c) //si on a trouve on cherche 2eme
+	if (c)
 	{
 		if (search_next_c(&s, &i, c) == 0)
 			c = 'e';
-			// err_msg("quotes pas bien fermés", NULL, 3);
 	}
 	return (c);
 }
@@ -123,13 +124,13 @@ char	*search_and_replace_quotes(char **input, t_env *liste, t_info *info)
 	while ((*input)[++i])
 	{
 		c = 0;
-		c = detect_and_check_quotes(*input, &i); //get_info_quotes 
-		if (c == '\'') //si' -> i = 2eme' -> j'avance au 2eme ' 
+		c = detect_and_check_quotes(*input, &i);
+		if (c == '\'')
 			search_next_c(input, &i, c);
 		if (c == '\"')
 			*input = chercher_and_replace_dollar(input, &i, liste, info);
 		if (c == 0)
-			return (*input);	
+			return (*input);
 		if (c == 'e')
 			return (NULL);
 	}
@@ -164,31 +165,4 @@ char	*search_and_replace_quotes(char **input, t_env *liste, t_info *info)
 // 		}
 // 	}
 // 	return (s); 	
-// }
-
-// char	detect_quotes(char *s, int *idx)
-// {
-// 	char	c;
-// 	int		i;
-// 	int		start;
-
-// 	i = *idx;
-// 	i += ft_strchr_set(s + i, "'\"");
-// 	start = i;
-// 	c = s[i];
-// 	if (c) //si on a trouve on cherche 2eme
-// 	{
-// 		i++;
-// 		while (s[i] && s[i] != c)
-// 			i++;
-// 		if (!s[i]) //on check que soit bien fermé
-// 			err_msg("quotes pas bien fermés", NULL, 3);
-// 		if (c == '\'')
-// 			*idx = i;
-// 		else 
-// 			*idx = start;
-// 		return (c);
-// 	}
-// 	else
-// 		return (c);
 // }

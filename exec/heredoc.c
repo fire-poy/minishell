@@ -3,7 +3,7 @@
 int	get_heredoc_fd(int cmd_index)
 {
 	int		fd_in;
-	char 	*heredoc;
+	char	*heredoc;
 
 	heredoc = ft_strjoin_whit_int(".heredoc_tmp", cmd_index);
 	fd_in = open(heredoc, O_RDONLY, 0644);
@@ -45,13 +45,13 @@ void	get_heredoc(char *flag, int i)
 		}
 		if (ft_strncmp(flag, line, len) == 0 && line != 0)
 		{
-			free (line);	
+			free (line);
 			line = NULL;
 			close(file);
 			return ;
 		}
-		write(file , line, ft_strlen(line));
-		free (line);	
+		write(file, line, ft_strlen(line));
+		free (line);
 	}
 }
 
@@ -69,8 +69,6 @@ int	create_heredocs(t_token *tk)
 		}
 		tk = tk->next;
 	}
-	// if (q_hd > 0)
-	// 	f(STDIN_FILENO);
 	return (1);
 }
 
@@ -88,54 +86,3 @@ int	destroy_heredocs(int q_cmd)
 	}
 	return (1);
 }
-
-/*
-char	*get_tempfilename(t_shell *shell)
-{
-	int		i;
-	char	*base;
-	char	*number;
-	char	*filename;
-
-	i = 1;
-	base = ft_strjoin(shell->working_dir, "/.tmp/.minishell");
-	number = ft_itoa(i);
-	filename = str_joins(base, ".tmp", number);
-	while (access(filename, F_OK) == 0)
-	{	
-		free(number);
-		free(filename);
-		number = ft_itoa(++i);
-		filename = str_joins(base, ".tmp", number);
-	}
-	free(base);
-	free(number);
-	return (filename);
-}
-
-void	here_doc(t_shell *shell, t_cmd *cmd, char *eof)
-{
-	char	*tmp_file;
-	char	*line;
-	int		fd;
-
-	tmp_file = get_tempfilename(shell);
-	fd = open(tmp_file, O_WRONLY | O_CREAT, 0664);
-	if (fd > -1)
-	{
-		line = here_doc_readline();
-		while (!(ft_strncmp(eof, line, ft_strlen(eof)) == 0
-				&& (ft_strlen(eof) + 1) == ft_strlen(line)))
-		{
-			write(fd, line, ft_strlen(line));
-			free(line);
-			line = here_doc_readline();
-		}
-		free(line);
-	}
-	close(fd);
-	free(cmd->redirect_path);
-	cmd->redirect_path = tmp_file;
-	cmd->redirect_id = id_in_file;
-}
-*/

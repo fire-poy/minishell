@@ -50,7 +50,7 @@ char	*ft_strjoin_free(char *s1, char const *s2)
 	return (dst);
 }
 
-char	*ft_strjoin_whit_int(char *s1,int n)
+char	*ft_strjoin_whit_int(char *s1, int n)
 {
 	char	*dst;
 	char	*s2;

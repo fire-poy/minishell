@@ -34,7 +34,7 @@ int	ft_strchr_set(const char *s, char *set)
 	int	i;
 
 	i = 0;
-	while (s[i] && !ft_c_vs_charset(s[i], set))//while I dont find charset I advance
+	while (s[i] && !ft_c_vs_charset(s[i], set))
 		i++;
 	return (i);
 }
@@ -46,9 +46,9 @@ int	ft_charset_found(const char *s, int* start, char *set)
 	int	i;
 
 	i = *start;
-	while (s[i] && !ft_c_vs_charset(s[i], set))//while I dont find charset I advance
+	while (s[i] && !ft_c_vs_charset(s[i], set))
 		i++;
-	if (s[i] == 0)		
+	if (s[i] == 0)
 		return (0);
 	else
 		*start = i;

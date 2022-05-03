@@ -38,7 +38,7 @@ int	exec_builtin(char **tab_cmd, t_info *liste)
 		my_env(liste->liste);
 	else if (!ft_strcmp(tab_cmd[0], "unset"))
 		ft_unset(&liste->liste, tab_cmd[1]);
-	else if(!ft_strcmp(tab_cmd[0], "export"))
+	else if (!ft_strcmp(tab_cmd[0], "export"))
 		ft_export(tab_cmd, liste->liste, liste);
 	return (0);
 }
