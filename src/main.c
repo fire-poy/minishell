@@ -2,7 +2,7 @@
 
 char	*prompt(void)
 {
-	char *s;
+	char	*s;
 
 	write(1, RED, ft_strlen(RED));
 	s = readline("Minishell ~ ");
@@ -15,8 +15,8 @@ void	loop_prompt(t_env *liste, char **envp)
 	char	*input;
 	t_token	*tk;
 	t_info	*info;
-	int last_exit;
-	
+	int		last_exit;
+
 	info = NULL;
 	last_exit = 0;
 	signal(SIGINT, signal_h);
@@ -29,16 +29,16 @@ void	loop_prompt(t_env *liste, char **envp)
 		if (ft_strlen(input) > 0)
 		{
 			tk = NULL;
-			if (lexer(input, liste, &tk, info) == 0)// obtiens les token
+			if (lexer(input, liste, &tk, info) == 0)
 			{
-				xperror("quotes pas bien fermés");				
+				xperror("quotes pas bien fermés");
 				free_info_simple(info);
 				free (input);
 			}
-			else 
+			else
 			{	
 				add_history(input);
-				info = parser(liste, tk, envp, info);// obtiens cmd et infos
+				info = parser(liste, tk, envp, info);
 				create_heredocs(info->tk);
 				execution_main(info);
 				destroy_heredocs(info->q_cmd);
@@ -52,14 +52,14 @@ void	loop_prompt(t_env *liste, char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_env *liste;
-	int	i;
+	t_env	*liste;
+	int		i;
 
 	(void)ac;
 	(void)av;
 	i = 0;
 	liste = NULL;
- 	create_env_list(&liste, envp);
+	create_env_list(&liste, envp);
 	loop_prompt(liste, envp);
 	ft_free_list(&liste);
 	while (1)

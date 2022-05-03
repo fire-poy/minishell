@@ -1,7 +1,6 @@
 #include "../minishell.h"
-#include <errno.h>
 
-void    err_msg(char *e, char *avant_e, int exit_status)
+void	err_msg(char *e, char *avant_e, int exit_status)
 {
 	if (avant_e)
 		ft_putstr_fd(avant_e, 2);
@@ -9,7 +8,7 @@ void    err_msg(char *e, char *avant_e, int exit_status)
 	exit (exit_status);
 }
 
-void    err_exit(char *e, char *avant_e, int exit_status)
+void	err_exit(char *e, char *avant_e, int exit_status)
 {
 	if (avant_e)
 	{
@@ -41,7 +40,7 @@ void	print_join(char *s1, char *s2, int fd)
 	if (print)
 	{
 		ft_putstr_fd(print, fd);
-		//free(print);
+		free(print);
 	}
 }
 

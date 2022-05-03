@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void syntax_error(char **in, int *i)
+void	syntax_error(char **in, int *i)
 {
 	char	e[3];
 	char	*s;
@@ -12,6 +12,7 @@ void syntax_error(char **in, int *i)
 	free (*in);
 	err_msg(e, "syntax error near unexpected token `", 258);
 }
+
 // "syntax error near unexpected token `|'"
 void	get_token_err(char **in, int *i, t_info *info)
 {
@@ -25,7 +26,7 @@ void	get_token_err(char **in, int *i, t_info *info)
 	(*i)++;
 	while (s[*i] == ' ' || s[*i] == '\t')
 		(*i)++;
-	if (s[*i] == '<' || s[*i] == '>' || s[*i] == '|')	
+	if (s[*i] == '<' || s[*i] == '>' || s[*i] == '|')
 	{
 		syntax_error(in, i);
 	}
@@ -33,7 +34,7 @@ void	get_token_err(char **in, int *i, t_info *info)
 	{
 		info->err = 1;
 		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
-		err_msg("syntax error near unexpected token `newline'", NULL, 258);
+		// err_msg("syntax error near unexpected token `newline'", NULL, 258);
 	}
 	*i = origin;
 }
@@ -51,11 +52,12 @@ void	get_pipe_err(char **in, int *i, t_info *info)
 	(*i)++;
 	while (s[*i] == ' ' || s[*i] == '\t')
 		(*i)++;
-	if (s[*i] == '|')	
+	if (s[*i] == '|')
 		syntax_error(in, i);
 	if (s[*i] == '\0')
 	{
 		info->err = 2;
+		break;
 		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
 		err_msg("syntax error near unexpected token `newline'", NULL, 258);
 	}
@@ -72,7 +74,7 @@ void	explore_tokens_err(char **in, t_info *info)
 	while (s[i])
 	{	
 		if (s[i] == '\'' || s[i] == '\"')//si hay quotes las salteo
-				search_next_c(&s, &i, s[i]);
+			search_next_c(&s, &i, s[i]);
 		if (s[i] == '<')
 		{
 			if (s[i + 1] == '<')
@@ -83,13 +85,10 @@ void	explore_tokens_err(char **in, t_info *info)
 		{
 			if (s[i + 1] == '>')
 				i++;
-			get_token_err(in, &i, info);			
+			get_token_err(in, &i, info);
 		}	
 		if (s[i] == '|')
-			get_pipe_err(in, &i, info);			
+			get_pipe_err(in, &i, info);
 		i++;
 	}
-} 	
-
-
-
+}

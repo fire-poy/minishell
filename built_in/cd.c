@@ -45,9 +45,8 @@ int	cd_check(char *args)
 void	ft_cd(char **argv, t_env *env)
 {
 	char	*dir;
-	char  cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 	char	*pwd;
-	// char	*home;
 
 	dir = NULL;
 	if (!argv[1])
