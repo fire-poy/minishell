@@ -15,9 +15,13 @@ t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
 			return (0);
 	}
 	if (token->export_content)
+	{
 		temp = ft_create_node(token->export_name, token->export_content);
+	}
 	else
+	{
 		temp = ft_create_node(token->export_name, token->export_content);
+	}
 	temp->initial_env = var;
 	return (temp);
 }
@@ -32,17 +36,19 @@ void	ft_print_export(t_env *liste)
 		ft_free_list(&sort);
 }
 
-void	ft_info_init(t_info *info, char *var)
+int	ft_info_init(t_info *info, char *var)
 {
 	if (!ft_equal(var))
 	{
 		info->tk->export_name = var;
 		info->tk->export_content = "";
+		return (0);
 	}
 	else
 	{
 		info->tk->export_name = ft_get_name(var);
 		info->tk->export_content = ft_get_line(var);
+		return (1);
 	}
 }
 
@@ -68,11 +74,10 @@ void	ft_update_var(t_env *liste, t_info *info, char *var)
 void	ft_export(char **argv, t_env *liste, t_info *info)
 {
 	char	*var;
+	int		flag;
 
 	if (!argv[1])
-	{
 		ft_print_export(liste);
-	}
 	else
 	{
 		var = argv[1];
@@ -80,8 +85,15 @@ void	ft_export(char **argv, t_env *liste, t_info *info)
 		{
 			if (var != NULL)
 			{
-				ft_info_init(info, var);
+				flag = ft_info_init(info, var);
 				ft_update_var(liste, info, var);
+				if (flag == 1)
+				{
+					if (info->tk->export_name)
+						free (info->tk->export_name);
+					if (info->tk->export_content)
+						free(info->tk->export_content);
+				}
 			}
 		}
 	}
