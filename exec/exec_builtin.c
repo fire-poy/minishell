@@ -24,14 +24,11 @@ int	is_builtin(char *cmd)
 int	exec_builtin(char **tab_cmd, t_info *liste)
 {
 	if (!ft_strcmp(tab_cmd[0], "exit"))
-		ft_exit(tab_cmd);
+		ft_exit(tab_cmd, liste);
 	else if (!ft_strcmp(tab_cmd[0], "pwd") || !ft_strcmp(tab_cmd[0], "PWD"))
 		current_dir();
 	else if (!ft_strcmp(tab_cmd[0], "cd"))
-	{
-		printf("tab_cmd[1] = %s\n", tab_cmd[1]);
-		ft_cd(tab_cmd, liste->liste);
-	}
+		ft_cd(tab_cmd, liste);
 	else if (!ft_strcmp(tab_cmd[0], "echo") || !ft_strcmp(tab_cmd[0], "ECHO"))
 		ft_echo(tab_cmd);
 	else if (!ft_strcmp(tab_cmd[0], "env") || !ft_strcmp(tab_cmd[0], "ENV"))
@@ -42,17 +39,3 @@ int	exec_builtin(char **tab_cmd, t_info *liste)
 		ft_export(tab_cmd, liste->liste, liste);
 	return (0);
 }
-
-// void	restart_in_out(t_info *info)
-// {
-// 	if (info->q_in > 0)
-// 	{
-// 		dup2(STDIN_FILENO, fd_in);
-// 		// close (0);
-// 	}
-// 	if (info->q_out > 0 )
-// 	{
-// 		dup2(STDOUT_FILENO, fd_out);
-// 		// close (1);
-// 	}
-// }

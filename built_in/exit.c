@@ -31,7 +31,7 @@ int	exit_arg(char *arg)
 }
 
 
-void	ft_exit(char **tab_cmd)
+void	ft_exit(char **tab_cmd, t_info *info)
 {
   int     i;
 
@@ -47,7 +47,7 @@ void	ft_exit(char **tab_cmd)
 	}
   i = exit_arg(tab_cmd[1]);
 	printf("exit\n");
-	// free_all(info);
-	// ft_free_list;
+	ft_free_list(&info->liste);
+	free_all(info);
   exit(i);
 }

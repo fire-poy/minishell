@@ -50,7 +50,6 @@ void	ft_delete_from_list(t_env **head, char *name)
 	t_env	*temp;
 
 	temp = *head;
-	//printf("delete name = %s\n", name);
 	if (*head == NULL)
 		return ;
 	if (ft_delete_first_node(head, temp, name))
@@ -88,14 +87,16 @@ void	ft_env_set_content(t_env *env, char *name, char *new_content)
 	t_env	*head;
 
 	head = env;
+	// flag = 6;
 	while (head)
 	{
 		if (!ft_strcmp(head->name, name))
 		{
+			// if (flag == 1)
 			//free(head->content);
 			head->content = NULL;
 			if (new_content)
-				head->content = ft_strdup(new_content);
+				head->content = new_content;
 			return ;
 		}
 		head = head->next;

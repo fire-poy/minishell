@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/05/03 11:40:25 by jhermon-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME		= minishell 
 
@@ -57,7 +46,6 @@ SRC 		=   ./src/main.c\
 				./built_in/exit.c\
 				./built_in/export.c\
 				./built_in/ctrl.c\
-				# ./built_in/builtin.c\
 
 INC			= -I./gnl/get_next_line.h -I$(HOME)/.brew/opt/readline/include
 LIB			= -lreadline -L$(HOME)/.brew/opt/readline/lib

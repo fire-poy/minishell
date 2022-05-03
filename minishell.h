@@ -219,8 +219,8 @@ void	ft_free_list(t_env **head_a);
 // BUILT_IN
 
 int		ft_builtin(t_token *token, t_env *liste);
-void	ft_exit(char **tab_cmd);
-void	ft_cd(char **argv, t_env *env);
+void	ft_exit(char **tab_cmd, t_info *info);
+void	ft_cd(char **argv, t_info *liste);
 int		current_dir(void);
 int		my_env(t_env *envp);
 int		ft_echo(char **argv);
