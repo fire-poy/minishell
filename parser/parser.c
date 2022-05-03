@@ -9,6 +9,7 @@ t_info	*init_info(t_info *info, int last_exit)
 	info->q_out = 0; 
 	info->cmd_i = 0;
 	info->pipe_i = 0;
+	info->err = 0;
 	info->exit_status = last_exit;
 	// info->input = malloc(sizeof(char));
 	return (info);

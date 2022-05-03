@@ -21,6 +21,7 @@ void	get_heredoc(char *flag, int i)
 
 	name = ft_strjoin_whit_int(".heredoc_tmp", i);
 	file = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	free (name);
 	if (file < 0)
 		err_msg("heredoc error", NULL, 1);
 	len = ft_strlen(flag);

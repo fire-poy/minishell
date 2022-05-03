@@ -91,6 +91,7 @@ typedef struct s_info
 	char	***split_cmd;
 	char	*redir_in; 
 	char	*redir_out;
+	int		err;
 	int		q_in; //q == quantite de redirection in
 	int		q_out; //q == quantite de redirection out
 	int		cmd_i;	//nro de commande
@@ -186,7 +187,7 @@ char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste, t_info *info);
 char	*remplacer_rest_of_dollar(char **s, t_env *liste, t_info *info);
 
 //TOKENS
-void	explore_tokens_err(char **in);
+void	explore_tokens_err(char **in, t_info *info);
 void	search_next_token(char *s, int *start, int *tk_idx, int *type);
 t_token	*get_tokens(char *s, t_token *tk);
 void	printlist_tk(t_token *node);
