@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked_list_sort.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:37:19 by jhermon-          #+#    #+#             */
+/*   Updated: 2022/05/04 18:38:03 by jhermon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	ft_free_list(t_env **head_a)
@@ -8,8 +20,6 @@ void	ft_free_list(t_env **head_a)
 	{
 		tmp = (*head_a);
 		(*head_a) = (*head_a)->next;
-		// if (tmp->initial_env)
-		// 	free(tmp->initial_env);
 		if (tmp->content)
 			free(tmp->content);
 		if (tmp->name)
@@ -17,33 +27,6 @@ void	ft_free_list(t_env **head_a)
 		free(tmp);
 	}
 }
-
-// void	ft_free_listtokens(t_env **env)
-// {
-// 	t_env *tmp;
-// 	t_env *a;
-	
-// 	a = *env;
-// 	while (a)
-// 	{
-// 		if (a->content)
-// 			free (a->content);
-// 		// if (a->export)
-// 		// {
-// 		// 	// free (a->export);
-// 		// 	// a->export = NULL;
-// 		// }
-// 		// if (a->export_name)
-// 		// 	free (a->export_name);
-// 		// if (a->export_content)
-// 		// 	free (a->export_content);
-// 		tmp = a->next;
-// 		free (a);
-// 		a = tmp;
-// 	}
-// 	*tk = NULL;
-// }
-
 
 void	ft_replaceit(t_env **head, char *name, char *value)
 {
@@ -79,25 +62,6 @@ t_env	*ft_copy_list(t_env *head)
 	return (copy);
 }
 
-// void	ft_swap_nodes(t_env	*temp)
-// {
-// 	char	*tmp;
-
-// 	if (ft_strcmp(temp->name, temp->next->name) > 0)
-// 	{
-// 		tmp = ft_strdup(temp->next->name);
-// 		free(temp->next->name);
-// 		temp->next->name = ft_strdup(temp->name);
-// 		free(temp->name);
-// 		temp->name = tmp;
-// 		tmp = ft_strdup(temp->next->content);
-// 		free(temp->next->content);
-// 		temp->next->content = ft_strdup(temp->content);
-// 		free(temp->content);
-// 		temp->content = tmp;
-// 	}
-// }
-
 void	ft_swap_nodes(t_env	*temp)
 {
 	char	*tmp;
@@ -105,14 +69,10 @@ void	ft_swap_nodes(t_env	*temp)
 	if (ft_strcmp(temp->name, temp->next->name) > 0)
 	{
 		tmp = temp->next->name;
-		// free(temp->next->name);
 		temp->next->name = temp->name;
-		// free(temp->name);
 		temp->name = tmp;
 		tmp = temp->next->content;
-		// free(temp->next->content);
 		temp->next->content = temp->content;
-		// free(temp->content);
 		temp->content = tmp;
 	}
 }
@@ -141,16 +101,3 @@ t_env	*ft_sort_list(t_env *head)
 
 // this main will print a sorted list of the env if export is prompted
 // int main(int argc, char **argv, char **envp)
-// {
-// 	t_env *head;
-
-// 	head = (t_env *)malloc(sizeof(t_env));
-// 	create_env_list(&head, envp);
-// 	printlist(head);
-// 	printf("//////////////////////////\n");
-// 	// printf("%s\n", argv[1]);
-// 	// printf("%d\n", ft_strcmp(argv[1], "export"));
-// 	if (argv[1] && ft_strcmp(argv[1], "export") == 0)
-// 		printlist(ft_sort_list(&head));
-// 	return 0;
-// }

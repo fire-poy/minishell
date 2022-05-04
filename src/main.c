@@ -1,3 +1,4 @@
+
 #include "../minishell.h"
 
 t_info	*init_info(t_env *liste, char **envp, int last_exit)

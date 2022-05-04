@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:34:48 by jhermon-          #+#    #+#             */
+/*   Updated: 2022/05/04 18:34:54 by jhermon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-#include "../libft/libft.h"
 
 t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
 {
@@ -74,7 +85,6 @@ void	ft_update_var(t_env *liste, t_info *info, char *var)
 void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 {
 	char	*var;
-	int		flag;
 
 	if (!argv[1])
 		ft_print_export(liste, fd);
@@ -86,17 +96,7 @@ void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 		if (!ft_check_export_var(var))
 		{
 			if (var != NULL)
-			{
-				flag = ft_info_init(info, var);
-				ft_update_var(liste, info, var);
-				if (flag == 1)
-				{
-					if (info->tk->export_name)
-						free (info->tk->export_name);
-					if (info->tk->export_content)
-						free(info->tk->export_content);
-				}
-			}
+				ft_free_flag(info, liste, var);
 		}
 	}
 }

@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_support.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:36:13 by jhermon-          #+#    #+#             */
+/*   Updated: 2022/05/04 18:48:25 by jhermon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-#include "../libft/libft.h"
 
 int	ft_equal(char *var)
 {
@@ -64,6 +75,7 @@ void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 	flag = 0;
 	free((*head)->content);
 	(*head)->content = ft_strdup(content);
+	(*head)->initial_env = ft_strdup(var);
 	if ((*head)->initial_env)
 		flag = 1;
 	if (flag == 1)
@@ -71,4 +83,19 @@ void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 	(*head)->initial_env = ft_strdup(var);
 	free((*head)->name);
 	(*head)->name = ft_strdup(name);
+}
+
+void	ft_free_flag(t_info *info, t_env *liste, char *var)
+{
+	int	flag;
+
+	flag = ft_info_init(info, var);
+	ft_update_var(liste, info, var);
+	if (flag == 1)
+	{
+		if (info->tk->export_name)
+			free (info->tk->export_name);
+		if (info->tk->export_content)
+			free(info->tk->export_content);
+	}
 }
