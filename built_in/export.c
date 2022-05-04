@@ -81,6 +81,8 @@ void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 	else
 	{
 		var = argv[1];
+		if (!ft_strncmp(var, "=", 1))
+			return ;
 		if (!ft_check_export_var(var))
 		{
 			if (var != NULL)
