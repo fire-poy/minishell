@@ -23,7 +23,8 @@ SRC 		=   ./src/main.c\
 				./lexer/token_get.c\
 				./lexer/token_create.c\
 				./parser/parser.c\
-				./exec/access.c\
+				./exec/access_1.c\
+				./exec/access_2.c\
 				./exec/exec_utils.c\
 				./exec/exec_builtin.c\
 				./exec/executeur.c\

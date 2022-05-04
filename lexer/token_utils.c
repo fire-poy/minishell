@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:52:17 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 11:52:18 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/04 13:10:07 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,21 @@ void	erase_quotes_tk(t_token *node)
 		node = node->next;
 		i++;
 	}
+}
+
+int	set_type(char *s, int i, char c)
+{
+	int	type;
+
+	if (c == '<')
+		type = IN_FILE;
+	if (c == '<' && s[i + 1] == '<')
+		type = HEREDOC;
+	if (c == '>')
+		type = OUT_FILE;
+	if (c == '>' && s[i + 1] == '>')
+		type = APPEND;
+	if (c == '|')
+		type = PIPE;
+	return (type);
 }

@@ -44,6 +44,15 @@
 
 pid_t					g_pid[255];
 
+
+typedef struct s_tk_info
+{
+	int		type;
+	int		mem;
+	int		i;
+	int		st;
+}	t_tk_info;
+
 // chained list to extract env
 typedef struct s_env	t_env;
 // typedef	struct s_env t_env;
@@ -114,6 +123,8 @@ int		get_q_out(t_token *tk, int i);
 int		redirect_in_bi(t_info *info, int i);
 int		redirect_out_bi(t_info *info, int i);
 int		redirect_in_out_bi(t_info *info, int i);
+int		open_trunc_close(t_token *tk, int last_out);
+
 
 // heredoc
 int		create_heredocs(t_token *tk);

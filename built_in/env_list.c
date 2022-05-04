@@ -17,8 +17,8 @@ void	printlist(t_env *node, int fd)
 
 char	*ft_get_line(char *line)
 {
-	int	i;
-	int	equal;
+	int		i;
+	int		equal;
 	char	*res;
 
 	i = 0;
@@ -41,8 +41,8 @@ char	*ft_get_line(char *line)
 
 char	*ft_get_name(char *line)
 {
-	int	i;
-	int	equal;
+	int		i;
+	int		equal;
 	char	*res;
 
 	i = 0;
@@ -52,7 +52,7 @@ char	*ft_get_name(char *line)
 		if (line[i] == '=')
 		{
 			equal = 1;
-			break;
+			break ;
 		}
 		i++;
 	}

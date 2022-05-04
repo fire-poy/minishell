@@ -31,7 +31,7 @@ void	get_heredoc(char *flag, int i)
 		line = get_next_line(STDIN_FILENO);
 		ft_stop2(line);
 		signal(SIGINT, signal_here);
-		signal(SIGQUIT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
 		if (line == 0)
 		{
 			line = flag;

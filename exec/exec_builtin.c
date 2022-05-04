@@ -33,7 +33,7 @@ int	exec_builtin(char **tab_cmd, t_info *liste, int fd)
 		ft_echo(tab_cmd, fd);
 	else if (!ft_strcmp(tab_cmd[0], "env") || !ft_strcmp(tab_cmd[0], "ENV"))
 		my_env(liste->liste, fd);
-	else if (!ft_strcmp(tab_cmd[0], "unset"))//no redir stdout
+	else if (!ft_strcmp(tab_cmd[0], "unset"))
 		ft_unset(&liste->liste, tab_cmd[1]);
 	else if (!ft_strcmp(tab_cmd[0], "export"))
 		ft_export(tab_cmd, liste->liste, liste, fd);
