@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
+/*   Updated: 2022/05/04 18:50:28 by jhermon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -44,8 +56,6 @@
 # define PIPE 6
 
 pid_t					g_pid[255];
-
-
 typedef struct s_tk_info
 {
 	int		type;
@@ -125,7 +135,6 @@ int		redirect_in_bi(t_info *info, int i);
 int		redirect_out_bi(t_info *info, int i);
 int		redirect_in_out_bi(t_info *info, int i);
 int		open_trunc_close(t_token *tk, int last_out);
-
 
 // heredoc
 int		create_heredocs(t_token *tk);
@@ -224,9 +233,10 @@ char	*ft_get_name(char *line);
 void	ft_env_set_content(t_env *env, char *name, char *new_content);
 void	free_env(t_env **env);
 void	ft_free_list(t_env **head_a);
+void	env_create_node(t_env **head, char *data);
+void	ft_free(char *head);
 
 // BUILT_IN
-
 int		ft_builtin(t_token *token, t_env *liste);
 void	ft_exit(char **tab_cmd, t_info *info);
 void	ft_cd(char **argv, t_info *liste);
@@ -239,9 +249,11 @@ void	ft_export(char **argv, t_env *liste, t_info *info, int fd);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
 void	ft_unset(t_env **env, char *argv);
 void	ft_replace_var(t_env **head, char *name, char *content, char *var);
+void	ft_free_flag(t_info *info, t_env *liste, char *var);
+void	ft_update_var(t_env *liste, t_info *info, char *var);
+int		ft_info_init(t_info *info, char *var);
 
 // SIGNALS
-
 void	signal_h(int signal);
 void	ft_stop(char *input, int last_exit);
 void	ft_stop2(char *input);
