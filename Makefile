@@ -6,7 +6,7 @@
 #    By: mpons <mpons@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:30:30 by mpons             #+#    #+#              #
-#    Updated: 2022/05/03 11:40:25 by jhermon-         ###   ########.fr        #
+#    Updated: 2022/05/04 11:11:02 by mpons            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC 		=   ./src/main.c\
 				./exec/single_cmd.c\
 				./exec/redirection_a.c\
 				./exec/redirection_b.c\
+				./exec/redirection_builtin.c\
 				./exec/heredoc.c\
 				./exec/pipe.c\
 				./exec/pid.c\

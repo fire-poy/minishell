@@ -26,12 +26,12 @@ t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
 	return (temp);
 }
 
-void	ft_print_export(t_env *liste)
+void	ft_print_export(t_env *liste, int fd)
 {
 	t_env	*sort;
 
 	sort = ft_sort_list(liste);
-	printlist(sort);
+	printlist(sort, fd);
 	if (sort)
 		ft_free_list(&sort);
 }
@@ -71,13 +71,13 @@ void	ft_update_var(t_env *liste, t_info *info, char *var)
 	}
 }
 
-void	ft_export(char **argv, t_env *liste, t_info *info)
+void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 {
 	char	*var;
 	int		flag;
 
 	if (!argv[1])
-		ft_print_export(liste);
+		ft_print_export(liste, fd);
 	else
 	{
 		var = argv[1];

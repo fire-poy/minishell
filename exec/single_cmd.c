@@ -80,11 +80,16 @@ int	exec_single_cmd(t_info *info)
 	int		id;
 	int		status;
 	char	*path;
+	int		fd;
 
 	id = 0;
 	path = NULL;
 	if (is_builtin(info->split_cmd[0][0]))
-		info->exit_status = exec_builtin(info->split_cmd[0], info);
+	{
+		fd = redirect_in_out_bi(info, 0);
+		if (fd > 0)
+			info->exit_status = exec_builtin(info->split_cmd[0], info, fd);
+	}
 	else if (access_ok(info->split_cmd[0][0], info, &path))
 	{
 		id = fork();
