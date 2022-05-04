@@ -16,8 +16,8 @@ int	ft_echo(char **argv)
 		}
 		while (argv[i] != NULL)
 		{
-			// printf("%s", argv[i]);
-			ft_putstr_fd(argv[i]);
+			printf("%s", argv[i]);
+			// ft_putstr_fd(argv[i], 1);
 			if (argv[i + 1] && argv[i][0] != '\0')
 				printf(" ");
 			i++;

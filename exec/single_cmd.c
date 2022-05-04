@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char	*ft_get_last_arg(char *src)//char **split_cmd)
+char	*ft_get_last_arg(char *src)
 {
 	int		i;
 	int		j;
@@ -71,7 +71,7 @@ int	access_ok(char *cmd, t_info *info, char **path)
 		}
 		free_tab(paths);
 	}
-	info->exit_status = show_command_error(info, cmd, MSG_COMMAND_NOT_FOUND, 127);
+	cmd_err(info, cmd, MSG_COMMAND_NOT_FOUND, 127);
 	return (0);
 }
 
@@ -111,7 +111,7 @@ int	exec_single_cmd(t_info *info)
 			free (path);
 			waitpid(id, &status, 0);
 			if (WIFEXITED(status))
-			info->exit_status = WEXITSTATUS(status);
+				info->exit_status = WEXITSTATUS(status);
 		}
 	}
 	return (1);

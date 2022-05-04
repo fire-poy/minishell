@@ -22,20 +22,14 @@ void	get_token_err(char **in, int *i, t_info *info)
 	s = *in;
 	origin = *i;
 	if ((*i) == 0 && s[*i] == '|')
-		syntax_error(in, i);
+		info->err = 1;
 	(*i)++;
 	while (s[*i] == ' ' || s[*i] == '\t')
 		(*i)++;
 	if (s[*i] == '<' || s[*i] == '>' || s[*i] == '|')
-	{
-		syntax_error(in, i);
-	}
-	if (s[*i] == '\0')
-	{
 		info->err = 1;
-		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
-		// err_msg("syntax error near unexpected token `newline'", NULL, 258);
-	}
+	if (s[*i] == '\0')
+		info->err = 1;
 	*i = origin;
 }
 
@@ -48,19 +42,14 @@ void	get_pipe_err(char **in, int *i, t_info *info)
 	s = *in;
 	origin = *i;
 	if ((*i) == 0 && s[*i] == '|')
-		syntax_error(in, i);
+		info->err = 1;
 	(*i)++;
 	while (s[*i] == ' ' || s[*i] == '\t')
 		(*i)++;
 	if (s[*i] == '|')
-		syntax_error(in, i);
+		info->err = 1;
 	if (s[*i] == '\0')
-	{
-		info->err = 2;
-		break;
-		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
-		err_msg("syntax error near unexpected token `newline'", NULL, 258);
-	}
+		info->err = 1;
 	*i = origin;
 }
 
@@ -73,7 +62,7 @@ void	explore_tokens_err(char **in, t_info *info)
 	i = 0;
 	while (s[i])
 	{	
-		if (s[i] == '\'' || s[i] == '\"')//si hay quotes las salteo
+		if (s[i] == '\'' || s[i] == '\"')
 			search_next_c(&s, &i, s[i]);
 		if (s[i] == '<')
 		{

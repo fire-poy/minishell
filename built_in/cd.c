@@ -33,7 +33,7 @@ int	cd_check(char *args)
 		if (open(args, O_RDONLY) > 0)
 		{
 			// ft_putstr_fd("Not a directory\n", 2);
-			// info->exit_status = show_command_error(info, cmd_name, MSG_IS_DIRECTORY, 126);
+			// info->exit_status = cmd_err(info, cmd_name, MSG_IS_DIRECTORY, 126);
 			return (1);
 		}
 		ft_putstr_fd("No such file orA directory\n", 2);

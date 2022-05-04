@@ -19,7 +19,7 @@ void	err_exit(char *e, char *avant_e, int exit_status)
 	exit (exit_status);
 }
 
-int	show_command_error(t_info *info, char *cmd, char *msg, int exit_status)
+int	cmd_err(t_info *info, char *cmd, char *msg, int exit_status)
 {
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
