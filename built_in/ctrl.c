@@ -67,13 +67,12 @@ void	signal_h(int signal)
 	tcsetattr(0, TCSANOW, &save);
 }
 
-void	ft_stop(char *input)
+void	ft_stop(char *input, int last_exit)
 {
 	if (input == 0)
 	{
 		write(1, "exit\n", 5);
-		exit(1);
-		//exit(info->exit_status);
+		exit(last_exit);
 	}
 }
 

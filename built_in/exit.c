@@ -38,7 +38,9 @@ void	ft_exit(char **tab_cmd, t_info *info)
   if (tab_cmd[1] == NULL)
 	{
 		printf("exit\n");
-    	exit(0);
+		ft_free_list(&info->liste);
+		free_all(info);
+    exit(0);
 	}
   if (tab_cmd[2] != NULL)
 	{

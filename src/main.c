@@ -75,7 +75,7 @@ void	loop_prompt(t_env *liste, char **envp)
 	{
 		input = prompt();
 		add_history(input);
-		ft_stop(input);
+		ft_stop(input, last_exit);
 		info = init_info(liste, envp, last_exit);
 		if (ft_strlen(input) > 0)
 			last_exit =	parsing_execution_and_free(input, info);

@@ -229,7 +229,7 @@ void	ft_replace_var(t_env **head, char *name, char *content, char *var);
 // SIGNALS
 
 void	signal_h(int signal);
-void	ft_stop(char *input);
+void	ft_stop(char *input, int last_exit);
 void	ft_stop2(char *input);
 void	signal_q(int sig);
 void	ft_get_pid(int i);

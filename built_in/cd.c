@@ -22,7 +22,7 @@ int	cd_check(char *args, t_info *liste)
 		if (open(args, O_RDONLY) > 0)
 		{
 			ft_putstr_fd("Not a directory\n", 2);
-			liste->exit_status = show_command_error(liste, args, MSG_IS_DIRECTORY, 126);
+			cmd_err(liste, args, MSG_IS_DIRECTORY, 126);
 			return (1);
 		}
 		ft_putstr_fd("No such file or directory\n", 2);
