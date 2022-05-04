@@ -15,7 +15,7 @@ void	exec_child_proc(t_info *info, int i)
 		if (info->full_cmd[i][0] != '\0')
 		{
 			if (is_builtin(info->split_cmd[i][0]))
-				exec_builtin(info->split_cmd[i], info);
+				exec_builtin(info->split_cmd[i], info, 1);
 			else if (access_ok(info->split_cmd[i][0], info, &path))
 			{
 				if (execve(path, info->split_cmd[i], info->envp))

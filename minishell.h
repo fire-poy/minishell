@@ -111,6 +111,9 @@ int		find_last_in(t_token *tk, int i);
 int		find_last_out(t_token *tk, int i);
 int		get_q_in(t_token *tk, int i);
 int		get_q_out(t_token *tk, int i);
+int		redirect_in_bi(t_info *info, int i);
+int		redirect_out_bi(t_info *info, int i);
+int		redirect_in_out_bi(t_info *info, int i);
 
 // heredoc
 int		create_heredocs(t_token *tk);
@@ -132,7 +135,7 @@ void	wait_pids_heredoc(t_info *info, int i);
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
-int		exec_builtin(char **tab_cmd, t_info *liste);
+int		exec_builtin(char **tab_cmd, t_info *liste, int fd);
 char	*ft_get_last_arg(char *src);
 int		slash_case(char *cmd, t_info *info);
 int		find_path(char *cmd, char **envp, t_env *liste);
@@ -192,7 +195,7 @@ void	erase_quotes_tk(t_token *node);
 
 //ENV
 void	create_node(t_env **head, char *data);
-void	printlist(t_env *node);
+void	printlist(t_env *node, int fd);
 void	create_env_list(t_env **head, char **envp);
 t_env	*ft_sort_list(t_env *head);
 t_env	*ft_search_in_list(t_env **head, char *name);
@@ -213,12 +216,12 @@ void	ft_free_list(t_env **head_a);
 int		ft_builtin(t_token *token, t_env *liste);
 void	ft_exit(char **tab_cmd);
 void	ft_cd(char **argv, t_env *env);
-int		current_dir(void);
-int		my_env(t_env *envp);
-int		ft_echo(char **argv);
+int		current_dir(int fd);
+int		my_env(t_env *envp, int fd);
+int		ft_echo(char **argv, int fd);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
-void	ft_export(char **argv, t_env *liste, t_info *info);
+void	ft_export(char **argv, t_env *liste, t_info *info, int fd);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
 void	ft_unset(t_env **env, char *argv);
 void	ft_replace_var(t_env **head, char *name, char *content, char *var);
