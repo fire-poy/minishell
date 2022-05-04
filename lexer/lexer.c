@@ -12,7 +12,7 @@ void	trimer(char *s, int *i)
 // 2 buscamos " ' y remplazamos $dentro
 // 2 buscamos tokens -> < >> > ' " funciones
 // 	despues de > file
-int	lexer(char *input, t_env *liste, t_token **tk, t_info *info)
+int	lexer(char *input, t_info *info)
 {
 	int		i;
 	char	*input2;
@@ -20,19 +20,22 @@ int	lexer(char *input, t_env *liste, t_token **tk, t_info *info)
 	i = 0;
 	trimer (input, &i);
 	input2 = ft_strdup(input + i);
-	input2 = search_and_replace_quotes(&input2, liste, info);
+	input2 = search_and_replace_quotes(&input2, info->liste, info);
 	if (input2 == NULL)
 	{
 		free (input2);
 		return (0);
 	}
-	input2 = remplacer_rest_of_dollar(&input2, liste, info);
+	input2 = remplacer_rest_of_dollar(&input2, info->liste, info);
 	explore_tokens_err(&input2, info);
-	// if (info->err == 1)
-		// info->exit_status = show_command_error(info, NULL, "syntax error near unexpected token `newline'", 258);
-	// else if (info->err == 2)
-	*tk = get_tokens(input2, *tk);
-	erase_quotes_tk(*tk);
+	if (info->err == 1)
+	{
+		cmd_err(info, NULL, "syntax error near unexpected token", 258);
+		free (input2);
+		return (0);
+	}
+	info->tk = get_tokens(input2, info->tk);
+	erase_quotes_tk(info->tk);
 	free (input2);
 	return (1);
 }

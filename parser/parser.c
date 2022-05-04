@@ -1,19 +1,5 @@
 #include "../minishell.h"
 
-t_info	*init_info(t_info *info, int last_exit)
-{
-	info = malloc (sizeof(t_info));
-	info->redir_in = 0;
-	info->redir_out = 0;
-	info->q_in = 0;
-	info->q_out = 0;
-	info->cmd_i = 0;
-	info->pipe_i = 0;
-	info->err = 0;
-	info->exit_status = last_exit;
-	return (info);
-}
-
 void	get_info_tk(t_token *tk, t_info *info)
 {
 	while (tk)
@@ -83,22 +69,19 @@ char	***get_cmd_split(char **full_cmd, int cmd_i)
 	return (cmd_split);
 }
 
-t_info	*parser(t_env *liste, t_token *tk, char **envp, t_info *info)
+void	parser(t_info *info)
 {
-	get_info_tk(tk, info);
-	info->full_cmd = get_tab_cmd(tk, info->q_cmd);
+	get_info_tk(info->tk, info);
+	info->full_cmd = get_tab_cmd(info->tk, info->q_cmd);
 	info->split_cmd = get_cmd_split(info->full_cmd, info->cmd_i);
-	info->tk = tk;
-	info->liste = liste;
-	info->envp = envp;
-	return (info);
 }
 /*
 	int 	i = 0;
-	printlist_tk(tk);
+	printlist_tk(info->tk);
 	while (i <= info->cmd_i)
 	{
 		printf("cmd_i %d = %s\n", i, info->full_cmd[i]);
 		i++;
 	}
-	*/
+	// */
+// }

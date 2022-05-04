@@ -19,8 +19,8 @@ void	exec_child_proc(t_info *info, int i)
 			else if (access_ok(info->split_cmd[i][0], info, &path))
 			{
 				if (execve(path, info->split_cmd[i], info->envp))
-					err_msg("comand error", NULL, info->exit_status);
-			//show_command_error(info, cmd->name, strerror(errno), errno);//err_msg
+					cmd_err(info, info->split_cmd[0][0],
+						strerror(errno), errno);
 			}
 		}
 		exit(info->exit_status);

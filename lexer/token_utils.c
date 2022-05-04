@@ -5,7 +5,7 @@ char	*chercher_env(t_env *liste, char *a_trouver)
 {
 	while (liste)
 	{
-		if (!ft_strncmp(a_trouver, liste->name ,ft_strlen(a_trouver)))
+		if (!ft_strncmp(a_trouver, liste->name, ft_strlen(a_trouver)))
 			return (liste->content);
 		else
 			liste = liste->next;
