@@ -1,12 +1,5 @@
 #include "../minishell.h"
 
-void	ft_get_pid(int id)
-{
-	if (id != 0)
-	{
-		g_pid[0] = id;
-	}
-}
 
 void	signal_q(int sig)
 {
@@ -18,20 +11,14 @@ void	signal_q(int sig)
 	if (res == 0)
 	{
 		if (sig == 2)
-		{
-			write(1, "^C\n", 3);
-		}
+			write(1, "^C\n", 4);
 		else if (sig == 3)
-		{
 			write(1, "^\\Quit: 3\n", 11);
-		}
 	}
 	else if (res == -1)
 	{
 		if (sig == 2)
-		{
 			write(1, "\n", 2);
-		}
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -45,10 +32,9 @@ void	signal_here(int signal)
 		g_pid[8] = 6;
 		write(1, "\n", 2);
 		rl_on_new_line();
-		rl_replace_line("", 1); // keep
-		rl_redisplay(); //keep
+		rl_replace_line(": heredoc : >> press enter to exit <<", 30);
+		rl_redisplay();
 	}
-		//ilfaut write meme signaux de ctrl+D
 }
 
 void	signal_h(int signal)
@@ -83,6 +69,5 @@ void	ft_stop2(char *input)
 		write(1, "\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		//rl_redisplay();
 	}
 }

@@ -27,22 +27,17 @@ void	get_heredoc(char *flag, int i)
 	len = ft_strlen(flag);
 	while (1)
 	{
-		write (STDOUT_FILENO, ">", 1);
-		line = get_next_line(STDIN_FILENO);
-		ft_stop2(line);
 		signal(SIGINT, signal_here);
-		signal(SIGQUIT, SIG_IGN);
-		if (line == 0)
-		{
-			line = flag;
-			return ;
-		}
 		if (g_pid[8] == 6) // to quit with ctrl+c
 		{
 			g_pid[8] = 0;
-			line = flag;
 			return ;
 		}
+		write (STDOUT_FILENO, ">", 1);
+		line = get_next_line(STDIN_FILENO);
+		ft_stop2(line);
+		if (line == 0)
+			return ;
 		if (ft_strncmp(flag, line, len) == 0 && line != 0)
 		{
 			free (line);
