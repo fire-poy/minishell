@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:41:01 by mpons             #+#    #+#             */
+/*   Updated: 2022/05/04 18:42:24 by mpons            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -45,7 +57,6 @@
 
 pid_t					g_pid[255];
 
-
 typedef struct s_tk_info
 {
 	int		type;
@@ -56,8 +67,6 @@ typedef struct s_tk_info
 
 // chained list to extract env
 typedef struct s_env	t_env;
-// typedef	struct s_env t_env;
-
 struct s_env
 {
 	char	*initial_env;
@@ -126,7 +135,6 @@ int		redirect_out_bi(t_info *info, int i);
 int		redirect_in_out_bi(t_info *info, int i);
 int		open_trunc_close(t_token *tk, int last_out);
 
-
 // heredoc
 int		create_heredocs(t_token *tk);
 void	get_heredoc(char *flag, int i);
@@ -139,7 +147,7 @@ int		create_pipes(t_info *info);
 void	close_pipes(t_info *shell);
 void	free_pipes(int **pipes, int q);
 
-//pid
+// pid
 void	create_pids(t_info *shell);
 void	wait_pids(t_info *shell);
 void	wait_pids_heredoc(t_info *info, int i);
