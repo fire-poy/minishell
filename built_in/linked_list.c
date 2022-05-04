@@ -82,21 +82,27 @@ t_env	*ft_search_in_list(t_env **head, char *name)
 	return (temp);
 }
 
+void	ft_free(char *head)
+{
+	if (head != NULL)
+		free(head);
+	else
+		head = NULL;
+}
+
 void	ft_env_set_content(t_env *env, char *name, char *new_content)
 {
 	t_env	*head;
 
 	head = env;
-	// flag = 6;
 	while (head)
 	{
 		if (!ft_strcmp(head->name, name))
 		{
-			// if (flag == 1)
-			//free(head->content);
+			ft_free(head->content);
 			head->content = NULL;
 			if (new_content)
-				head->content = new_content;
+				head->content = ft_strdup(new_content);
 			return ;
 		}
 		head = head->next;

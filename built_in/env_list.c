@@ -5,6 +5,7 @@ void	printlist(t_env *node, int fd)
 {
 	while (node != NULL)
 	{
+		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(node->name, fd);
 		ft_putstr_fd("=\"", fd);
 		ft_putstr_fd(node->content, fd);
