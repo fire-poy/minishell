@@ -1,4 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_a.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 15:27:36 by mpons             #+#    #+#             */
+/*   Updated: 2022/05/04 17:52:22 by mpons            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
+int	open_rdonly_close(t_info *info, t_token *tk, int last_in)
+{
+	int	fd;
+
+	fd = open(tk->content, O_RDONLY, 0644);
+	if (fd == -1)
+	{
+		cmd_err(info, tk->content, MSG_FILE_NOT_FOUND, 1);
+		exit(1);
+	}
+	if (last_in == tk->in_index)
+		return (fd);
+	else
+		close(fd);
+	return (0);
+}
 
 int	redirect_in(t_info *info, int i)
 {
@@ -11,17 +40,7 @@ int	redirect_in(t_info *info, int i)
 	while (tk && tk->cmd_index <= i)
 	{
 		if (tk->type == IN_FILE && tk->cmd_index == i)
-		{
-			fd_in = open(tk->content, O_RDONLY, 0644);
-			if (fd_in == -1)
-			{
-				perror("Error: open() failed");
-				exit(1);
-			}
-			if (last_in == tk->in_index)
-				break ;
-			close(fd_in);
-		}
+			fd_in = open_rdonly_close(info, tk, last_in);
 		if (tk->type == HEREDOC && tk->cmd_index == i)
 		{
 			if (last_in == tk->in_index)
@@ -44,13 +63,7 @@ int	redirect_out(t_info *info, int i)
 	while (tk)
 	{
 		if (tk->type == OUT_FILE && tk->cmd_index == i)
-		{
-			fd_out = open(tk->content, O_CREAT | O_RDWR | O_TRUNC, 0644);
-			if (last_out == tk->out_index)
-				break ;
-			else
-				close(fd_out);
-		}
+			fd_out = open_trunc_close(tk, last_out);
 		if (tk->type == APPEND && tk->cmd_index == i)
 		{
 			fd_out = open(tk->content, O_CREAT | O_RDWR | O_APPEND, 0644);

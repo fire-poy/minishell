@@ -28,6 +28,9 @@ void	get_heredoc(char *flag, int i)
 	while (1)
 	{
 		signal(SIGINT, signal_here);
+		// signal(SIGQUIT, SIG_IGN);
+		if (line == 0)
+			return ;
 		if (g_pid[8] == 6) // to quit with ctrl+c
 		{
 			g_pid[8] = 0;

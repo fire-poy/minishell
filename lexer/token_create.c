@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:54:38 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 11:54:39 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/04 13:09:49 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ char	**ft_split_from_charset(char *s, char *set)
 		return (NULL);
 }
 
+void	tk_add_last(t_token **head, t_token *new_node)
+{
+	t_token	*last;
+
+	last = *head;
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new_node;
+}
+
 void	tk_create_second(t_token **head, char **data, int type)
 {
 	t_token	*new_node_a;
@@ -83,9 +93,7 @@ void	tk_create_second(t_token **head, char **data, int type)
 		*head = new_node_a;
 		return ;
 	}
-	while (last->next != NULL)
-		last = last->next;
-	last->next = new_node_a;
+	tk_add_last(head, new_node_a);
 	return ;
 }
 
@@ -115,21 +123,4 @@ void	tk_create_node(t_token **head, char **data, int type)
 	while (last->next != NULL)
 		last = last->next;
 	last->next = new_node;
-}
-
-int	set_type(char *s, int i, char c)
-{
-	int	type;
-
-	if (c == '<')
-		type = IN_FILE;
-	if (c == '<' && s[i + 1] == '<')
-		type = HEREDOC;
-	if (c == '>')
-		type = OUT_FILE;
-	if (c == '>' && s[i + 1] == '>')
-		type = APPEND;
-	if (c == '|')
-		type = PIPE;
-	return (type);
 }
