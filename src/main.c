@@ -2,7 +2,7 @@
 
 t_info	*init_info(t_env *liste, char **envp, int last_exit)
 {
-	t_info *info;
+	t_info	*info;
 
 	info = NULL;
 	info = malloc (sizeof(t_info));
@@ -78,7 +78,7 @@ void	loop_prompt(t_env *liste, char **envp)
 		ft_stop(input, last_exit);
 		info = init_info(liste, envp, last_exit);
 		if (ft_strlen(input) > 0)
-			last_exit =	parsing_execution_and_free(input, info);
+			last_exit = parsing_execution_and_free(input, info);
 	}
 }
 

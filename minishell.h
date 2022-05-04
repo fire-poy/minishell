@@ -180,6 +180,8 @@ char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
 char	*chercher_and_replace_dollar(char **s, int *i,
 			t_env *liste, t_info *info);
 char	*remplacer_rest_of_dollar(char **s, t_env *liste, t_info *info);
+char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
+char	*ajouter_env(char **s, int *index, char *env_var, char *remplacer);
 
 //TOKENS
 void	explore_tokens_err(char **in, t_info *info);
