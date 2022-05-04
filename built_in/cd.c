@@ -34,10 +34,8 @@ int	cd_check(char *args, t_info *liste)
 void	ft_cd(char **argv, t_info *info)
 {
 	char	*dir;
-	char  cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 	char	*pwd;
-	//int		flag;
-	// char	*home;
 
 	if (!argv[1] || !ft_strcmp(argv[1], "~") || !ft_strcmp(argv[1], "-"))
 	{

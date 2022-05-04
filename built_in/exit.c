@@ -38,7 +38,7 @@ void	ft_exit(char **tab_cmd, t_info *info)
   if (tab_cmd[1] == NULL)
 	{
 		printf("exit\n");
-    exit(0);
+    	exit(0);
 	}
   if (tab_cmd[2] != NULL)
 	{

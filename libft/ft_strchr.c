@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:17:41 by mpons             #+#    #+#             */
-/*   Updated: 2022/03/31 15:51:25 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/04 09:13:23 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -28,5 +29,5 @@ char	*ft_strchr(const char *s, int c)
 			return (0);
 		i++;
 	}
-	return (str + i+1);
+	return (str + i + 1);
 }	

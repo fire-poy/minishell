@@ -1,15 +1,19 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void	printlist(t_env *node)
+void	printlist(t_env *node, int fd)
 {
 	while (node != NULL)
 	{
-		printf("%s", node->name);
-		printf("=\"%s\"\n", node->content);
+		ft_putstr_fd(node->name, fd);
+		ft_putstr_fd("=\"", fd);
+		ft_putstr_fd(node->content, fd);
+		ft_putstr_fd("\"\n", fd);
 		node = node->next;
 	}
 }
+// printf("%s", node->name);
+// printf("=\"%s\"\n", node->content);
 
 char	*ft_get_line(char *line)
 {

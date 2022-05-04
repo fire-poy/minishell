@@ -42,10 +42,11 @@
 # define CMD 5
 # define PIPE 6
 
-pid_t	g_pid[255];
+pid_t					g_pid[255];
 
 // chained list to extract env
-typedef struct s_env t_env;
+typedef struct s_env	t_env;
+// typedef	struct s_env t_env;
 
 struct s_env
 {
@@ -58,43 +59,39 @@ struct s_env
 // chained list to order export list
 typedef struct s_order
 {
-	t_env	*newNode;
+	t_env	*new_node;
 	t_env	*temp1;
 	t_env	*temp2;
 }	t_order;
 
 // chained list with minishell input
-typedef struct s_token t_token;
+typedef struct s_token	t_token;
 
 struct s_token
 {
-	char		*content;//cmd, infile, outfile, etc
+	char		*content;
 	int			type;
-	int			cmd_index;//nro de commande
-	int			in_index;//nro de redir_in
-	int			out_index;//nro de redir_out
+	int			cmd_index;
+	int			in_index;
+	int			out_index;
 	int			export_vars;
 	char		*export;
-	char		*export_name;// var name
-	char		*export_content; // var content
-	t_token	*next;
-// 	char		**tab_cmd;// remplace par t_info->split_cmd
+	char		*export_name;
+	char		*export_content;
+	t_token		*next;
 };
 
 typedef struct s_info
 {
 	t_token	*tk;
 	t_env	*liste;
-	// char	*input;
 	char	**envp;
 	char	**full_cmd;
 	char	***split_cmd;
-	char	*redir_in; 
-	char	*redir_out;
 	int		err;
-	int		q_in; //q == quantite de redirection in
-	int		q_out; //q == quantite de redirection out
-	int		cmd_i;	//nro de commande
+	int		q_in;
+	int		q_out;
+	int		cmd_i;
 	int		q_cmd;
 	int		pipe_i;
 	int		**pipes;
@@ -106,7 +103,7 @@ typedef struct s_info
 void	err_msg(char *e, char *avant_e, int exit_status);
 void	xperror(char *str);
 void	print_join(char *s1, char *s2, int fd);
-int		show_command_error(t_info *info, char *cmd, char *msg, int exit_status);
+int		cmd_err(t_info *info, char *cmd, char *msg, int exit_status);
 
 // redirection
 void	redirect_in_out(t_info *info, int i);
@@ -114,7 +111,9 @@ int		find_last_in(t_token *tk, int i);
 int		find_last_out(t_token *tk, int i);
 int		get_q_in(t_token *tk, int i);
 int		get_q_out(t_token *tk, int i);
-// void	restart_in_out(t_info *info);
+int		redirect_in_bi(t_info *info, int i);
+int		redirect_out_bi(t_info *info, int i);
+int		redirect_in_out_bi(t_info *info, int i);
 
 // heredoc
 int		create_heredocs(t_token *tk);
@@ -136,7 +135,7 @@ void	wait_pids_heredoc(t_info *info, int i);
 // EXEC
 char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
-int		exec_builtin(char **tab_cmd, t_info *liste);
+int		exec_builtin(char **tab_cmd, t_info *liste, int fd);
 char	*ft_get_last_arg(char *src);
 int		slash_case(char *cmd, t_info *info);
 int		find_path(char *cmd, char **envp, t_env *liste);
@@ -156,34 +155,30 @@ char	*ft_strjoin_free(char *s1, char const *s2);
 void	print_tab(char **tab);
 void	print_tab_tab(char ***tab);
 
-
 // parser
-t_info	*parser(t_env *liste, t_token *tk, char **envp, t_info *info);
-t_info	*init_info(t_info *info, int last_exit);
+void	parser(t_info *info);
+t_info	*init_info(t_env *liste, char **envp, int last_exit);
 
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
 int		ft_strchr_set(const char *s, char *set);
 int		ft_strchr_char(const char *s, char c);
 int		search_next_c(char **s, int *debut, char c);
-int		ft_charset_found(const char *s, int* start, char *set);
+int		ft_charset_found(const char *s, int *start, char *set);
 void	loop_prompt(t_env *liste, char **envp);
-int		lexer(char *input, t_env *liste, t_token **tk, t_info *info);
-void	trimer (char *s, int *i);
+int		lexer(char *input, t_info *info);
+void	trimer(char *s, int *i);
 
 // QUOTES
-// char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste);
-// char	*search_and_replace_quotes(char **input, t_env *liste);
-// char	*remplacer_dollar(char **s, int *index, t_env *liste); 
-// char	*remplacer_rest_of_dollar(char **s, t_env *liste);
 void	search_quotes_closed(char *str);
 char	detect_and_check_quotes(char *s, int *i);
 char	*search_and_replace_quotes(char **input, t_env *liste, t_info *info);
 char	*chercher_env(t_env *liste, char *a_trouver);
 
-char	*remplacer_dollar(char **s, int *index, t_env *liste, t_info *info); 
+char	*remplacer_dollar(char **s, int *index, t_env *liste, t_info *info);
 char	*ajouter_au_string(char **s, int *i, int enlever, char *ajouter);
-char	*chercher_and_replace_dollar(char **s, int *i, t_env *liste, t_info *info);
+char	*chercher_and_replace_dollar(char **s, int *i,
+			t_env *liste, t_info *info);
 char	*remplacer_rest_of_dollar(char **s, t_env *liste, t_info *info);
 
 //TOKENS
@@ -193,14 +188,14 @@ t_token	*get_tokens(char *s, t_token *tk);
 void	printlist_tk(t_token *node);
 char	**ft_split_from_charset(char *s, char *set);
 void	tk_create_second(t_token **head, char **data, int type);
-void    tk_create_node(t_token **head, char **data, int type);
+void	tk_create_node(t_token **head, char **data, int type);
 int		set_type(char *s, int i, char c);
 char	*erase_quotes(char *s);
 void	erase_quotes_tk(t_token *node);
 
 //ENV
 void	create_node(t_env **head, char *data);
-void	printlist(t_env *node);
+void	printlist(t_env *node, int fd);
 void	create_env_list(t_env **head, char **envp);
 t_env	*ft_sort_list(t_env *head);
 t_env	*ft_search_in_list(t_env **head, char *name);
@@ -209,7 +204,7 @@ void	ft_add_to_list(t_env **head, t_env *newnode);
 int		ft_delete_first_node(t_env **head, t_env *temp, char *name);
 void	ft_delete_from_list(t_env **head, char *name);
 int		ft_count_list(t_env **head);
-void  err_exit(char *e, char *avant_e, int exit_status);
+void	err_exit(char *e, char *avant_e, int exit_status);
 char	*ft_get_line(char *line);
 char	*ft_get_name(char *line);
 void	ft_env_set_content(t_env *env, char *name, char *new_content);
@@ -221,12 +216,12 @@ void	ft_free_list(t_env **head_a);
 int		ft_builtin(t_token *token, t_env *liste);
 void	ft_exit(char **tab_cmd, t_info *info);
 void	ft_cd(char **argv, t_info *liste);
-int		current_dir(void);
-int		my_env(t_env *envp);
-int		ft_echo(char **argv);
+int		current_dir(int fd);
+int		my_env(t_env *envp, int fd);
+int		ft_echo(char **argv, int fd);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
-void	ft_export(char **argv, t_env *liste, t_info *info);
+void	ft_export(char **argv, t_env *liste, t_info *info, int fd);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
 void	ft_unset(t_env **env, char *argv);
 void	ft_replace_var(t_env **head, char *name, char *content, char *var);

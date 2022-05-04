@@ -1,13 +1,12 @@
 #include "../minishell.h"
 
-int	redirect_in(t_info *info, int i)
+int	redirect_in_bi(t_info *info, int i)
 {
 	t_token	*tk;
 	int		fd_in;
-	int		last_in;
+	// int		last_in;
 
 	tk = info->tk;
-	last_in = find_last_in(tk, i);
 	while (tk && tk->cmd_index <= i)
 	{
 		if (tk->type == IN_FILE && tk->cmd_index == i)
@@ -16,24 +15,23 @@ int	redirect_in(t_info *info, int i)
 			if (fd_in == -1)
 			{
 				perror("Error: open() failed");
-				exit(1);
+				info->exit_status = 1;
+				return (0);
 			}
-			if (last_in == tk->in_index)
-				break ;
 			close(fd_in);
 		}
 		if (tk->type == HEREDOC && tk->cmd_index == i)
 		{
-			if (last_in == tk->in_index)
+			// if (last_in == tk->in_index)
 				fd_in = get_heredoc_fd(i);
 		}
 		tk = tk->next;
 	}
-	return (fd_in);
+	return (1);
 }
 
 // return fd_out
-int	redirect_out(t_info *info, int i)
+int	redirect_out_bi(t_info *info, int i)
 {
 	t_token	*tk;
 	int		fd_out;
@@ -65,7 +63,7 @@ int	redirect_out(t_info *info, int i)
 }
 
 // changer fd_in info?
-void	redirect_in_out(t_info *info, int i)
+int	redirect_in_out_bi(t_info *info, int i)
 {
 	int	fd_in;
 	int	fd_out;
@@ -74,20 +72,14 @@ void	redirect_in_out(t_info *info, int i)
 	last_cmd = info->cmd_i;
 	if (get_q_in(info->tk, i) > 0)
 	{
-		fd_in = redirect_in(info, i);
-		dup2(fd_in, STDIN_FILENO);
-		close (fd_in);
-	}
-	else if (info->q_cmd > 1 && i != 0)
-	{
-		dup2(info->pipes[i - 1][0], STDIN_FILENO);
+		fd_in = redirect_in_bi(info, i);
+		if (fd_in == 0)
+			return (0);
 	}
 	if (get_q_out(info->tk, i) > 0)
 	{
-		fd_out = redirect_out(info, i);
-		dup2(fd_out, STDOUT_FILENO);
-		close (fd_out);
+		fd_out = redirect_out_bi(info, i);
+			return (fd_out);
 	}
-	else if (info->q_cmd > 1 && i != last_cmd)
-		dup2(info->pipes[i][1], STDOUT_FILENO);
+	return (1);
 }

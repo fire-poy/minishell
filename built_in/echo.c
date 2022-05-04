@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int	ft_echo(char **argv)
+int	ft_echo(char **argv, int fd)
 {
 	int	i;
 	int	n_flag;
@@ -16,24 +16,14 @@ int	ft_echo(char **argv)
 		}
 		while (argv[i] != NULL)
 		{
-			printf("%s", argv[i]);
+			ft_putstr_fd(argv[i], fd);
 			if (argv[i + 1] && argv[i][0] != '\0')
-				printf(" ");
+				ft_putstr_fd(" ", fd);
 			i++;
 		}
 		if (n_flag == 1)
 			return (0);
 	}
-	printf("\n");
+	ft_putstr_fd("\n", fd);
 	return (0);
 }
-
-
-
-// compilation = gcc built_in/echo.c libft/ft_strncmp.c && ./a.out
-// int	main(int argc, char **argv)
-// {
-// 	if (strncmp(argv[1], "echo", 5))
-// 		return (ft_echo(argv, argc));
-// 	return (0);
-// }

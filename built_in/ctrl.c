@@ -69,20 +69,21 @@ void	signal_h(int signal)
 
 void	ft_stop(char *input)
 {
-		if (input == 0)
-		{
-			write(1, "exit\n", 5);
-			exit(1);
-		}
+	if (input == 0)
+	{
+		write(1, "exit\n", 5);
+		exit(1);
+		//exit(info->exit_status);
+	}
 }
 
 void	ft_stop2(char *input)
 {
-		if (input == 0)
-		{
-			write(1, "\n", 2);
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			//rl_redisplay();
-		}
+	if (input == 0)
+	{
+		write(1, "\n", 2);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		//rl_redisplay();
+	}
 }

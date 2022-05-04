@@ -6,7 +6,6 @@ void	exec_child_proc(t_info *info, int i)
 
 	path = NULL;
 	info->pids[i] = fork();
-	// sleep(1);
 	if (info->pids[i] < 0)
 		perror("Error: fork() failed");
 	if (info->pids[i] == 0)
@@ -15,13 +14,13 @@ void	exec_child_proc(t_info *info, int i)
 		close_pipes(info);
 		if (info->full_cmd[i][0] != '\0')
 		{
-			// 1f("cmd ='%s'\n char ='%c'", info->full_cmd[i], (int)info->full_cmd[i][0]);
 			if (is_builtin(info->split_cmd[i][0]))
-				exec_builtin(info->split_cmd[i], info);
+				exec_builtin(info->split_cmd[i], info, 1);
 			else if (access_ok(info->split_cmd[i][0], info, &path))
 			{
 				if (execve(path, info->split_cmd[i], info->envp))
-					err_msg("comand error", NULL, info->exit_status);//show_command_error(info, cmd->name, strerror(errno), errno);//err_msg
+					cmd_err(info, info->split_cmd[0][0],
+						strerror(errno), errno);
 			}
 		}
 		exit(info->exit_status);
@@ -62,7 +61,7 @@ void	execution_main(t_info *info)
 			{
 				waitpid(id, &status, 0);
 				if (WIFEXITED(status))
-				info->exit_status = WEXITSTATUS(status);
+					info->exit_status = WEXITSTATUS(status);
 			}
 		}
 		else
@@ -71,25 +70,3 @@ void	execution_main(t_info *info)
 	else
 		exec_cmds(info);
 }
-	
-/*
-// EXEC_CMDS
-
-void	execution(char **path, char **cmd_tab, char **envp, t_env *liste)
-{
-	int	id;
-
-	// if (is_builtin(cmd_tab[0]))
-	// {
-	// 	exec_builtin(cmd_tab, *liste);
-	// 	free (*path);
-	// 	return ;
-	// }
-	id = fork();
-	if (id == 0)
-		execve(*path, cmd_tab, envp);
-	else
-		free (*path);
-	wait(&id);
-}
-*/

@@ -30,6 +30,7 @@ SRC 		=   ./src/main.c\
 				./exec/single_cmd.c\
 				./exec/redirection_a.c\
 				./exec/redirection_b.c\
+				./exec/redirection_builtin.c\
 				./exec/heredoc.c\
 				./exec/pipe.c\
 				./exec/pid.c\

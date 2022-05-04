@@ -2,7 +2,7 @@
 
 //search charset a partir du start, avance l'address si trouve le chset;
 //return 0 si ne trouve pas, 1 en succes
-int	ft_space_out_quotes_found(char *s, int* start, char *set)
+int	ft_space_out_quotes_found(char *s, int *start, char *set)
 {
 	int	i;
 
@@ -18,7 +18,7 @@ int	ft_space_out_quotes_found(char *s, int* start, char *set)
 		}
 		i++;
 	}
-	if (s[i] == 0)		
+	if (s[i] == 0)
 		return (0);
 	else
 		*start = i;
@@ -28,8 +28,8 @@ int	ft_space_out_quotes_found(char *s, int* start, char *set)
 //free s == content
 char	**ft_split_from_charset(char *s, char *set)
 {
-	int	i;
-	char **tab_ch;
+	int		i;
+	char	**tab_ch;
 
 	i = 0;
 	if (ft_space_out_quotes_found(s, &i, set))
@@ -77,34 +77,33 @@ void	tk_create_second(t_token **head, char **data, int type)
 	return ;
 }
 
-void    tk_create_node(t_token **head, char **data, int type)//, char c)
+void	tk_create_node(t_token **head, char **data, int type)
 {
-    t_token *new_node;
-    t_token *last;
-	int	i;
+	t_token	*new_node;
+	t_token	*last;
+	int		i;
 
 	i = 0;
-	if ((type == 0 || type == 1 || type == 2 || type == 3) 
+	if ((type == 0 || type == 1 || type == 2 || type == 3)
 		&& ft_space_out_quotes_found(*data, &i, " \t"))
 	{
 		tk_create_second(head, data, type);
 		return ;
 	}
-    last = *head;
-    new_node = malloc(sizeof(t_token));
-    new_node->content = *data;
-    new_node->type = type;
-    new_node->next = NULL;
-    if (*head == NULL)
-    {
-        *head = new_node;
-        return ;
-    }
-    while (last->next != NULL)
-        last = last->next;
-    last->next = new_node;
+	last = *head;
+	new_node = malloc(sizeof(t_token));
+	new_node->content = *data;
+	new_node->type = type;
+	new_node->next = NULL;
+	if (*head == NULL)
+	{
+		*head = new_node;
+		return ;
+	}
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new_node;
 }
-    // if (type == -1)
 
 int	set_type(char *s, int i, char c)
 {
