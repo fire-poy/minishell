@@ -6,8 +6,9 @@ int	my_env(t_env *envp, int fd)
 	{
 		ft_putstr_fd(envp->name, fd);
 		ft_putstr_fd("=", fd);
+		ft_putstr_fd("\"", fd);
 		ft_putstr_fd(envp->content, fd);
-		ft_putstr_fd("\n", fd);
+		ft_putstr_fd("\"\n", fd);
 		envp = envp->next;
 	}
 	return (0);

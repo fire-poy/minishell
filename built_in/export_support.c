@@ -59,9 +59,16 @@ int	ft_varlen(char *var)
 
 void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 {
+	int	flag;
+
+	flag = 0;
 	free((*head)->content);
-	(*head)->content = content;
-	(*head)->initial_env = var;
+	(*head)->content = ft_strdup(content);
+	if ((*head)->initial_env)
+		flag = 1;
+	if (flag == 1)
+		free((*head)->initial_env);
+	(*head)->initial_env = ft_strdup(var);
 	free((*head)->name);
-	(*head)->name = name;
+	(*head)->name = ft_strdup(name);
 }
