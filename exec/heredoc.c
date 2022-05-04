@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:18:33 by mpons             #+#    #+#             */
+/*   Updated: 2022/05/04 18:24:45 by mpons            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	get_heredoc_fd(int cmd_index)
@@ -11,24 +23,14 @@ int	get_heredoc_fd(int cmd_index)
 	return (fd_in);
 }
 
-// heredoc se ejecuta aun si hay un error antes OK
-void	get_heredoc(char *flag, int i)
+void	here_boucle(int file, char *flag, int len)
 {
 	char	*line;
-	char	*name;
-	int		len;
-	int		file;
 
-	name = ft_strjoin_whit_int(".heredoc_tmp", i);
-	file = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	free (name);
-	if (file < 0)
-		err_msg("heredoc error", NULL, 1);
-	len = ft_strlen(flag);
 	while (1)
 	{
 		signal(SIGINT, signal_here);
-		if (g_pid[8] == 6) // to quit with ctrl+c
+		if (g_pid[8] == 6)
 		{
 			g_pid[8] = 0;
 			return ;
@@ -48,6 +50,22 @@ void	get_heredoc(char *flag, int i)
 		write(file, line, ft_strlen(line));
 		free (line);
 	}
+}
+
+// heredoc se ejecuta aun si hay un error antes OK
+void	get_heredoc(char *flag, int i)
+{
+	char	*name;
+	int		len;
+	int		file;
+
+	name = ft_strjoin_whit_int(".heredoc_tmp", i);
+	file = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	free (name);
+	if (file < 0)
+		err_msg("heredoc error", NULL, 1);
+	len = ft_strlen(flag);
+	here_boucle(file, flag, len);
 }
 
 int	create_heredocs(t_token *tk)

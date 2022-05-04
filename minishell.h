@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 18:50:28 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/04 19:01:02 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ typedef struct s_tk_info
 
 // chained list to extract env
 typedef struct s_env	t_env;
-// typedef	struct s_env t_env;
-
 struct s_env
 {
 	char	*initial_env;
@@ -148,7 +146,7 @@ int		create_pipes(t_info *info);
 void	close_pipes(t_info *shell);
 void	free_pipes(int **pipes, int q);
 
-//pid
+// pid
 void	create_pids(t_info *shell);
 void	wait_pids(t_info *shell);
 void	wait_pids_heredoc(t_info *info, int i);
