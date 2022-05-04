@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 18:51:16 by jhermon-          #+#    #+#             */
+/*   Updated: 2022/05/04 18:52:25 by jhermon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-#include "../libft/libft.h"
 
 int	check_arg(char	*arg)
 {
@@ -22,7 +33,7 @@ int	check_arg(char	*arg)
 
 int	exit_arg(char *arg)
 {
-	int     estatus;
+	int	estatus;
 
 	if (check_arg(arg) == 0)
 		return (0);
@@ -30,26 +41,25 @@ int	exit_arg(char *arg)
 	return (estatus);
 }
 
-
 void	ft_exit(char **tab_cmd, t_info *info)
 {
-  int     i;
+	int	i;
 
-  if (tab_cmd[1] == NULL)
+	if (tab_cmd[1] == NULL)
 	{
 		printf("exit\n");
 		ft_free_list(&info->liste);
 		free_all(info);
-    exit(0);
+		exit(0);
 	}
-  if (tab_cmd[2] != NULL)
+	if (tab_cmd[2] != NULL)
 	{
 		printf("Minishell: exit :too many arguments\n");
 		return ;
 	}
-  i = exit_arg(tab_cmd[1]);
+	i = exit_arg(tab_cmd[1]);
 	printf("exit\n");
 	ft_free_list(&info->liste);
 	free_all(info);
-  exit(i);
+	exit(i);
 }
