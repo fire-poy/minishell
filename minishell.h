@@ -29,6 +29,7 @@
 # define DEFAULT "\033[0m"
 
 # define MSG_IS_DIRECTORY "is a directory"
+# define MSG_IS_NOT_DIRECTORY "Not a directory"
 # define MSG_FILE_NOT_FOUND "not such file or directory"
 # define MSG_COMMAND_NOT_FOUND "command not found"
 # define MSG_PERMISSION_DENIED "permission denied"

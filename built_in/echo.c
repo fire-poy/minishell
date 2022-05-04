@@ -1,5 +1,13 @@
 #include "../minishell.h"
 
+void	ft_get_pid(int id)
+{
+	if (id != 0)
+	{
+		g_pid[0] = id;
+	}
+}
+
 int	ft_echo(char **argv, int fd)
 {
 	int	i;

@@ -69,10 +69,10 @@ void	loop_prompt(t_env *liste, char **envp)
 
 	info = NULL;
 	last_exit = 0;
-	signal(SIGINT, signal_h);
-	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
+		signal(SIGINT, signal_h);
+		signal(SIGQUIT, SIG_IGN);
 		input = prompt();
 		add_history(input);
 		ft_stop(input, last_exit);
