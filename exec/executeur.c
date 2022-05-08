@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:58:58 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 17:58:59 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/04 19:15:04 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_child_proc(t_info *info, int i)
 		{
 			if (is_builtin(info->split_cmd[i][0]))
 				exec_builtin(info->split_cmd[i], info, 1);
-			else if (access_ok(info->split_cmd[i][0], info, &path))
+			else if (access_ok(info->split_cmd[i][0], info, &path, i))
 			{
 				if (execve(path, info->split_cmd[i], info->envp))
 					cmd_err(info, info->split_cmd[0][0],

@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:32:00 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 15:48:10 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/04 19:16:18 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	exec_single_cmd(t_info *info)
 		if (fd > 0)
 			info->exit_status = exec_builtin(info->split_cmd[0], info, fd);
 	}
-	else if (access_ok(info->split_cmd[0][0], info, &path))
+	else if (access_ok(info->split_cmd[0][0], info, &path, 0))
 	{
 		id = fork();
 		signal_init(info, id);

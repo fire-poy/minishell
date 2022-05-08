@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:38:16 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 18:40:34 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/08 14:44:20 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_env	*ft_create_node(char *name, char *value)
 	{
 		new->name = ft_strdup(name);
 		new->content = ft_strdup(value);
+		new->initial_env = NULL;
 		new->next = NULL;
 	}
 	return (new);
@@ -78,6 +79,7 @@ void	ft_delete_from_list(t_env **head, char *name)
 		prev->next = temp->next;
 		free(temp->name);
 		free(temp->content);
+		free(temp->initial_env);
 		free(temp);
 	}
 }

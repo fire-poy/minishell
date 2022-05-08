@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 19:01:02 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:41:49 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ struct s_token
 	int			in_index;
 	int			out_index;
 	int			export_vars;
-	char		*export;
+	// char		*export;
 	char		*export_name;
 	char		*export_content;
 	t_token		*next;
@@ -156,13 +156,13 @@ char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
 int		exec_builtin(char **tab_cmd, t_info *liste, int fd);
 char	*ft_get_last_arg(char *src);
-int		slash_case(char *cmd, t_info *info);
+int		slash_case(char *cmd, t_info *info, int i);
 int		find_path(char *cmd, char **envp, t_env *liste);
 void	execution_main(t_info *info);
 int		exec_single_cmd(t_info *info);
 
 // access
-int		access_ok(char *cmd, t_info *info, char **path);
+int		access_ok(char *cmd, t_info *info, char **path, int i);
 int		is_invalid_command(t_info *info, char *cmd);
 
 // free

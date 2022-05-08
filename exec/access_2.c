@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   access2.c                                          :+:      :+:    :+:   */
+/*   access_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:46:22 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 15:46:33 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/04 19:24:18 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_get_last_arg(char *src)
 	return (dst);
 }
 
-int	slash_case(char *cmd, t_info *info)
+int	slash_case(char *cmd, t_info *info, int i)
 {
 	if (ft_strchr(cmd, '/'))
 	{
@@ -43,7 +43,9 @@ int	slash_case(char *cmd, t_info *info)
 		{
 			if ((access(cmd, X_OK) == -1))
 				return (2);
-			info->split_cmd[0][0] = ft_get_last_arg(cmd);
+			free (info->split_cmd[i][0]);
+			info->split_cmd[i][0] = NULL;
+			info->split_cmd[i][0] = ft_get_last_arg(cmd);
 			return (1);
 		}
 	}
@@ -76,18 +78,18 @@ int	check_path(char *cmd, t_info *info, char **path, char *env)
 
 // return 1 if access == ok
 // return the good path by **path
-int	access_ok(char *cmd, t_info *info, char **path)
+int	access_ok(char *cmd, t_info *info, char **path, int i)
 {
 	char	*env;
 
 	if (is_invalid_command(info, cmd))
 		return (0);
-	if (slash_case(cmd, info) == 2)
+	if (slash_case(cmd, info, i) == 2)
 	{
 		cmd_err(info, cmd, MSG_PERMISSION_DENIED, 126);
 		return (0);
 	}
-	if (slash_case(cmd, info) == 1)
+	if (slash_case(cmd, info, i) == 1)
 	{
 		*path = cmd;
 		return (1);

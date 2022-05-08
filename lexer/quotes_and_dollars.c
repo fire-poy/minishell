@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:54:47 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 12:11:08 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/04 20:03:39 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ char	*remplacer_dollar(char **s, int *index, t_env *liste, t_info *info)
 	env_var = ft_substr(*s, (unsigned int)*index + 1, len);
 	remplacer = chercher_env(liste, env_var);
 	if (remplacer == NULL)
+	{
+		free (env_var);
 		return (ajouter_au_string(s, index, len + 1, ""));
-	else
-		return (ajouter_env(s, index, env_var, remplacer));
+	}
+	return (ajouter_env(s, index, env_var, remplacer));
 }
 
 //on commence in the "
