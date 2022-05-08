@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:16:26 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 15:16:27 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/08 16:38:42 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ int	cd_check(char *args, t_info *liste)
 	return (0);
 }
 
-void	ft_update_dir(char *cwd, t_info *info)
+void	ft_update_dir(t_info *info)
 {
+	char	cwd[PATH_MAX];
 	char	*dir;
 	char	*pwd;
 
@@ -53,28 +54,55 @@ void	ft_update_dir(char *cwd, t_info *info)
 	ft_env_set_content(info->liste, "PWD", dir);
 }
 
-void	ft_cd(char **argv, t_info *info)
+char	*special_case(char *argv, t_info *info)
 {
-	char	cwd[PATH_MAX];
-	int		flag;
+	char	*new_path;
 
-	flag = 0;
-	if (!argv[1] || !ft_strcmp(argv[1], "~") || !ft_strcmp(argv[1], "-"))
+	new_path = NULL;
+	if (!argv || !ft_strcmp(argv, "~"))
 	{
-		flag = 1;
-		argv[1] = get_env(info->liste, "HOME");
-		if (!argv[1])
+		new_path = get_env(info->liste, "HOME");
+		if (!new_path)
 		{
 			ft_putstr_fd("minishell: cd : HOME not set\n", 2);
-			return ;
+			info->exit_status = 1;
+			return (NULL);
 		}
 	}
-	if (!ft_strcmp(argv[1], "\"\"") || !ft_strcmp(argv[1], "\'\'"))
-		return ;
-	if (cd_check(argv[1], info))
-		return ;
-	ft_update_dir(cwd, info);
-	if (flag == 0)
-		free(argv[1]);
-	argv[1] = NULL;
+	if (argv != NULL && !ft_strcmp(argv, "-"))
+	{
+		new_path = get_env(info->liste, "OLDPWD");
+		if (!new_path)
+		{
+			ft_putstr_fd("minishell: cd : OLDPWD not set\n", 2);
+			info->exit_status = 1;
+			return (NULL);
+		}
+	}
+	return (new_path);
+}
+
+void	ft_cd(char **argv, t_info *info)
+{
+	char	*new_path;
+
+	if (!argv[1] || !ft_strcmp(argv[1], "~") || !ft_strcmp(argv[1], "-"))
+	{
+		new_path = special_case(argv[1], info);
+		if (new_path == NULL)
+			return ;
+		if (!ft_strcmp(new_path, "\"\"") || !ft_strcmp(new_path, "\'\'"))
+			return ;
+		if (cd_check(new_path, info))
+			return ;
+		ft_update_dir(info);
+	}
+	else
+	{
+		if (!ft_strcmp(argv[1], "\"\"") || !ft_strcmp(argv[1], "\'\'"))
+			return ;
+		if (cd_check(argv[1], info))
+			return ;
+		ft_update_dir(info);
+	}
 }

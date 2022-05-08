@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/06 16:41:49 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/08 16:41:27 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ struct s_token
 	int			in_index;
 	int			out_index;
 	int			export_vars;
-	// char		*export;
 	char		*export_name;
 	char		*export_content;
 	t_token		*next;

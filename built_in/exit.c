@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:51:16 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 18:52:25 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/08 16:40:12 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_exit(char **tab_cmd, t_info *info)
 	if (tab_cmd[2] != NULL)
 	{
 		printf("Minishell: exit :too many arguments\n");
+		info->exit_status = 1;
 		return ;
 	}
 	i = exit_arg(tab_cmd[1]);

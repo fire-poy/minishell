@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:34:48 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/06 16:43:44 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/08 16:47:15 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env	*add_var_to_env(t_env **head, char *var, t_token *token)
 		temp = ft_create_node(token->export_name, token->export_content);
 	else
 		temp = ft_create_node(token->export_name, token->export_content);
-	temp->initial_env = ft_strdup(var);//
+	temp->initial_env = ft_strdup(var);
 	return (temp);
 }
 
@@ -46,7 +46,7 @@ void	ft_print_export(t_env *liste, int fd)
 //si no assignation ex_name = var    cont = "" , else malloc export_name y cont
 int	ft_info_init(t_info *info, char *var)
 {
-	if (!ft_equal(var))//si pas de =
+	if (!ft_equal(var))
 	{
 		info->tk->export_name = var;
 		info->tk->export_content = "";
@@ -68,7 +68,7 @@ void	ft_update_var(t_env *liste, t_info *info, char *var)
 	while (liste->next != NULL && ft_strcmp
 		(liste->name, info->tk->export_name) != 0)
 		liste = liste->next;
-	if (ft_strcmp(liste->name, info->tk->export_name) == 0)//si encuentro en env
+	if (ft_strcmp(liste->name, info->tk->export_name) == 0)
 	{
 		ft_replace_var(&liste, info->tk->export_name,
 			info->tk->export_content, var);
@@ -80,7 +80,7 @@ void	ft_update_var(t_env *liste, t_info *info, char *var)
 	}
 }
 
-void	ft_export(char **argv, t_env *liste, t_info *info, int fd)//argv = tab_cmd
+void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 {
 	char	*var;
 
@@ -91,7 +91,7 @@ void	ft_export(char **argv, t_env *liste, t_info *info, int fd)//argv = tab_cmd
 		var = argv[1];
 		if (!ft_strncmp(var, "=", 1))
 			return ;
-		if (!ft_check_export_var(var))//si var is good then
+		if (!ft_check_export_var(var))
 		{
 			if (var != NULL)
 				ft_free_flag(info, liste, var);

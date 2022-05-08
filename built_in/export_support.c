@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:36:13 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/06 16:44:08 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/08 16:47:55 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,12 @@ int	ft_varlen(char *var)
 
 void	ft_replace_var(t_env **head, char *name, char *content, char *var)
 {
-	// int	flag;
-
-	// flag = 0;
 	free((*head)->content);
-	(*head)->content = ft_strdup(content);//42
+	(*head)->content = ft_strdup(content);
 	free((*head)->name);
 	(*head)->name = ft_strdup(name);
 	free ((*head)->initial_env);
-	(*head)->initial_env = ft_strdup(var);//a=42
-	// if ((*head)->initial_env)
-	// 	free((*head)->initial_env);
-	// (*head)->initial_env = ft_strdup(var);
+	(*head)->initial_env = ft_strdup(var);
 }
 
 void	ft_free_flag(t_info *info, t_env *liste, char *var)

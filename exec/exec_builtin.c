@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:49:35 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 18:49:37 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/08 16:42:36 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ int	exec_builtin(char **tab_cmd, t_info *liste, int fd)
 		ft_unset(&liste->liste, tab_cmd[1]);
 	else if (!ft_strcmp(tab_cmd[0], "export"))
 		ft_export(tab_cmd, liste->liste, liste, fd);
-	return (0);
+	return (liste->exit_status);
 }
