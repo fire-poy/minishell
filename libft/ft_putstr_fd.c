@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 12:14:42 by mpons             #+#    #+#             */
-/*   Updated: 2021/11/05 17:16:28 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/10 16:39:21 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)

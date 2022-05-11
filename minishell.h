@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/08 16:41:27 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:10:15 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_info
 	char	**envp;
 	char	**full_cmd;
 	char	***split_cmd;
+	char	*input;
 	int		err;
 	int		q_in;
 	int		q_out;
@@ -175,7 +176,7 @@ void	print_tab_tab(char ***tab);
 
 // parser
 void	parser(t_info *info);
-t_info	*init_info(t_env *liste, char **envp, int last_exit);
+t_info	*init_info(t_env *liste, char **envp, int last_exit, char *input);
 
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
@@ -239,7 +240,7 @@ void	ft_exit(char **tab_cmd, t_info *info);
 void	ft_cd(char **argv, t_info *liste);
 int		current_dir(int fd);
 int		my_env(t_env *envp, int fd);
-int		ft_echo(char **argv, int fd);
+int		ft_echo(char **argv, int fd, t_info *liste);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
 void	ft_export(char **argv, t_env *liste, t_info *info, int fd);
@@ -249,6 +250,9 @@ void	ft_replace_var(t_env **head, char *name, char *content, char *var);
 void	ft_free_flag(t_info *info, t_env *liste, char *var);
 void	ft_update_var(t_env *liste, t_info *info, char *var);
 int		ft_info_init(t_info *info, char *var);
+int		ft_check_c(char c, t_info *liste, int i, int fd);
+int		str_compare(char *str1, char *str2);
+int		array_length(char *arr[]);
 
 // SIGNALS
 void	signal_h(int signal);
