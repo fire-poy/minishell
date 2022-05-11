@@ -37,6 +37,7 @@ SRC 		=   ./src/main.c\
 				./gnl/get_next_line.c\
 				./built_in/env.c\
 				./built_in/echo.c\
+				./built_in/echo_support.c\
 				./built_in/env_set.c\
 				./built_in/env_list.c\
 				./built_in/env_list_2.c\
@@ -75,7 +76,3 @@ fclean:
 re:			fclean all
 
 .PHONY : all clean fclean re bonus
-
-###### Debuging
-# valgrind --leak-check=full --show-leak-kinds=all ./minishell
-# -O0 pour le débegueur vscode.
