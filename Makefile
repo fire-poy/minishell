@@ -3,7 +3,7 @@ NAME		= minishell
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 
 
 OBJS		= ${SRC:.c=.o}
@@ -52,6 +52,7 @@ SRC 		=   ./src/main.c\
 				./built_in/exit.c\
 				./built_in/export.c\
 				./built_in/ctrl.c\
+				./built_in/ctrl_signal.c\
 
 INC			= -I./gnl/get_next_line.h -I$(HOME)/.brew/opt/readline/include
 LIB			= -lreadline -L$(HOME)/.brew/opt/readline/lib

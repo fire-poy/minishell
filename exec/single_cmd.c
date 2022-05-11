@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:32:00 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 14:34:55 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 16:43:13 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	signal_init(t_info *info, int id)
 {
 	if ((!ft_strcmp(info->split_cmd[0][0], "cat") || !ft_strcmp
-		(info->split_cmd[0][0], "grep")) && info->split_cmd[0][0] != NULL)
+		(info->split_cmd[0][0], "grep") || !ft_strcmp
+		(info->split_cmd[0][0], "wc")) && info->split_cmd[0][0] != NULL)
 	{
 		ft_get_pid(id);
 		signal(SIGINT, signal_q);
@@ -24,8 +25,7 @@ void	signal_init(t_info *info, int id)
 	else
 	{
 		ft_get_pid(id);
-		signal(SIGINT, signal_h);
-		signal(SIGQUIT, SIG_IGN);
+		init_signals(0);
 	}
 }
 
