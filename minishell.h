@@ -6,10 +6,11 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:19:48 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 17:19:51 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 17:22:59 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
