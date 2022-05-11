@@ -6,12 +6,11 @@
 /*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:16:40 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 17:05:40 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:09:11 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	signal_q(int sig)
 {
@@ -29,8 +28,6 @@ void	signal_q(int sig)
 	}
 	else if (res == -1)
 	{
-		//if (sig == 2)
-			//write(1, "\n", 2);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();

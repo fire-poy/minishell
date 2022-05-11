@@ -6,7 +6,7 @@
 /*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:10:36 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 16:42:48 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:08:52 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	handle_signals(int signum)
 {
 	if (signum == SIGINT)
 	{
-		//write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 1);
 	}
