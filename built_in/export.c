@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:34:48 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/08 16:47:15 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:45:02 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 				ft_free_flag(info, liste, var);
 		}
 	}
+	info->exit_status = 0;
 }
