@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:49:18 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 18:52:51 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:57:03 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_unset(t_env **env, char *argv)
+int	ft_unset(t_env **env, char *argv)
 {
 	if (argv)
 	{
 		ft_delete_from_list(env, argv);
 	}
+	return (0);
 }

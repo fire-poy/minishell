@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:16:26 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 14:54:44 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:06:33 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	cd_check(char *args, t_info *liste)
 {
 	if (chdir(args) <= -1)
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		print_join(args, ": ", 2);
 		if (open(args, O_RDONLY) > 0)
 		{
-			cmd_err(liste, args, MSG_IS_NOT_DIRECTORY, 126);
+			cmd_err(liste, args, MSG_IS_NOT_DIRECTORY, 1);
 			return (1);
 		}
-		ft_putstr_fd("No such file or directory\n", 2);
+		cmd_err(liste, args, MSG_FILE_NOT_FOUND, 1);
 		return (1);
 	}
 	return (0);
@@ -82,7 +80,7 @@ char	*special_case(char *argv, t_info *info)
 	return (new_path);
 }
 
-void	ft_cd(char **argv, t_info *info)
+int	ft_cd(char **argv, t_info *info)
 {
 	char	*new_path;
 
@@ -90,19 +88,20 @@ void	ft_cd(char **argv, t_info *info)
 	{
 		new_path = special_case(argv[1], info);
 		if (new_path == NULL)
-			return ;
+			return (1);
 		if (!ft_strcmp(new_path, "\"\"") || !ft_strcmp(new_path, "\'\'"))
-			return ;
+			return (1);
 		if (cd_check(new_path, info))
-			return ;
+			return (1);
 		ft_update_dir(info);
 	}
 	else
 	{
 		if (!ft_strcmp(argv[1], "\"\"") || !ft_strcmp(argv[1], "\'\'"))
-			return ;
+			return (1);
 		if (cd_check(argv[1], info))
-			return ;
+			return (1);
 		ft_update_dir(info);
 	}
+	return (0);
 }

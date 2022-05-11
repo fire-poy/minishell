@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 14:31:42 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 17:09:42 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,15 +237,15 @@ void	ft_free(char *head);
 // BUILT_IN
 int		ft_builtin(t_token *token, t_env *liste);
 void	ft_exit(char **tab_cmd, t_info *info);
-void	ft_cd(char **argv, t_info *liste);
+int		ft_cd(char **argv, t_info *liste);
 int		current_dir(int fd);
 int		my_env(t_env *envp, int fd);
 int		ft_echo(char **argv, int fd, t_info *liste);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
-void	ft_export(char **argv, t_env *liste, t_info *info, int fd);
+int		ft_export(char **argv, t_env *liste, t_info *info, int fd);
 void	ft_add_to_list2(t_env **head, t_env *newnode);
-void	ft_unset(t_env **env, char *argv);
+int		ft_unset(t_env **env, char *argv);
 void	ft_replace_var(t_env **head, char *name, char *content, char *var);
 void	ft_free_flag(t_info *info, t_env *liste, char *var);
 void	ft_update_var(t_env *liste, t_info *info, char *var);

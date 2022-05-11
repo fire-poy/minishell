@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:34:48 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 14:45:02 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:13:45 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_update_var(t_env *liste, t_info *info, char *var)
 	}
 }
 
-void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
+int	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 {
 	char	*var;
 
@@ -90,12 +90,12 @@ void	ft_export(char **argv, t_env *liste, t_info *info, int fd)
 	{
 		var = argv[1];
 		if (!ft_strncmp(var, "=", 1))
-			return ;
+			return (0);
 		if (!ft_check_export_var(var))
 		{
 			if (var != NULL)
 				ft_free_flag(info, liste, var);
 		}
 	}
-	info->exit_status = 0;
+	return (0);
 }
