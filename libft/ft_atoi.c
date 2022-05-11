@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:18:46 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 09:13:45 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:36:08 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,3 @@ int	ft_atoi(const char *str)
 	}	
 	return (value * sign);
 }
-/*
-int main(int ac,char **string)
-{
-	(void) ac;
-
-	printf ("%d\n", atoi(string[1]));
-	printf ("%d\n", ft_atoi(string[1]));
-	return (0);
-}
-*/

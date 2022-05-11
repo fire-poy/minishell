@@ -2,7 +2,9 @@
 NAME		= minishell 
 
 CC			= gcc
+
 CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address
+
 
 OBJS		= ${SRC:.c=.o}
 
@@ -76,7 +78,3 @@ fclean:
 re:			fclean all
 
 .PHONY : all clean fclean re bonus
-
-###### Debuging
-# valgrind --leak-check=full --show-leak-kinds=all ./minishell
-# -O0 pour le débegueur vscode.
