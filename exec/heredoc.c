@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:18:33 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 18:24:45 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:40:11 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	here_boucle(int file, char *flag, int len)
 		ft_stop2(line);
 		if (line == 0)
 			return ;
-		if (ft_strncmp(flag, line, len) == 0 && line != 0)
+		if (ft_strncmp(flag, line, len) == 0
+			&& (len + 1) == (int)ft_strlen(line))// && line != 0)
 		{
 			free (line);
 			line = NULL;

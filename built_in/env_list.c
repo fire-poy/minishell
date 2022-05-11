@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:15:27 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 20:38:34 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:35:10 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	printlist(t_env *node, int fd)
 		node = node->next;
 	}
 }
-// printf("%s", node->name);
-// printf("=\"%s\"\n", node->content);
 
 char	*ft_get_line(char *line)
 {

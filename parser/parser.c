@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:50:26 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 11:50:29 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:38:48 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,17 @@ void	parser(t_info *info)
 }
 /*
 	int 	i = 0;
+	int 	j = 0;
 	printlist_tk(info->tk);
 	while (i <= info->cmd_i)
 	{
 		printf("cmd_i %d = %s\n", i, info->full_cmd[i]);
+		while (info->split_cmd[i][j])
+		{
+			printf("cmd_i %d = %s\n", i, info->split_cmd[i][j]);
+			j++;
+		}
 		i++;
 	}
-	// */
-// }
+}
+	*/

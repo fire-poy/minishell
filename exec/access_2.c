@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:46:22 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 19:24:18 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:35:36 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ char	*ft_get_last_arg(char *src)
 	while (src[i])
 		dst[j++] = src[i++];
 	dst[j] = '\0';
+	free (src);
+	src = NULL;
 	return (dst);
 }
 
-int	slash_case(char *cmd, t_info *info, int i)
+int	slash_case(char *cmd, t_info *info, int i, char **path)
 {
 	if (ft_strchr(cmd, '/'))
 	{
@@ -43,8 +45,7 @@ int	slash_case(char *cmd, t_info *info, int i)
 		{
 			if ((access(cmd, X_OK) == -1))
 				return (2);
-			free (info->split_cmd[i][0]);
-			info->split_cmd[i][0] = NULL;
+			*path = ft_strdup(cmd);
 			info->split_cmd[i][0] = ft_get_last_arg(cmd);
 			return (1);
 		}
@@ -81,19 +82,18 @@ int	check_path(char *cmd, t_info *info, char **path, char *env)
 int	access_ok(char *cmd, t_info *info, char **path, int i)
 {
 	char	*env;
+	int		ret;
 
 	if (is_invalid_command(info, cmd))
 		return (0);
-	if (slash_case(cmd, info, i) == 2)
+	ret = slash_case(cmd, info, i, path);
+	if (ret == 2)
 	{
 		cmd_err(info, cmd, MSG_PERMISSION_DENIED, 126);
 		return (0);
 	}
-	if (slash_case(cmd, info, i) == 1)
-	{
-		*path = cmd;
+	if (ret == 1)
 		return (1);
-	}
 	env = chercher_env(info->liste, "PATH");
 	if (env != NULL)
 	{

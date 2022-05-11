@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/08 16:41:27 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:31:42 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ char	*ft_strjoin_whit_space(char *s1, char const *s2);
 int		is_builtin(char *cmd);
 int		exec_builtin(char **tab_cmd, t_info *liste, int fd);
 char	*ft_get_last_arg(char *src);
-int		slash_case(char *cmd, t_info *info, int i);
+int		slash_case(char *cmd, t_info *info, int i, char **path);
 int		find_path(char *cmd, char **envp, t_env *liste);
 void	execution_main(t_info *info);
 int		exec_single_cmd(t_info *info);
