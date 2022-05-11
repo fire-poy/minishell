@@ -6,7 +6,7 @@
 /*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:50:12 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 14:31:42 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 15:27:15 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,7 @@ void	signal_q(int sig);
 void	ft_get_pid(int i);
 void	signal_here(int signal);
 void	signal_2(int signal);
+void	save_exit_status(t_info *shell);
+void	init_signals(int redisplay);
 
 #endif

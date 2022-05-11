@@ -6,7 +6,7 @@
 /*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:16:40 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/04 15:16:53 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:09:11 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ void	signal_q(int sig)
 	if (res == 0)
 	{
 		if (sig == 2)
-			write(1, "^C\n", 4);
+			write(1, "^C\n", 3);
 		else if (sig == 3)
-			write(1, "^\\Quit: 3\n", 11);
+			write(1, "^\\Quit: 3\n", 10);
 	}
 	else if (res == -1)
 	{
-		if (sig == 2)
-			write(1, "\n", 2);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -42,8 +40,8 @@ void	signal_here(int signal)
 	{
 		g_pid[8] = 6;
 		write(1, "\n", 2);
-		rl_on_new_line();
 		rl_replace_line(": heredoc : >> press enter to exit <<", 30);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }

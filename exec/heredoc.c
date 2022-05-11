@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:18:33 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 14:40:11 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/11 17:10:26 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	here_boucle(int file, char *flag, int len)
 {
 	char	*line;
 
+	signal(SIGINT, signal_here);
 	while (1)
 	{
-		signal(SIGINT, signal_here);
 		if (g_pid[8] == 6)
 		{
 			g_pid[8] = 0;
@@ -41,11 +41,10 @@ void	here_boucle(int file, char *flag, int len)
 		if (line == 0)
 			return ;
 		if (ft_strncmp(flag, line, len) == 0
-			&& (len + 1) == (int)ft_strlen(line))// && line != 0)
+			&& (len + 1) == (int)ft_strlen(line))
 		{
 			free (line);
 			line = NULL;
-			close(file);
 			return ;
 		}
 		write(file, line, ft_strlen(line));

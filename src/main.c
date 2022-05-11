@@ -6,7 +6,7 @@
 /*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:40:16 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/10 17:40:03 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:01:33 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ void	loop_prompt(t_env *liste, char **envp)
 	last_exit = 0;
 	while (1)
 	{
-		signal(SIGINT, signal_h);
-		signal(SIGQUIT, SIG_IGN);
+		init_signals(1);
 		input = prompt();
 		add_history(input);
+		init_signals(0);
 		ft_stop(input, last_exit);
 		info = init_info(liste, envp, last_exit, input);
 		if (ft_strlen(input) > 0)
