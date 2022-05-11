@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:40:16 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 19:00:36 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/10 17:40:03 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_info	*init_info(t_env *liste, char **envp, int last_exit)
+t_info	*init_info(t_env *liste, char **envp, int last_exit, char *input)
 {
 	t_info	*info;
 
@@ -33,6 +33,7 @@ t_info	*init_info(t_env *liste, char **envp, int last_exit)
 	info->err = 0;
 	info->pipes = NULL;
 	info->pids = NULL;
+	info->input = input;
 	info->exit_status = last_exit;
 	return (info);
 }
@@ -88,7 +89,7 @@ void	loop_prompt(t_env *liste, char **envp)
 		input = prompt();
 		add_history(input);
 		ft_stop(input, last_exit);
-		info = init_info(liste, envp, last_exit);
+		info = init_info(liste, envp, last_exit, input);
 		if (ft_strlen(input) > 0)
 			last_exit = parsing_execution_and_free(input, info);
 	}

@@ -2,7 +2,7 @@
 NAME		= minishell 
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 
 OBJS		= ${SRC:.c=.o}
 
@@ -37,6 +37,7 @@ SRC 		=   ./src/main.c\
 				./gnl/get_next_line.c\
 				./built_in/env.c\
 				./built_in/echo.c\
+				./built_in/echo_support.c\
 				./built_in/env_set.c\
 				./built_in/env_list.c\
 				./built_in/env_list_2.c\
