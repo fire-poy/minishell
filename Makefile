@@ -3,7 +3,7 @@ NAME		= minishell
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror
 
 
 OBJS		= ${SRC:.c=.o}
