@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:27:17 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/13 15:32:51 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 13:15:18 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ void	wait_pids(t_info *info)
 	free(info->pids);
 	if (WIFEXITED(status))
 		info->exit_status = WEXITSTATUS(status);
+	if (WIFSIGNALED(status))
+		info->exit_status = 130;
 }

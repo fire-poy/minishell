@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:19:48 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/16 12:03:18 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 13:32:24 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,5 +267,6 @@ void	signal_here(int signal);
 void	signal_2(int signal);
 void	save_exit_status(t_info *shell);
 void	init_signals(int redisplay);
+void	exit_check(t_info *info);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ctrl_signal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:10:36 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 17:08:52 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:32:05 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	handle_signals(int signum)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 1);
+		g_pid[230] = 1;
 	}
 }
 
@@ -29,6 +30,7 @@ void	handle_signals_redisplay(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
+		g_pid[230] = 1;
 	}
 }
 
@@ -49,4 +51,13 @@ void	init_signals(int redisplay)
 		signal(SIGINT, handle_signals);
 	}
 	tcsetattr(0, TCSANOW, &save);
+}
+
+void	exit_check(t_info *info)
+{
+	if (g_pid[230] == 1)
+	{
+		info->exit_status = 1;
+		g_pid[230] = 0;
+	}
 }

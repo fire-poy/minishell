@@ -10,7 +10,10 @@ minishell.dSYM
 minishell.h
 notes
 out1
+outfile
+outfile
+
 parser
 src
 test
-test_shell.c
+z_test_sh

@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:40:16 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/16 12:01:03 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 13:33:32 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	parsing_execution_and_free(char *input, t_info *info)
 	int	last_exit;
 
 	last_exit = 0;
+	exit_check(info);
 	if (lexer(input, info) == 0)
 	{
 		if (info->err == 0)

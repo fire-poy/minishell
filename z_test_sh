@@ -59,11 +59,11 @@ env
 //export
 export 
 export a
+export b=15
+export 
 export a=
 export a=3
 export a=5
-export 
-export b=15
 export 
 
 //unset
