@@ -5,7 +5,6 @@ CC			= gcc
 
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3
 
-
 OBJS		= ${SRC:.c=.o}
 
 RM			= rm -f
