@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:50:26 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 14:38:48 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 11:59:30 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,34 @@ char	***get_cmd_split(char **full_cmd, int cmd_i)
 		cmd_split[i] = NULL;
 	i = -1;
 	while (full_cmd[++i])
-		cmd_split[i] = ft_split(full_cmd[i], ' ');
+		cmd_split[i] = ft_split_token(full_cmd[i], " \t");
 	return (cmd_split);
 }
 
 void	parser(t_info *info)
 {
+	int	i;
+	int	j;
+
 	get_info_tk(info->tk, info);
 	info->full_cmd = get_tab_cmd(info->tk, info->q_cmd);
 	info->split_cmd = get_cmd_split(info->full_cmd, info->cmd_i);
-}
-/*
-	int 	i = 0;
-	int 	j = 0;
-	printlist_tk(info->tk);
+	i = 0;
+	j = 0;
 	while (i <= info->cmd_i)
 	{
-		printf("cmd_i %d = %s\n", i, info->full_cmd[i]);
 		while (info->split_cmd[i][j])
 		{
-			printf("cmd_i %d = %s\n", i, info->split_cmd[i][j]);
+			info->split_cmd[i][j] = erase_quotes(info->split_cmd[i][j]);
 			j++;
 		}
+		j = 0;
 		i++;
 	}
 }
-	*/
+/*
+	// printlist_tk(info->tk);
+		// printf("cmd_i %d = %s!\n", i, info->full_cmd[i]);
+			// printf("split_cmd %d %d = %s\n", i,j, info->split_cmd[i][j]);
+			// printf("split_cmd %d %d = %s\n", i,j, info->split_cmd[i][j]);
+*/

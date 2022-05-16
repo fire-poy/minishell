@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:40:16 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 17:01:33 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:33:32 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_info	*init_info(t_env *liste, char **envp, int last_exit, char *input)
+t_info	*init_info(t_env *liste, int last_exit, char *input)
 {
 	t_info	*info;
 
@@ -22,7 +22,7 @@ t_info	*init_info(t_env *liste, char **envp, int last_exit, char *input)
 		return (NULL);
 	info->tk = NULL;
 	info->liste = liste;
-	info->envp = envp;
+	info->envp = get_env_tab(liste);
 	info->full_cmd = NULL;
 	info->split_cmd = NULL;
 	info->q_in = 0;
@@ -53,10 +53,11 @@ int	parsing_execution_and_free(char *input, t_info *info)
 	int	last_exit;
 
 	last_exit = 0;
+	exit_check(info);
 	if (lexer(input, info) == 0)
 	{
 		if (info->err == 0)
-			xperror("quotes pas bien fermés");
+			ft_putendl_fd("minishell: quotes pas bien fermés", 2);
 		last_exit = info->exit_status;
 		free_info_simple(info);
 		free (input);
@@ -74,7 +75,7 @@ int	parsing_execution_and_free(char *input, t_info *info)
 	return (last_exit);
 }
 
-void	loop_prompt(t_env *liste, char **envp)
+void	loop_prompt(t_env *liste)
 {
 	char	*input;
 	t_info	*info;
@@ -89,7 +90,7 @@ void	loop_prompt(t_env *liste, char **envp)
 		add_history(input);
 		init_signals(0);
 		ft_stop(input, last_exit);
-		info = init_info(liste, envp, last_exit, input);
+		info = init_info(liste, last_exit, input);
 		if (ft_strlen(input) > 0)
 			last_exit = parsing_execution_and_free(input, info);
 	}
@@ -105,7 +106,7 @@ int	main(int ac, char **av, char **envp)
 	i = 0;
 	liste = NULL;
 	create_env_list(&liste, envp);
-	loop_prompt(liste, envp);
+	loop_prompt(liste);
 	ft_free_list(&liste);
 	while (1)
 		pause();
