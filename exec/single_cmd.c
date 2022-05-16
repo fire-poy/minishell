@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:32:00 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 16:43:13 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:13:41 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	exec_parent_and_child(t_info *info, int id, char *path)
 		waitpid(id, &status, 0);
 		if (WIFEXITED(status))
 			info->exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+			info->exit_status = 130;
 	}
 }
 
