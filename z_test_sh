@@ -125,3 +125,5 @@ echo $?
 
 // signals
 //hystory check!
+
+leaks minishell

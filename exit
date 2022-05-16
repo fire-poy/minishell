@@ -10,8 +10,10 @@ exit 5 2
 echo $?
 exit hola patate
 echo $?
+./minishell
 exit hola 2
 echo $?
+./minishell
 exit 2 hola
 echo $?
 exit 50

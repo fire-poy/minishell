@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:54:47 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 20:03:39 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 16:06:18 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ char	*search_and_replace_quotes(char **input, t_env *liste, t_info *info)
 		if (c == 0)
 			return (*input);
 		if (c == 'e')
+		{
+			free (*input);
 			return (NULL);
+		}
 	}
 	return (*input);
 }
