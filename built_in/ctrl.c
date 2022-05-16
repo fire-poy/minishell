@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:16:40 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/16 13:19:11 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 14:08:06 by jhermon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	signal_here(int signal)
 	if (signal == SIGINT)
 	{
 		g_pid[8] = 6;
+		g_pid[230] = 1;
 		write(1, "\n", 2);
 		rl_replace_line(": heredoc : >> press enter to exit <<", 30);
 		rl_on_new_line();
