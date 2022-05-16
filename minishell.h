@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:19:48 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/11 17:22:59 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 12:03:18 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,8 @@ void	print_tab_tab(char ***tab);
 
 // parser
 void	parser(t_info *info);
-t_info	*init_info(t_env *liste, char **envp, int last_exit, char *input);
+t_info	*init_info(t_env *liste, int last_exit, char *input);
+// t_info	*init_info(t_env *liste, char **envp, int last_exit, char *input);
 
 // lexer
 int		ft_c_vs_charset(char c, const char *cs);
@@ -184,7 +185,7 @@ int		ft_strchr_set(const char *s, char *set);
 int		ft_strchr_char(const char *s, char c);
 int		search_next_c(char **s, int *debut, char c);
 int		ft_charset_found(const char *s, int *start, char *set);
-void	loop_prompt(t_env *liste, char **envp);
+void	loop_prompt(t_env *liste);
 int		lexer(char *input, t_info *info);
 void	trimer(char *s, int *i);
 
@@ -213,6 +214,7 @@ void	tk_create_node(t_token **head, char **data, int type);
 int		set_type(char *s, int i, char c);
 char	*erase_quotes(char *s);
 void	erase_quotes_tk(t_token *node);
+char	**ft_split_token(char *s, char *c);
 
 //ENV
 void	create_node(t_env **head, char *data);
@@ -233,6 +235,7 @@ void	free_env(t_env **env);
 void	ft_free_list(t_env **head_a);
 void	env_create_node(t_env **head, char *data);
 void	ft_free(char *head);
+char	**get_env_tab(t_env *node);
 
 // BUILT_IN
 int		ft_builtin(t_token *token, t_env *liste);
@@ -240,7 +243,7 @@ void	ft_exit(char **tab_cmd, t_info *info);
 int		ft_cd(char **argv, t_info *liste);
 int		current_dir(int fd);
 int		my_env(t_env *envp, int fd);
-int		ft_echo(char **argv, int fd, t_info *liste);
+int		ft_echo(char **argv, int fd);
 int		ft_equal(char *var);
 int		ft_check_export_var(char *var);
 int		ft_export(char **argv, t_env *liste, t_info *info, int fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhermon- <jhermon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:54:58 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/10 17:25:27 by jhermon-         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:01:20 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	lexer(char *input, t_info *info)
 		return (0);
 	}
 	info->tk = get_tokens(input2, info->tk);
-	erase_quotes_tk(info->tk);
 	free (input2);
 	return (1);
 }

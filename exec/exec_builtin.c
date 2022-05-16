@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:49:35 by jhermon-          #+#    #+#             */
-/*   Updated: 2022/05/11 17:13:17 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 12:02:32 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	exec_builtin(char **tab_cmd, t_info *liste, int fd)
 		return (1);
 	}
 	else if (!ft_strcmp(tab_cmd[0], "pwd") || !ft_strcmp(tab_cmd[0], "PWD"))
-		return (current_dir(fd));//OK
+		return (current_dir(fd));
 	else if (!ft_strcmp(tab_cmd[0], "cd"))
-		return (ft_cd(tab_cmd, liste));//OK
+		return (ft_cd(tab_cmd, liste));
 	else if (!ft_strcmp(tab_cmd[0], "echo") || !ft_strcmp(tab_cmd[0], "ECHO"))
-		return (ft_echo(tab_cmd, fd, liste));//OK
+		return (ft_echo(tab_cmd, fd));
 	else if (!ft_strcmp(tab_cmd[0], "env") || !ft_strcmp(tab_cmd[0], "ENV"))
-		return (my_env(liste->liste, fd));//OK
+		return (my_env(liste->liste, fd));
 	else if (!ft_strcmp(tab_cmd[0], "unset"))
-		return (ft_unset(&liste->liste, tab_cmd[1]));//OK
+		return (ft_unset(&liste->liste, tab_cmd[1]));
 	else if (!ft_strcmp(tab_cmd[0], "export"))
 		return (ft_export(tab_cmd, liste->liste, liste, fd));
 	return (0);

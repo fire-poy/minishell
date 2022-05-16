@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:27:17 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 15:27:22 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/13 15:32:51 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,4 @@ void	wait_pids(t_info *info)
 	free(info->pids);
 	if (WIFEXITED(status))
 		info->exit_status = WEXITSTATUS(status);
-}
-
-void	wait_pids_heredoc(t_info *info, int i)
-{
-	int	j;
-	int	status;
-
-	j = -1;
-	while (++j < i)
-		waitpid(info->pids[j], &status, 0);
 }

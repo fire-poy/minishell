@@ -3,7 +3,7 @@ NAME		= minishell
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3
 
 
 OBJS		= ${SRC:.c=.o}
@@ -24,6 +24,7 @@ SRC 		=   ./src/main.c\
 				./lexer/token_get.c\
 				./lexer/token_create.c\
 				./parser/parser.c\
+				./parser/split_token.c\
 				./exec/access_1.c\
 				./exec/access_2.c\
 				./exec/exec_utils.c\
@@ -36,10 +37,10 @@ SRC 		=   ./src/main.c\
 				./exec/heredoc.c\
 				./exec/pipe.c\
 				./exec/pid.c\
+				./exec/convert_env.c\
 				./gnl/get_next_line.c\
 				./built_in/env.c\
 				./built_in/echo.c\
-				./built_in/echo_support.c\
 				./built_in/env_set.c\
 				./built_in/env_list.c\
 				./built_in/env_list_2.c\

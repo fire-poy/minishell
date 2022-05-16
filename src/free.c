@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:51:42 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 11:51:45 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 11:39:51 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	free_all(t_info *info)
 			free_tab_tab(info->split_cmd);
 		if (info->tk)
 			free_tokens(&info->tk);
+		if (info->envp)
+			free_tab(info->envp);
 		free (info);
 	}
 	info = NULL;
@@ -92,6 +94,8 @@ void	free_info_simple(t_info *info)
 {
 	if (info)
 	{
+		if (info->envp)
+			free_tab(info->envp);
 		free (info);
 		info = NULL;
 	}

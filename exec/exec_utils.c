@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:58:47 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 17:58:48 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/13 15:54:47 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*ft_strjoin_whit_space(char *s1, char const *s2)
 		return (NULL);
 	while (s1[++i])
 		dst[i] = s1[i];
-	dst[i++] = ' ';
+	if (ft_strlen(s1) > 0)
+		dst[i++] = ' ';
 	while (s2[j])
 		dst[i++] = s2[j++];
 	dst[i] = '\0';
