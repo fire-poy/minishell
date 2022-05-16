@@ -1,0 +1,18 @@
+echo exit
+./minishell
+exit
+echo $?
+./minishell
+exit 42
+echo $?
+./minishell
+exit 5 2
+echo $?
+exit hola patate
+echo $?
+exit hola 2
+echo $?
+exit 2 hola
+echo $?
+exit 50
+echo $?
