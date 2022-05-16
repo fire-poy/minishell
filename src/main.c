@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:40:16 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/16 13:33:32 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/16 16:11:03 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ void	loop_prompt(t_env *liste)
 		add_history(input);
 		init_signals(0);
 		ft_stop(input, last_exit);
-		info = init_info(liste, last_exit, input);
 		if (ft_strlen(input) > 0)
+		{
+			info = init_info(liste, last_exit, input);
 			last_exit = parsing_execution_and_free(input, info);
+		}
 	}
 }
 
