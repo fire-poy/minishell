@@ -6,7 +6,7 @@
 /*   By: mpons <mpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:52:17 by mpons             #+#    #+#             */
-/*   Updated: 2022/05/04 13:10:07 by mpons            ###   ########.fr       */
+/*   Updated: 2022/05/17 13:36:21 by mpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*chercher_env(t_env *liste, char *a_trouver)
 {
 	while (liste)
 	{
-		if (!ft_strncmp(a_trouver, liste->name, ft_strlen(a_trouver)))
+		if (!ft_strcmp(a_trouver, liste->name))
 			return (liste->content);
 		else
 			liste = liste->next;
